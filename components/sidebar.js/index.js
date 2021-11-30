@@ -5,7 +5,12 @@ import { data } from './sidebar-data';
 const Sidebar = () => {
   const renderSidebarItems = () => {
     return data.map((item) => (
-      <SidebarItem key={item.title} icon={item.icon} color={item.color} />
+      <SidebarItem
+        key={item.title}
+        title={item.title}
+        icon={item.icon}
+        color={item.color}
+      />
     ));
   };
 

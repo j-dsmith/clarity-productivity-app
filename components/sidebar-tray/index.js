@@ -1,19 +1,19 @@
-import { useContext } from 'react';
-import AnimationContext from '../../store/animation-ctx';
-import { useCycle } from 'framer-motion';
-import { StyledTray } from './tray.styles';
+import { fetchContext } from '../../helpers';
+import { StyledTray, StyledTrayHeader, StyledBtnGroup } from './tray.styles';
+import SidebarBtn from './sidebar-btn';
+import { MdAdd } from 'react-icons/md';
+import { MdDelete } from 'react-icons/md';
+import { theme } from '../../pages/_app';
 
 const SidebarTray = () => {
-  const animationCtx = useContext(AnimationContext);
-  const { trayOpenState, toggleTrayOpenState } = animationCtx;
-  console.log(animationCtx);
+  const { toggleTrayOpenState, trayOpenState } = fetchContext();
 
   const variants = {
     closed: {
       left: '-17%',
       transition: {
         type: 'linear',
-        duration: 0.5,
+        duration: 0.4,
         ease: 'easeInOut',
       },
     },
@@ -21,7 +21,7 @@ const SidebarTray = () => {
       left: '8%',
       transition: {
         type: 'linear',
-        duration: 0.5,
+        duration: 0.4,
         ease: 'easeInOut',
       },
     },
@@ -29,12 +29,13 @@ const SidebarTray = () => {
 
   return (
     <StyledTray variants={variants} initial="closed" animate={trayOpenState}>
-      <button
-        onClick={() => toggleTrayOpenState()}
-        style={{ position: 'fixed', right: '50%', top: '50%' }}
-      >
-        toggle tray
-      </button>
+      <StyledTrayHeader>
+        <h2>Projects</h2>
+        <StyledBtnGroup>
+          <SidebarBtn icon={<MdAdd />} color={theme.colors.turquoise} />
+          <SidebarBtn icon={<MdDelete />} color={theme.colors.bittersweet} />
+        </StyledBtnGroup>
+      </StyledTrayHeader>
     </StyledTray>
   );
 };

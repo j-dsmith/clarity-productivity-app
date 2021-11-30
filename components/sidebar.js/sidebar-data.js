@@ -1,4 +1,4 @@
-import * as MdIcons from 'react-icons/md';
+import { MdHome, MdFolder, MdNote, MdAlarm, MdDelete } from 'react-icons/md';
 import { theme } from '../../pages/_app';
 
 const { turquoise, bittersweet, naplesyellow, bluecrayola, lavender } =
@@ -7,27 +7,27 @@ const { turquoise, bittersweet, naplesyellow, bluecrayola, lavender } =
 export const data = [
   {
     title: 'Home',
-    icon: <MdIcons.MdHome />,
+    icon: <MdHome />,
     color: naplesyellow,
   },
   {
     title: 'Projects',
-    icon: <MdIcons.MdFolder />,
+    icon: <MdFolder />,
     color: bluecrayola,
   },
   {
     title: 'Decks',
-    icon: <MdIcons.MdNote />,
+    icon: <MdNote />,
     color: lavender,
   },
   {
     title: 'Timer',
-    icon: <MdIcons.MdAlarm />,
+    icon: <MdAlarm />,
     color: turquoise,
   },
   {
     title: 'Trash',
-    icon: <MdIcons.MdDelete />,
+    icon: <MdDelete />,
     color: bittersweet,
   },
 ];

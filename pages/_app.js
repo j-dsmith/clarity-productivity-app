@@ -1,5 +1,6 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { AnimationContextProvider } from '../store/animation-ctx';
+import Head from 'next/head';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -49,6 +50,23 @@ export default function App({ Component, pageProps }) {
     <AnimationContextProvider>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
+        <Head>
+          <title>_wrkingTitle</title>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="true"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
         <Component {...pageProps} />
       </ThemeProvider>
     </AnimationContextProvider>
