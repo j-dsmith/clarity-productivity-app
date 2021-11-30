@@ -1,12 +1,25 @@
 import { fetchContext } from '../../helpers';
-import { StyledTray, StyledTrayHeader, StyledBtnGroup } from './tray.styles';
+import {
+  StyledTray,
+  StyledTrayHeader,
+  StyledInputGroup,
+  StyledInput,
+  StyledContentSection,
+} from './tray.styles';
 import SidebarBtn from './sidebar-btn';
+import ItemTile from '../item-tile/item-tile';
 import { MdAdd } from 'react-icons/md';
 import { MdDelete } from 'react-icons/md';
+import { BsTagsFill } from 'react-icons/bs';
 import { theme } from '../../pages/_app';
+import { useState } from 'react';
 
 const SidebarTray = () => {
-  const { toggleTrayOpenState, trayOpenState } = fetchContext();
+  // fetch animation context
+  const { trayOpenState } = fetchContext();
+
+  // initialize state for controlled input
+  const [title, setTitle] = useState('');
 
   const variants = {
     closed: {
@@ -31,11 +44,24 @@ const SidebarTray = () => {
     <StyledTray variants={variants} initial="closed" animate={trayOpenState}>
       <StyledTrayHeader>
         <h2>Projects</h2>
-        <StyledBtnGroup>
-          <SidebarBtn icon={<MdAdd />} color={theme.colors.turquoise} />
-          <SidebarBtn icon={<MdDelete />} color={theme.colors.bittersweet} />
-        </StyledBtnGroup>
+        <BsTagsFill />
       </StyledTrayHeader>
+      <StyledInputGroup>
+        <StyledInput
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          type="text"
+          maxLength={35}
+          placeholder="Title"
+        />
+        <SidebarBtn icon={<MdAdd />} color={theme.colors.turquoise} />
+        <SidebarBtn icon={<MdDelete />} color={theme.colors.bittersweet} />
+      </StyledInputGroup>
+      <StyledContentSection>
+        <ItemTile title="PRoject 1" />
+        <ItemTile title="PRoject 1" />
+        <ItemTile title="PRoject 1" />
+      </StyledContentSection>
     </StyledTray>
   );
 };
