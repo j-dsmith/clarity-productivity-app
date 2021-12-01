@@ -7,7 +7,6 @@ export const StyledTasksContainer = styled.section`
   height: 100%;
   background-color: ${({ theme }) => theme.colors.gray800};
   color: ${({ theme }) => theme.colors.cultured};
-  grid-area: tasks;
   border-radius: 1.5rem;
   box-shadow: ${({ theme }) => theme.shadow.xl};
   flex: 1;
@@ -54,6 +53,7 @@ export const StyledTaskTile = styled.li`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.gray600};
+    background-color: ${({ theme }) => theme.colors.gray700};
+    //TODO: Set border left to color of tile checkbox -> use project tray tiles as reference
   }
 `;

@@ -1,30 +1,26 @@
 import styled from 'styled-components';
 
 export const StyledForecastContainer = styled.section`
-  padding: 1rem;
+  padding: 2rem;
   margin: 0 0.5rem;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.gray800};
   color: ${({ theme }) => theme.colors.cultured};
-  grid-area: tasks;
   border-radius: 1.5rem;
   box-shadow: ${({ theme }) => theme.shadow.xl};
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const StyledForecastGroup = styled.div`
-  flex: ${({ flex }) => flex};
-  border: 2px solid blue;
-  justify-content: space-between;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas:
+    'location location . . . detail detail'
+    'day day day day day day day';
 `;
 
 export const StyledLocationTile = styled.div`
   height: 100%;
   width: 30%;
-  padding: 0.5rem;
+  padding: 0 1.5rem;
+  grid-area: location;
 
   h2 {
     margin: 0;
@@ -47,11 +43,11 @@ export const StyledLocationTile = styled.div`
 
 export const StyledForecastInfoTile = styled.div`
   height: 100%;
-  width: 30%;
-  padding: 0.5rem;
+  padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  grid-area: detail;
 
   svg {
     margin-left: auto;
@@ -61,5 +57,18 @@ export const StyledForecastInfoTile = styled.div`
     text-align: right;
     padding: 0;
     margin: 0;
+  }
+`;
+
+export const StyledForecastDayTile = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  grid-row-start: 2;
+
+  p {
+    text-align: center;
+    font-size: 1.5rem;
   }
 `;

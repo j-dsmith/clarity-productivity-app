@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledDashContainer = styled.div`
-  border: 1px solid red;
   padding: 1rem;
   height: 50%;
   display: flex;

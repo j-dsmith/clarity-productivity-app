@@ -3,29 +3,6 @@ import { AnimationContextProvider } from '../store/animation-ctx';
 import Head from 'next/head';
 import Layout from '../components/layout';
 
-const GlobalStyle = createGlobalStyle`
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
-  background-color: hsl(20, 33%, 98%);
-}
-
-body {
-  height: 100vh;
-  min-height: 100vh;
-  width: 100vw;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-`;
-
 export const theme = {
   colors: {
     gray100: 'hsl(214, 14%, 77%)',
@@ -51,6 +28,29 @@ export const theme = {
     dbXl: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
   },
 };
+
+const GlobalStyle = createGlobalStyle`
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  background-color: hsl(20, 33%, 98%);
+}
+
+body {
+  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+`;
 
 export default function App({ Component, pageProps }) {
   return (

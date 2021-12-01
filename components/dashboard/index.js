@@ -1,11 +1,15 @@
-import Tasks from './tasks';
 import { StyledDashContainer } from './dashboard.styles';
+import Calendar from './calendar';
+import Tasks from './tasks';
 import Forecast from './forecast';
 
 const Dashboard = () => {
   return (
     <>
-      <StyledDashContainer></StyledDashContainer>
+      <StyledDashContainer>
+        <Calendar />
+        <Tasks />
+      </StyledDashContainer>
 
       <StyledDashContainer>
         <Tasks />

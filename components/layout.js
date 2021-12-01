@@ -12,6 +12,7 @@ const StyledLayoutContainer = styled.section`
   top: 0;
   left: 8%;
   z-index: 0;
+  background-color: ${({ theme }) => theme.colors.gray600};
 
   main {
     height: 100%;

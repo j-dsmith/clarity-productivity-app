@@ -57,6 +57,7 @@ const SidebarTray = () => {
         <SidebarBtn icon={<MdFilterList />} color={theme.colors.bluecrayola} />
         <SidebarBtn icon={<MdDelete />} color={theme.colors.bittersweet} />
       </StyledInputGroup>
+      {/* add info row, column headers table style. (title, current sort order, more?) */}
       <StyledContentSection>
         <ItemTile title="PRoject 1" />
         <ItemTile title="PRoject 1" />
