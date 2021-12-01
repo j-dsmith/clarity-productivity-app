@@ -15,8 +15,10 @@ export const StyledForecastContainer = styled.section`
 `;
 
 export const StyledForecastGroup = styled.div`
-  height: ${({ height }) => height};
+  flex: ${({ flex }) => flex};
   border: 2px solid blue;
+  justify-content: space-between;
+  display: flex;
 `;
 
 export const StyledLocationTile = styled.div`
@@ -40,5 +42,24 @@ export const StyledLocationTile = styled.div`
     svg {
       margin-left: 0.25rem;
     }
+  }
+`;
+
+export const StyledForecastInfoTile = styled.div`
+  height: 100%;
+  width: 30%;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  svg {
+    margin-left: auto;
+  }
+
+  p {
+    text-align: right;
+    padding: 0;
+    margin: 0;
   }
 `;
