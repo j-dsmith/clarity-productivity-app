@@ -6,7 +6,7 @@ const colors = {
   bittersweet: 'hsl(0, 100%, 71%)',
   naplesyellow: 'hsl(50, 100%, 71%)',
   bluecrayola: 'hsl(222, 100%, 61%)',
-  lavender: 'hsl(267, 72%, 82%)',
+  discord: 'hsl(227, 58%, 65%)',
 };
 
 export const data = [
@@ -23,7 +23,7 @@ export const data = [
   {
     title: 'Decks',
     icon: <MdNote />,
-    color: colors.lavender,
+    color: colors.discord,
   },
   {
     title: 'Timer',

@@ -19,7 +19,7 @@ export const theme = {
     bittersweet: 'hsl(0, 100%, 71%)',
     naplesyellow: 'hsl(50, 100%, 71%)',
     bluecrayola: 'hsl(222, 100%, 61%)',
-    lavender: 'hsl(267, 72%, 82%)',
+    discord: 'hsl(227, 58%, 65%)',
   },
   shadow: {
     md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
