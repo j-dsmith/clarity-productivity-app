@@ -12,6 +12,7 @@ const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
+  //calc leading and trailing months conditionally for current month?
   const months = [
     { name: 'January', numDays: 31 },
     { name: 'February', numDays: 28 },
@@ -31,6 +32,20 @@ const Calendar = () => {
     .toLowerCase()
     .split(' ')[0];
 
+  // const extraDays = [
+  //   {
+  //     name: 'mon',
+  //     leadingDays: 0,
+  //     trailingDays: 12,
+  //   },
+  //   { name: 'tue', leadingDays: 1, trailingDays: 11 },
+  //   { name: 'wed', leadingDays: 2, trailingDays: 10 },
+  //   { name: 'thu', leadingDays: 3, trailingDays: 9 },
+  //   { name: 'fri', leadingDays: 4, trailingDays: 8 },
+  //   { name: 'sat', leadingDays: 5, trailingDays: 7 },
+  //   { name: 'sun', leadingDays: 6, trailingDays: 6 },
+  // ];
+
   const renderDays = () => {
     const daysInMonth = months[currentMonth].numDays;
     const calendarDays = [];
@@ -39,7 +54,19 @@ const Calendar = () => {
       calendarDays.push(i);
     }
 
-    //using dates(days) in array - render dates
+    //TODO: finish adding in logic for leading and trailing days
+    // const currentExtraDay = extraDays.filter(
+    //   (day, index) => day.name === firstDayOfMonth
+    // )[0];
+
+    // for (let i = 1; i < currentExtraDay.leadingDays; i++) {
+    //   calendarDays.unshift(i);
+    // }
+    // for (let i = 2; i < currentExtraDay.trailingDays; i++) {
+    //   calendarDays.push(i);
+    // }
+
+    // Using dates(days) in array - render dates
     return calendarDays.map((day) => {
       if (day === 1) {
         return (
