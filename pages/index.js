@@ -1,16 +1,10 @@
-import SidebarTray from '../components/sidebar-tray/index.js';
-import Sidebar from '../components/sidebar.js/index.js';
+import Dashboard from '../components/dashboard/index.js';
 
 // const Title = styled.h1`
 //   font-size: 50px;
 //   color: ${({ theme }) => theme.colors.primary};
 // `
 
-export default function Dashboard() {
-  return (
-    <>
-      <Sidebar />
-      <SidebarTray />
-    </>
-  );
+export default function Home() {
+  return <Dashboard />;
 }

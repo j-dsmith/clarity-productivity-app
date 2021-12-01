@@ -8,8 +8,7 @@ import {
 } from './tray.styles';
 import SidebarBtn from './sidebar-btn';
 import ItemTile from '../item-tile/item-tile';
-import { MdAdd } from 'react-icons/md';
-import { MdDelete } from 'react-icons/md';
+import { MdAdd, MdFilterList, MdDelete } from 'react-icons/md';
 import { BsTagsFill } from 'react-icons/bs';
 import { theme } from '../../pages/_app';
 import { useState } from 'react';
@@ -23,7 +22,7 @@ const SidebarTray = () => {
 
   const variants = {
     closed: {
-      left: '-17%',
+      left: '-14%',
       transition: {
         type: 'linear',
         duration: 0.4,
@@ -55,6 +54,7 @@ const SidebarTray = () => {
           placeholder="Title"
         />
         <SidebarBtn icon={<MdAdd />} color={theme.colors.turquoise} />
+        <SidebarBtn icon={<MdFilterList />} color={theme.colors.bluecrayola} />
         <SidebarBtn icon={<MdDelete />} color={theme.colors.bittersweet} />
       </StyledInputGroup>
       <StyledContentSection>

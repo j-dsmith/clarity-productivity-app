@@ -1,6 +1,7 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { AnimationContextProvider } from '../store/animation-ctx';
 import Head from 'next/head';
+import Layout from '../components/layout';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -11,6 +12,12 @@ body {
   overflow: hidden;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   background-color: hsl(20, 33%, 98%);
+}
+
+body {
+  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
 }
 
 * {
@@ -40,7 +47,7 @@ export const theme = {
   shadow: {
     md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
     lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+    xl: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px',
     dbXl: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
   },
 };
@@ -67,7 +74,9 @@ export default function App({ Component, pageProps }) {
             rel="stylesheet"
           />
         </Head>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </AnimationContextProvider>
   );

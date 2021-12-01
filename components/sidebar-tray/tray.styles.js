@@ -6,8 +6,8 @@ export const StyledTray = styled(motion.div)`
   width: 22%;
   height: 100vh;
   min-height: 100vh;
-  position: relative;
-  z-index: 0;
+  position: absolute;
+  z-index: 1;
   box-shadow: ${({ theme }) => theme.shadow.lg};
   padding: 1rem;
 `;
