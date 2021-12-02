@@ -85,3 +85,7 @@ export const StyledFirstDay = styled(StyledCalendarDay)`
     box-shadow: ${({ theme }) => theme.shadow.lg};
   }
 `;
+
+export const StyledExtraDay = styled(StyledCalendarDay)`
+  color: ${({ theme }) => theme.colors.gray200};
+`;
