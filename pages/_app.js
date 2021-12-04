@@ -1,4 +1,5 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { AnimatePresence } from 'framer-motion';
 import { AnimationContextProvider } from '../store/animation-ctx';
 import Head from 'next/head';
 import Layout from '../components/layout';
@@ -46,13 +47,14 @@ body {
   width: 100vw;
 }
 
+
 * {
   box-sizing: border-box;
 }
 
 `;
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, router }) {
   return (
     <AnimationContextProvider>
       <GlobalStyle />
@@ -70,12 +72,14 @@ export default function App({ Component, pageProps }) {
             crossOrigin="true"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
             rel="stylesheet"
           />
         </Head>
         <Layout>
-          <Component {...pageProps} />
+          <AnimatePresence exitBeforeEnter>
+            <Component {...pageProps} key={router.route} />
+          </AnimatePresence>
         </Layout>
       </ThemeProvider>
     </AnimationContextProvider>

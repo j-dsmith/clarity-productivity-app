@@ -48,7 +48,7 @@ export const StyledTaskTile = styled.li`
     width: 1.5rem;
     border-radius: 50%;
     position: relative;
-    border: 2px solid hsl(176, 56%, 55%);
+    border: 2px solid hsl(50, 100%, 71%);
     cursor: pointer;
   }
 

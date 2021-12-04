@@ -10,6 +10,7 @@ const Sidebar = () => {
         title={item.title}
         icon={item.icon}
         color={item.color}
+        href={item.href}
       />
     ));
   };

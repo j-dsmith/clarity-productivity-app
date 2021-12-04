@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { StyledCalendarContainer, StyledCalendarBtn } from './calendar.styles';
+import {
+  StyledCalendarContainer,
+  StyledCalendarBtn,
+  StyledWeekday,
+} from './calendar.styles';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import CalendarMonth, {
   renderPrevMonthDays,
@@ -41,13 +45,13 @@ const Calendar = () => {
       <StyledCalendarBtn colStart="7" onClick={() => handleClick('increment')}>
         <MdArrowForwardIos />
       </StyledCalendarBtn>
-      <p>Mo</p>
-      <p>Tu</p>
-      <p>We</p>
-      <p>Th</p>
-      <p>Fr</p>
-      <p>Sa</p>
-      <p>Su</p>
+      <StyledWeekday>Mo</StyledWeekday>
+      <StyledWeekday>Tu</StyledWeekday>
+      <StyledWeekday>We</StyledWeekday>
+      <StyledWeekday>Th</StyledWeekday>
+      <StyledWeekday>Fr</StyledWeekday>
+      <StyledWeekday>Sa</StyledWeekday>
+      <StyledWeekday>Su</StyledWeekday>
       {renderPrevMonthDays(calendarMonth, currentYear, currentMonth)}
       {renderCurrentMonthDays(calendarMonth)}
       {renderNextMonthDays(calendarMonth)}

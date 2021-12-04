@@ -57,7 +57,6 @@ const Layout = ({ children }) => {
   return (
     <>
       <Sidebar />
-      <SidebarTray />
       <StyledLayoutContainer>
         <main>{children}</main>
         {/* <StyledBackdropFilter

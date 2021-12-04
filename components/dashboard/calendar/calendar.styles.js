@@ -4,7 +4,7 @@ export const StyledCalendarContainer = styled.section`
   padding: 1rem;
   margin: 0 0.5rem;
   height: 100%;
-  width: 50%;
+  flex: 2;
   background-color: ${({ theme }) => theme.colors.gray800};
   color: ${({ theme }) => theme.colors.cultured};
   border-radius: 1.5rem;
@@ -26,15 +26,16 @@ export const StyledCalendarContainer = styled.section`
     display: grid;
     place-items: center;
   }
+`;
 
-  p {
-    text-align: center;
-    height: 100%;
-    width: 100%;
-    display: grid;
-    place-items: center;
-    grid-column: 'mon';
-  }
+export const StyledWeekday = styled.h5`
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  grid-column: 'mon';
+  font-size: 1rem;
 `;
 
 export const StyledCalendarBtn = styled.button`
@@ -46,13 +47,13 @@ export const StyledCalendarBtn = styled.button`
   display: grid;
   place-items: center;
   color: ${({ theme }) => theme.colors.cultured};
-  border: 1px solid ${({ theme }) => theme.colors.bluecrayola};
+  border: 1px solid ${({ theme }) => theme.colors.bittersweet};
   border-radius: 30%;
   transition: all 100ms linear;
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.bluecrayola};
+    background-color: ${({ theme }) => theme.colors.bittersweet};
     box-shadow: ${({ theme }) => theme.shadow.md};
   }
 `;
@@ -63,6 +64,9 @@ export const StyledCalendarDay = styled.p`
   width: 100%;
   display: grid;
   place-items: center;
+  grid-column: 'mon';
+  font-size: 1rem;
+  text-align: center;
 `;
 
 export const StyledFirstDay = styled(StyledCalendarDay)`
@@ -81,7 +85,7 @@ export const StyledFirstDay = styled(StyledCalendarDay)`
     height: 2.25rem;
     width: 2.25rem;
     border-radius: 50%;
-    background-color: ${({ theme }) => theme.colors.bluecrayola};
+    background-color: ${({ theme }) => theme.colors.bittersweet};
     box-shadow: ${({ theme }) => theme.shadow.lg};
   }
 `;

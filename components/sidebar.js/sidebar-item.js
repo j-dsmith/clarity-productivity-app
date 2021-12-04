@@ -1,7 +1,8 @@
+import Link from 'next/link';
 import { fetchContext } from '../../helpers/index';
 import { StyledIcon } from './sidebar.styles';
 
-const SidebarItem = ({ title, icon, color }) => {
+const SidebarItem = ({ title, icon, color, href }) => {
   const { trayOpenState, toggleTrayOpenState } = fetchContext();
 
   const toggleTray = (title) => {
@@ -17,13 +18,15 @@ const SidebarItem = ({ title, icon, color }) => {
   };
 
   return (
-    <StyledIcon
-      whileHover="hover"
-      color={color}
-      onClick={() => handleClick(title)}
-    >
-      {icon}
-    </StyledIcon>
+    <Link href={href}>
+      <StyledIcon
+        whileHover="hover"
+        color={color}
+        onClick={() => handleClick(title)}
+      >
+        {icon}
+      </StyledIcon>
+    </Link>
   );
 };
 

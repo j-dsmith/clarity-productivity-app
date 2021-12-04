@@ -22,7 +22,7 @@ const SidebarTray = () => {
 
   const variants = {
     closed: {
-      left: '-14%',
+      left: '-30%',
       transition: {
         type: 'linear',
         duration: 0.4,
@@ -30,7 +30,7 @@ const SidebarTray = () => {
       },
     },
     open: {
-      left: '8%',
+      left: '0%',
       transition: {
         type: 'linear',
         duration: 0.4,
@@ -40,7 +40,12 @@ const SidebarTray = () => {
   };
 
   return (
-    <StyledTray variants={variants} initial="closed" animate={trayOpenState}>
+    <StyledTray
+      variants={variants}
+      initial="closed"
+      animate="open"
+      exit="closed"
+    >
       <StyledTrayHeader>
         <h2>Projects</h2>
         <BsTagsFill />

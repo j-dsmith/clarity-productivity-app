@@ -11,27 +11,32 @@ const colors = {
 
 export const data = [
   {
-    title: 'Home',
+    title: 'home',
+    href: '/',
     icon: <MdHome />,
     color: colors.naplesyellow,
   },
   {
-    title: 'Projects',
+    title: 'projects',
+    href: '/projects',
     icon: <MdFolder />,
     color: colors.bluecrayola,
   },
   {
-    title: 'Decks',
+    title: 'decks',
+    href: '/study',
     icon: <MdNote />,
     color: colors.discord,
   },
   {
-    title: 'Timer',
+    title: 'timer',
+    href: '/study/timer',
     icon: <MdAlarm />,
     color: colors.turquoise,
   },
   {
-    title: 'Trash',
+    title: 'trash',
+    href: '/trash',
     icon: <MdDelete />,
     color: colors.bittersweet,
   },
