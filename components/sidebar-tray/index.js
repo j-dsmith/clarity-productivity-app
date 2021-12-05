@@ -14,13 +14,16 @@ import { theme } from '../../pages/_app';
 import { useState } from 'react';
 
 const SidebarTray = () => {
+  // Initialize active state for tray type
+  const [trayType, setTrayType] = useState('projects');
+
   // fetch animation context
   const { trayOpenState } = fetchContext();
 
   // initialize state for controlled input
   const [title, setTitle] = useState('');
 
-  const variants = {
+  const tray = {
     closed: {
       left: '-30%',
       transition: {
@@ -40,14 +43,9 @@ const SidebarTray = () => {
   };
 
   return (
-    <StyledTray
-      variants={variants}
-      initial="closed"
-      animate="open"
-      exit="closed"
-    >
+    <StyledTray variants={tray} initial="closed" animate="open" exit="closed">
       <StyledTrayHeader>
-        <h2>Projects</h2>
+        <h2>{trayType === 'projects' ? 'Projects' : 'PROJECT_TITLE'}</h2>
         <BsTagsFill />
       </StyledTrayHeader>
       <StyledInputGroup>
@@ -59,10 +57,12 @@ const SidebarTray = () => {
           placeholder="Title"
         />
         <SidebarBtn icon={<MdAdd />} color={theme.colors.turquoise} />
-        <SidebarBtn icon={<MdFilterList />} color={theme.colors.bluecrayola} />
         <SidebarBtn icon={<MdDelete />} color={theme.colors.bittersweet} />
       </StyledInputGroup>
-      {/* add info row, column headers table style. (title, current sort order, more?) */}
+      {/* 
+          Add info row, column headers table style. (title, current sort order, more?) 
+          <SidebarBtn icon={<MdFilterList />} color={theme.colors.bluecrayola} />
+      */}
       <StyledContentSection>
         <ItemTile title="PRoject 1" />
         <ItemTile title="PRoject 1" />

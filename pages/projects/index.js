@@ -1,7 +1,7 @@
 import { fetchContext } from '../../helpers';
 import SidebarTray from '../../components/sidebar-tray';
 
-import Tiptap from '../../components/editor/tiptap';
+import MyEditor from '../../components/editor/tiptap';
 
 const Projects = () => {
   const { trayOpenState, toggleTrayOpenState } = fetchContext();
@@ -10,7 +10,6 @@ const Projects = () => {
     // Set Container for editor w/ toolbar and a header componenent, editable through local state
     <>
       <SidebarTray />
-      <Tiptap />
     </>
   );
 };

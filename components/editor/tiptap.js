@@ -5,7 +5,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import { StyledEditorContainer, StyledEditorContent } from './editor.styles';
 import ToolBar from './toolbar';
 
-export default () => {
+const MyEditor = () => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -24,3 +24,5 @@ export default () => {
     </StyledEditorContainer>
   );
 };
+
+export default MyEditor;
