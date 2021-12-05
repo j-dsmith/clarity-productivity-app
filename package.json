@@ -12,6 +12,7 @@
     "@tiptap/starter-kit": "^2.0.0-beta.150",
     "draft-js": "^0.11.7",
     "framer-motion": "^5.3.3",
+    "mongoose": "^6.0.14",
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
