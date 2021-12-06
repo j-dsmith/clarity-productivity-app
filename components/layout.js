@@ -55,14 +55,13 @@ const Layout = ({ children }) => {
     },
   };
 
-  const { data: session } = useSession();
-  console.log(session);
+  const { data: session, status } = useSession();
 
-  if (!session) {
+  if (!session || status === 'unauthenticated') {
     return <AuthForm />;
   }
 
-  if (session.status === 'loading') {
+  if (status === 'loading') {
     return <div>loading</div>;
   }
 
@@ -81,7 +80,6 @@ const Layout = ({ children }) => {
       </>
     );
   }
-  return <AuthForm />;
 };
 
 export default Layout;

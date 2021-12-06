@@ -6,4 +6,18 @@ const AuthPage = () => {
   return <AuthForm />;
 };
 
+// export async function getServerSideProps({ req, res }) {
+//   const session = await getSession({ req });
+//   if (session) {
+//     return {
+//       redirect: '/',
+//       permanent: false,
+//     };
+//   }
+
+//   return {
+//     props: { session },
+//   };
+// }
+
 export default AuthPage;

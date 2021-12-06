@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import Dashboard from '../components/dashboard/index.js';
 
 // const Title = styled.h1`
@@ -8,3 +9,18 @@ import Dashboard from '../components/dashboard/index.js';
 export default function Home() {
   return <Dashboard />;
 }
+
+// export async function getServerSideProps({ req, res }) {
+//   const session = await getSession({ req });
+
+//   if (!session) {
+//     return {
+//       redirect: '/auth',
+//       permanent: false,
+//       props: {},
+//     };
+//   }
+//   return {
+//     props: { session },
+//   };
+// }
