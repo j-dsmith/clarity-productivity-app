@@ -45,6 +45,6 @@ const handler = async (req, res) => {
     password: hashedPassword,
   }).save();
   db.disconnect();
-  res.status(200).json({ user, message: 'User created' });
+  res.status(200).json({ message: 'User created' });
 };
 export default handler;

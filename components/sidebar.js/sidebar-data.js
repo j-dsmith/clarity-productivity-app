@@ -26,13 +26,13 @@ export const data = [
     title: 'decks',
     href: '/study',
     icon: <MdNote />,
-    color: colors.discord,
+    color: colors.turquoise,
   },
   {
     title: 'timer',
     href: '/study/timer',
     icon: <MdAlarm />,
-    color: colors.turquoise,
+    color: colors.discord,
   },
   {
     title: 'trash',
