@@ -5,6 +5,7 @@ const connectDB = async () => {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   });
+
   return db;
 };
 

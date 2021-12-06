@@ -1,10 +1,8 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { omit } from 'lodash/omit';
-import mongoose from 'mongoose';
 import { verifyPassword } from '../../../helpers/auth';
 import connectDB from '../../../helpers/db';
-import User from '../../../models/user';
+import { User } from '../../../models/user';
 
 export default NextAuth({
   session: {
@@ -31,7 +29,7 @@ export default NextAuth({
 
         if (!isValid) {
           db.disconnect();
-          throw new Error('Could not log you in');
+          throw new Error('Invalid password. Could not log you in');
         }
         // Remove password field before sending user in jwt
         // const protectedUser = omit(user, 'password');

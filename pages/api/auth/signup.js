@@ -1,5 +1,6 @@
 import { hashPassword } from '../../../helpers/auth.js';
 import connectDB from '../../../helpers/db';
+import { User } from '../../../models/user';
 
 const handler = async (req, res) => {
   if (req.method !== 'POST') {
@@ -7,8 +8,9 @@ const handler = async (req, res) => {
     return;
   }
 
-  // destructure request body
+  // Destructure request body
   const { name, email, password } = req.body;
+
   // Validate email and password
   if (
     !email ||
@@ -38,6 +40,7 @@ const handler = async (req, res) => {
 
   // Hash password
   const hashedPassword = await hashPassword(password);
+
   // Create new user and save in db
   const user = await new User({
     name,
