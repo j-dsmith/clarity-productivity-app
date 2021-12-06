@@ -1,6 +1,5 @@
 import { hashPassword } from '../../../helpers/auth.js';
 import connectDB from '../../../helpers/db';
-import User from '../../../models/user';
 
 const handler = async (req, res) => {
   if (req.method !== 'POST') {
@@ -26,6 +25,7 @@ const handler = async (req, res) => {
 
   // Open mongoose connection
   const db = await connectDB();
+
   // Check if user with email exists in database
   const existingUser = await User.findOne({ email });
   if (existingUser) {

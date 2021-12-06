@@ -9,13 +9,11 @@ export const StyledLoginPage = styled.section`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.cultured};
   color: ${({ theme }) => theme.colors.gray900};
-  border: 2px solid red;
 `;
 
 export const StyledFormContainer = styled.div`
   height: 70%;
   width: 70%;
-  border: 1px solid blue;
 
   .loginStateControl {
     text-align: center;
@@ -24,6 +22,11 @@ export const StyledFormContainer = styled.div`
     span {
       text-decoration: underline;
       cursor: pointer;
+      /* transition: all 100ms ease-in-out; */
+
+      &:hover {
+        color: ${({ theme }) => theme.colors.bluecrayola};
+      }
     }
   }
 `;

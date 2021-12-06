@@ -69,6 +69,14 @@ export const StyledCalendarDay = styled.p`
   text-align: center;
 `;
 
+export const StyledCurrentDay = styled(StyledCalendarDay)`
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.bittersweet};
+  box-shadow: ${({ theme }) => theme.shadow.lg};
+`;
+
 export const StyledFirstDay = styled(StyledCalendarDay)`
   position: relative;
   z-index: 1;

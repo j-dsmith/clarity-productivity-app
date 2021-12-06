@@ -16,7 +16,7 @@ export const StyledSidebar = styled.nav`
 export const SidebarItemList = styled.ul`
   margin: 0;
   padding: 0;
-  height: 80%;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@ export const SidebarItemList = styled.ul`
   list-style: none;
 `;
 
-export const StyledIcon = styled(motion.div)`
+export const StyledIcon = styled.div`
   margin: 0.5rem;
   padding: 0.75rem;
   border-radius: 50%;
@@ -40,6 +40,8 @@ export const StyledIcon = styled(motion.div)`
   &:hover {
     color: ${({ color }) => color};
     border-radius: 1.5rem;
+    /* background-color: ${({ btntype, theme }) =>
+      btntype === 'logout' ? theme.colors.gray900 : theme.colors.gray700}; */
   }
 
   svg {

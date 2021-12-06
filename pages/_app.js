@@ -1,4 +1,5 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { SessionProvider } from 'next-auth/react';
 import { AnimatePresence } from 'framer-motion';
 import { AnimationContextProvider } from '../store/animation-ctx';
 import Head from 'next/head';
@@ -54,34 +55,40 @@ body {
 
 `;
 
-export default function App({ Component, pageProps, router }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+  router,
+}) {
   return (
-    <AnimationContextProvider>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Head>
-          <title>_wrkingTitle</title>
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="true"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
-        <Layout>
-          <AnimatePresence exitBeforeEnter>
-            <Component {...pageProps} key={router.route} />
-          </AnimatePresence>
-        </Layout>
-      </ThemeProvider>
-    </AnimationContextProvider>
+    <SessionProvider session={session}>
+      <AnimationContextProvider>
+        <GlobalStyle />
+        <ThemeProvider theme={theme}>
+          <Head>
+            <title>_wrkingTitle</title>
+            <meta
+              name="viewport"
+              content="initial-scale=1.0, width=device-width"
+            />
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link
+              rel="preconnect"
+              href="https://fonts.gstatic.com"
+              crossOrigin="true"
+            />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+              rel="stylesheet"
+            />
+          </Head>
+          <Layout>
+            <AnimatePresence exitBeforeEnter>
+              <Component {...pageProps} key={router.route} />
+            </AnimatePresence>
+          </Layout>
+        </ThemeProvider>
+      </AnimationContextProvider>
+    </SessionProvider>
   );
 }

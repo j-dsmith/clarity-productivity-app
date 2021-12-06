@@ -1,6 +1,7 @@
 import { StyledSidebar, SidebarItemList } from './sidebar.styles';
 import SidebarItem from './sidebar-item';
 import { data } from './sidebar-data';
+import LogoutBtn from './logout-btn';
 
 const Sidebar = () => {
   const renderSidebarItems = () => {
@@ -17,7 +18,10 @@ const Sidebar = () => {
 
   return (
     <StyledSidebar>
-      <SidebarItemList>{renderSidebarItems()}</SidebarItemList>
+      <SidebarItemList>
+        {renderSidebarItems()}
+        <LogoutBtn />
+      </SidebarItemList>
     </StyledSidebar>
   );
 };

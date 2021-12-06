@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
-import { signIn } from 'next-auth/client/_utils';
+import { signIn } from 'next-auth/react';
 import { createUser } from '../../helpers/auth';
 import {
   StyledLoginPage,
@@ -49,7 +48,6 @@ const AuthForm = () => {
       // Create new user
       try {
         const result = await createUser(emailValue, passwordValue);
-        console.log(result);
         router.replace('/');
       } catch (error) {
         console.log(error);
@@ -58,7 +56,7 @@ const AuthForm = () => {
   };
 
   const inputVariant = {
-    focus: {
+    hover: {
       transition: { duration: 0.5, type: 'spring' },
       scale: 1.06,
       boxShadow:
@@ -72,8 +70,8 @@ const AuthForm = () => {
         <StyledFormHeader>
           <h1>{isLogin ? 'Login to Your Account' : 'Create Account'}</h1>
           <p>
-            Track <span id="tasks-span">tasks</span>, organize ideas into
-            <span id="projects-span">projects</span>, review with
+            Track <span id="tasks-span">tasks</span>, organize ideas into{' '}
+            <span id="projects-span">projects</span>, review with{' '}
             <span id="decks-span">study decks</span>, and write out your next
             masterpiece in a fully featured RichText editor
           </p>
@@ -89,7 +87,7 @@ const AuthForm = () => {
               onChange={(e) => setEmailValue(e.target.value)}
               required
               variants={inputVariant}
-              whileFocus="focus"
+              whileHover="hover"
             />
             <StyledTextInput
               type="Password"
@@ -100,7 +98,7 @@ const AuthForm = () => {
               onChange={(e) => setPasswordValue(e.target.value)}
               required
               variants={inputVariant}
-              whileFocus="focus"
+              whileHover="hover"
             />
             <FormBtn
               text={isLogin ? 'Login to Your Account' : 'Create Account'}
@@ -133,14 +131,7 @@ const AuthForm = () => {
         </StyledForm>
         <div className="loginStateControl" onClick={switchAuthModeHandler}>
           {isLogin ? 'Not registered? ' : 'Already have an account? '}
-          <motion.span
-            whileHover={{
-              color: 'hsl(222, 100%, 61%)',
-              transition: { duration: 0.2, ease: 'easeInOut' },
-            }}
-          >
-            {isLogin ? 'Sign up' : 'Login'}
-          </motion.span>
+          <span>{isLogin ? 'Sign up' : 'Login'}</span>
         </div>
       </StyledFormContainer>
     </StyledLoginPage>

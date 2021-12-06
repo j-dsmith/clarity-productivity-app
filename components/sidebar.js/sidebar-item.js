@@ -19,11 +19,7 @@ const SidebarItem = ({ title, icon, color, href }) => {
 
   return (
     <Link href={href}>
-      <StyledIcon
-        whileHover="hover"
-        color={color}
-        onClick={() => handleClick(title)}
-      >
+      <StyledIcon color={color} onClick={() => handleClick(title)}>
         {icon}
       </StyledIcon>
     </Link>

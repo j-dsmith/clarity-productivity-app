@@ -1,9 +1,11 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { omit } from 'lodash/omit';
+import mongoose from 'mongoose';
 import { verifyPassword } from '../../../helpers/auth';
 import connectDB from '../../../helpers/db';
 import User from '../../../models/user';
-import { omit } from 'lodash/omit';
+
 export default NextAuth({
   session: {
     jwt: true,
@@ -17,29 +19,28 @@ export default NextAuth({
         // Lookup user
         const user = await User.findOne({ email: credentials.email });
 
-        if(!user){
-          db.disconnect()
-          throw new Error('No user found!')
+        if (!user) {
+          db.disconnect();
+          throw new Error('No user found!');
         }
         // Check if found users password matches hashed password in db for given email
-        const isValid = await verifyPassword(credentials.password, user.password)
+        const isValid = await verifyPassword(
+          credentials.password,
+          user.password
+        );
 
-        if(!isValid){
-          db.disconnect()
+        if (!isValid) {
+          db.disconnect();
           throw new Error('Could not log you in');
         }
         // Remove password field before sending user in jwt
-        const protectedUser = omit(user, 'password')
+        // const protectedUser = omit(user, 'password');
 
-        
-        db.disconnect()
+        db.disconnect();
 
-        
-        return {protectedUser}
+        return { email: user.email };
       },
     }),
     // ...add more providers here
   ],
 });
-
-export default NextAuth()

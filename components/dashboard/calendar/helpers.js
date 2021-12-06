@@ -1,6 +1,6 @@
 import {
   StyledCalendarDay,
-  StyledFirstDay,
+  StyledCurrentDay,
   StyledExtraDay,
 } from './calendar.styles';
 
@@ -38,11 +38,15 @@ export const renderCurrentMonthDays = (calendarMonth) => {
 
   // Using dates(days) in array - render dates
   return currentMonthDays.map((day) => {
+    //TODO: Fix so that todays date gets highlighted
+    // if (day === new Date()) {
+    //   return <StyledCurrentDay key={'current-' + day}>{day}</StyledCurrentDay>;
+    // }
     if (day === 1) {
       return (
-        <StyledFirstDay key={day} firstDay={calendarMonth.firstOfMonth}>
+        <StyledCalendarDay key={day} firstDay={calendarMonth.firstOfMonth}>
           {day}
-        </StyledFirstDay>
+        </StyledCalendarDay>
       );
     }
     return <StyledCalendarDay key={'current-' + day}>{day}</StyledCalendarDay>;
