@@ -1,23 +1,25 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { getSession, useSession } from 'next-auth/react';
 import AuthForm from '../components/auth/auth-form';
 
-const AuthPage = () => {
+const AuthPage = ({ session }) => {
   return <AuthForm />;
 };
 
-// export async function getServerSideProps({ req, res }) {
-//   const session = await getSession({ req });
-//   if (session) {
-//     return {
-//       redirect: '/',
-//       permanent: false,
-//     };
-//   }
+export async function getServerSideProps({ req, res }) {
+  const session = await getSession({ req });
 
-//   return {
-//     props: { session },
-//   };
-// }
+  if (session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: { session },
+  };
+}
 
 export default AuthPage;

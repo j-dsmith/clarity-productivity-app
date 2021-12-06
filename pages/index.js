@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import Dashboard from '../components/dashboard/index.js';
 
 // const Title = styled.h1`
@@ -10,17 +10,18 @@ export default function Home() {
   return <Dashboard />;
 }
 
-// export async function getServerSideProps({ req, res }) {
-//   const session = await getSession({ req });
+export async function getServerSideProps({ req, res }) {
+  const session = await getSession({ req });
 
-//   if (!session) {
-//     return {
-//       redirect: '/auth',
-//       permanent: false,
-//       props: {},
-//     };
-//   }
-//   return {
-//     props: { session },
-//   };
-// }
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: { session },
+  };
+}

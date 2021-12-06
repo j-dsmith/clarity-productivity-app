@@ -61,25 +61,24 @@ const Layout = ({ children }) => {
     return <AuthForm />;
   }
 
-  if (status === 'loading') {
-    return <div>loading</div>;
-  }
+  // if (status === 'loading') {
+  //   return <div>loading</div>;
+  // }
 
-  if (session.user && session.status !== 'loading') {
-    return (
-      <>
-        <Sidebar />
-        <StyledLayoutContainer>
-          <main>{children}</main>
-          {/* <StyledBackdropFilter
+  // if (session.user && session.status !== 'loading') {
+  return (
+    <>
+      <Sidebar />
+      <StyledLayoutContainer>
+        <main>{children}</main>
+        {/* <StyledBackdropFilter
           variants={variants}
           initial="closed"
           animate={trayOpenState}
         /> */}
-        </StyledLayoutContainer>
-      </>
-    );
-  }
+      </StyledLayoutContainer>
+    </>
+  );
 };
 
 export default Layout;
