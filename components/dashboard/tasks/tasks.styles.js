@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { StyledInput } from '../../sidebar-tray/tray.styles';
 
 export const StyledTasksContainer = styled.section`
-  padding: 2rem;
+  /* padding: 2rem; */
   margin: 0 0.5rem;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.gray800};
@@ -13,11 +13,14 @@ export const StyledTasksContainer = styled.section`
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 `;
 
 export const StyledTaskHeader = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 2rem 1rem 0 1rem;
+
   h3 {
     margin: 0;
     font-size: 1.5rem;
@@ -27,25 +30,18 @@ export const StyledTaskHeader = styled.div`
 export const StyledTaskList = styled.div`
   height: 100%;
   width: 100%;
-  margin-top: 1rem;
-
-  h3 {
-    margin: 0;
-    padding: 1rem;
-    font-size: 1.5rem;
-  }
+  margin-bottom: 2rem;
+  overflow-y: scroll;
 
   ul {
     list-style: none;
-    margin: 0 -1rem;
     padding: 0;
   }
 `;
 
 export const StyledTaskTile = styled.li`
   height: 3rem;
-  padding: 1rem 2rem;
-  margin: 0 -1rem;
+  padding: 2rem;
   cursor: pointer;
   transition: all 100ms ease-in-out;
   display: flex;

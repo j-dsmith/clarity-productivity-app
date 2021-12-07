@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import UserContext from '../../../store/user-ctx';
 
 import {
@@ -11,8 +11,10 @@ import { theme } from '../../../pages/_app';
 import { MdAdd } from 'react-icons/md';
 import TaskTile from './task-tile';
 import UIBtn from '../../ui/ui-btn';
+import { addTask } from '../../../helpers/db';
 
 const Tasks = () => {
+  const [taskTitle, setTaskTitle] = useState('');
   const { user } = useContext(UserContext);
   const { tasks } = user;
 
@@ -29,15 +31,31 @@ const Tasks = () => {
     return null;
   };
 
+  const handleAddTask = async () => {
+    console.log('clicked');
+    const response = await addTask(taskTitle);
+    console.log(response);
+  };
+
   if (!user) return <div />;
 
   return (
     <StyledTasksContainer>
       <StyledTaskHeader>
         <h3>Tasks</h3>
-        <StyledInputGroup>
-          <StyledInput type="text" />
-          <UIBtn icon={<MdAdd />} color={theme.colors.turquoise} />
+        <StyledInputGroup width="80%">
+          <StyledInput
+            type="text"
+            placeholder="Task Title"
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
+          />
+          <button onClick={() => handleAddTask()}></button>
+          <UIBtn
+            icon={<MdAdd />}
+            color={theme.colors.turquoise}
+            handler={handleAddTask}
+          />
         </StyledInputGroup>
       </StyledTaskHeader>
       <StyledTaskList>

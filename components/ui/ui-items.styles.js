@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledBtn = styled.div`
+export const StyledBtn = styled.button`
   display: grid;
   place-items: center;
   padding: 0.25rem;
@@ -28,7 +28,7 @@ export const StyledInputGroup = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 1rem 0;
-  width: 80%;
+  width: ${({ width }) => width};
 `;
 
 export const StyledInput = styled.input`

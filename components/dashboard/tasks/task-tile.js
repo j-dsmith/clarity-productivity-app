@@ -1,7 +1,6 @@
 import { StyledTaskTile } from './tasks.styles';
 
 const TaskTile = ({ content, dueDate }) => {
-  console.log(typeof dueDate);
   return (
     <StyledTaskTile>
       <label htmlFor="task"></label>

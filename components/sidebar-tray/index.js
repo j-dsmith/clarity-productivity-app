@@ -43,7 +43,7 @@ const SidebarTray = () => {
         <h2>{trayType === 'projects' ? 'Projects' : 'PROJECT_TITLE'}</h2>
         <BsTagsFill />
       </StyledTrayHeader>
-      <StyledInputGroup>
+      <StyledInputGroup width="100%">
         <StyledInput
           value={title}
           onChange={(e) => setTitle(e.target.value)}

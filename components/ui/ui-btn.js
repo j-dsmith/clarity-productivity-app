@@ -1,7 +1,11 @@
 import { StyledBtn } from './ui-items.styles';
 
-const UIBtn = ({ type, color, icon }) => {
-  return <StyledBtn color={color}>{icon}</StyledBtn>;
+const UIBtn = ({ handler, color, icon }) => {
+  return (
+    <StyledBtn onClick={() => handler} color={color}>
+      {icon}
+    </StyledBtn>
+  );
 };
 
 export default UIBtn;
