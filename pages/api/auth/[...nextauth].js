@@ -5,6 +5,9 @@ import connectDB from '../../../helpers/db';
 import { User } from '../../../models/user';
 
 export default NextAuth({
+  pages: {
+    signIn: '/auth',
+  },
   session: {
     jwt: true,
   },

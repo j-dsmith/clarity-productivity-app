@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Sidebar from './sidebar.js';
 import { useSession } from 'next-auth/react';
-import { fetchContext } from '../helpers/index.js';
 import AuthForm from './auth/auth-form.js';
+import { fetchContext } from '../helpers/index.js';
 
 const StyledLayoutContainer = styled.section`
   height: 100%;
@@ -33,7 +33,7 @@ const StyledBackdropFilter = styled(motion.div)`
 `;
 
 const Layout = ({ children }) => {
-  const { trayOpenState } = fetchContext();
+  // const { user } = fetchContext('user');
 
   const variants = {
     closed: {
@@ -61,24 +61,25 @@ const Layout = ({ children }) => {
     return <AuthForm />;
   }
 
-  // if (status === 'loading') {
-  //   return <div>loading</div>;
-  // }
+  if (status === 'loading') {
+    return <div>loading</div>;
+  }
 
-  // if (session.user && session.status !== 'loading') {
-  return (
-    <>
-      <Sidebar />
-      <StyledLayoutContainer>
-        <main>{children}</main>
-        {/* <StyledBackdropFilter
+  if (session.user && status !== 'loading') {
+    return (
+      <>
+        <Sidebar />
+        <StyledLayoutContainer>
+          <main>{children}</main>
+          {/* <StyledBackdropFilter
           variants={variants}
           initial="closed"
           animate={trayOpenState}
         /> */}
-      </StyledLayoutContainer>
-    </>
-  );
+        </StyledLayoutContainer>
+      </>
+    );
+  }
 };
 
 export default Layout;

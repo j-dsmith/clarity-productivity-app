@@ -15,6 +15,7 @@ import { MdArrowForward } from 'react-icons/md';
 import { BsGoogle, BsGithub } from 'react-icons/bs';
 import { VscKey } from 'react-icons/vsc';
 import FormBtn from './form-btn';
+import axios from 'axios';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -25,9 +26,9 @@ const AuthForm = () => {
   const router = useRouter();
 
   const switchAuthModeHandler = () => {
+    setIsLogin(!isLogin);
     setEmailValue('');
     setPasswordValue('');
-    setIsLogin((prevState) => !prevState);
   };
 
   const submitHandler = async (event) => {
@@ -47,10 +48,22 @@ const AuthForm = () => {
     } else {
       // Create new user
       try {
-        const result = await createUser(emailValue, passwordValue);
-        router.replace('/');
+        const response = await axios.post('/api/auth/signup', {
+          email: emailValue,
+          password: passwordValue,
+        });
+
+        const user = await signIn('credentials', {
+          redirect: false,
+          email: emailValue,
+          password: passwordValue,
+        });
+
+        console.log(response);
       } catch (error) {
-        console.log(error);
+        const {
+          response: { data },
+        } = error;
       }
     }
   };

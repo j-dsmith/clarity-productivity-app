@@ -8,7 +8,6 @@ const projectSchema = new Schema({
     required: true,
   },
   notes: { type: [noteSchema], default: [] },
-  _user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 export default projectSchema;

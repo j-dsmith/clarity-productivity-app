@@ -1,13 +1,26 @@
-import { getSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { getSession, useSession } from 'next-auth/react';
 import Dashboard from '../components/dashboard/index.js';
+import connectDB from '../helpers/db.js';
+import { User } from '../models/user';
+import Layout from '../components/layout.js';
+import { fetchContext } from '../helpers/index.js';
 
-// const Title = styled.h1`
-//   font-size: 50px;
-//   color: ${({ theme }) => theme.colors.primary};
-// `
+export default function Home({ protectedUser }) {
+  const { data: session } = useSession();
+  const { setUser } = fetchContext('user');
 
-export default function Home() {
-  return <Dashboard />;
+  useEffect(() => {
+    if (session && protectedUser) {
+      setUser({ ...protectedUser });
+    }
+  }, [session]);
+
+  return (
+    <Layout>
+      <Dashboard />
+    </Layout>
+  );
 }
 
 export async function getServerSideProps({ req, res }) {
@@ -21,7 +34,17 @@ export async function getServerSideProps({ req, res }) {
       },
     };
   }
+  const db = await connectDB();
+  const user = await User.findOne({ email: session.user.email });
+
+  const protectedUser = {
+    email: user.email,
+    projects: user.projects,
+    tasks: user.tasks,
+    decks: user.decks,
+    pomodoroCycles: user.pomodoroCycles,
+  };
   return {
-    props: { session },
+    props: { session, protectedUser },
   };
 }

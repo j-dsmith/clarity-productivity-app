@@ -1,4 +1,3 @@
-import { fetchContext } from '../../helpers';
 import {
   StyledTray,
   StyledTrayHeader,
@@ -16,9 +15,6 @@ import { useState } from 'react';
 const SidebarTray = () => {
   // Initialize active state for tray type
   const [trayType, setTrayType] = useState('projects');
-
-  // fetch animation context
-  const { trayOpenState } = fetchContext();
 
   // initialize state for controlled input
   const [title, setTitle] = useState('');

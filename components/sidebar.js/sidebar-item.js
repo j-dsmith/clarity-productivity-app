@@ -3,7 +3,7 @@ import { fetchContext } from '../../helpers/index';
 import { StyledIcon } from './sidebar.styles';
 
 const SidebarItem = ({ title, icon, color, href }) => {
-  const { trayOpenState, toggleTrayOpenState } = fetchContext();
+  const { trayOpenState, toggleTrayOpenState } = fetchContext('animation');
 
   const toggleTray = (title) => {
     if (title === 'Projects') {

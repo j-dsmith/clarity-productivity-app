@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import { hashPassword } from '../../../helpers/auth.js';
 import connectDB from '../../../helpers/db';
 import { User } from '../../../models/user';
@@ -8,15 +9,22 @@ const handler = async (req, res) => {
     return;
   }
 
+  // const session = await getSession({ req });
+
+  // if (!session) {
+  //   res.status(401).json({ message: 'Not authenticated' });
+  //   return;
+  // }
+
   // Destructure request body
-  const { name, email, password } = req.body;
+  const { email, password } = req.body;
 
   // Validate email and password
   if (
     !email ||
     !email.includes('@') ||
-    !password ||
-    password.trim().length < 7
+    !password
+    // password.trim().length < 7
   ) {
     res.status(422).json({
       message:
@@ -30,6 +38,7 @@ const handler = async (req, res) => {
 
   // Check if user with email exists in database
   const existingUser = await User.findOne({ email });
+
   if (existingUser) {
     res.status(422).json({
       message: 'A user with that email address already exists in the database',
@@ -43,11 +52,11 @@ const handler = async (req, res) => {
 
   // Create new user and save in db
   const user = await new User({
-    name,
     email,
     password: hashedPassword,
   }).save();
   db.disconnect();
-  res.status(200).json({ message: 'User created' });
+
+  res.status(201).json({ message: 'User created' });
 };
 export default handler;
