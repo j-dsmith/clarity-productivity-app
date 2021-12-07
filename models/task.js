@@ -6,7 +6,9 @@ const taskSchema = new Schema({
     type: String,
     required: true,
   },
-  dueDate: { type: Date },
+  dueDate: {
+    type: Date,
+  },
   complete: {
     type: Boolean,
     default: false,

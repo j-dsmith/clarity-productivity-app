@@ -1,6 +1,7 @@
 import { StyledTaskTile } from './tasks.styles';
 
-const TaskTile = () => {
+const TaskTile = ({ content, dueDate }) => {
+  console.log(typeof dueDate);
   return (
     <StyledTaskTile>
       <label htmlFor="task"></label>
@@ -10,6 +11,9 @@ const TaskTile = () => {
         id="task"
         onChange={(e) => console.log(e.target.checked)}
       />
+      <p>{content}</p>
+
+      <p className="date">{dueDate}</p>
     </StyledTaskTile>
   );
 };

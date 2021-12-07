@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { StyledInput } from '../../sidebar-tray/tray.styles';
 
 export const StyledTasksContainer = styled.section`
-  padding: 1rem;
+  padding: 2rem;
   margin: 0 0.5rem;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.gray800};
@@ -14,9 +15,20 @@ export const StyledTasksContainer = styled.section`
   flex-direction: column;
 `;
 
+export const StyledTaskHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+`;
+
 export const StyledTaskList = styled.div`
   height: 100%;
   width: 100%;
+  margin-top: 1rem;
+
   h3 {
     margin: 0;
     padding: 1rem;
@@ -32,12 +44,24 @@ export const StyledTaskList = styled.div`
 
 export const StyledTaskTile = styled.li`
   height: 3rem;
+  padding: 1rem 2rem;
+  margin: 0 -1rem;
   cursor: pointer;
   transition: all 100ms ease-in-out;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 1rem 2rem;
+  border-left: 2px solid ${({ theme }) => theme.colors.gray800};
+
+  p {
+    margin: 0 1rem;
+  }
+
+  .date {
+    margin-left: auto;
+    color: ${({ theme }) => theme.colors.gray200};
+    font-style: italic;
+  }
 
   input[type='checkbox'] {
     visibility: hidden;
@@ -54,6 +78,8 @@ export const StyledTaskTile = styled.li`
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray700};
+    border-left: 2px solid ${({ theme }) => theme.colors.naplesyellow};
+
     //TODO: Set border left to color of tile checkbox -> use project tray tiles as reference
   }
 `;

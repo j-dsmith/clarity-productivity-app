@@ -21,65 +21,15 @@ const StyledLayoutContainer = styled.section`
   }
 `;
 
-const StyledBackdropFilter = styled(motion.div)`
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(0.25rem);
-  z-index: 1;
-`;
-
 const Layout = ({ children }) => {
-  // const { user } = fetchContext('user');
-
-  const variants = {
-    closed: {
-      opacity: 0,
-      visibility: 'hidden',
-      transition: {
-        type: 'linear',
-        duration: 0.4,
-        ease: 'easeInOut',
-      },
-    },
-    open: {
-      opacity: 1,
-      transition: {
-        type: 'linear',
-        duration: 0.4,
-        ease: 'easeInOut',
-      },
-    },
-  };
-
-  const { data: session, status } = useSession();
-
-  if (!session || status === 'unauthenticated') {
-    return <AuthForm />;
-  }
-
-  if (status === 'loading') {
-    return <div>loading</div>;
-  }
-
-  if (session.user && status !== 'loading') {
-    return (
-      <>
-        <Sidebar />
-        <StyledLayoutContainer>
-          <main>{children}</main>
-          {/* <StyledBackdropFilter
-          variants={variants}
-          initial="closed"
-          animate={trayOpenState}
-        /> */}
-        </StyledLayoutContainer>
-      </>
-    );
-  }
+  return (
+    <>
+      <Sidebar />
+      <StyledLayoutContainer>
+        <main>{children}</main>
+      </StyledLayoutContainer>
+    </>
+  );
 };
 
 export default Layout;

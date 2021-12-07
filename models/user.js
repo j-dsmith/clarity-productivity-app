@@ -12,6 +12,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
+    select: false,
   },
   projects: {
     type: [projectSchema],
@@ -21,11 +22,15 @@ const userSchema = new Schema({
     type: [taskSchema],
     default: [],
   },
+  tasksCompleted: {
+    type: Number,
+    default: 0,
+  },
   decks: {
     type: [deckSchema],
     default: [],
   },
-  pomodoroCycles: { type: Number, default: 0 },
+  pomodorosCompleted: { type: Number, default: 0 },
 });
 
 export const User = mongoose.models.User || mongoose.model('User', userSchema);

@@ -1,11 +1,10 @@
 import {
   StyledTray,
   StyledTrayHeader,
-  StyledInputGroup,
-  StyledInput,
   StyledContentSection,
 } from './tray.styles';
-import SidebarBtn from './sidebar-btn';
+import { StyledInputGroup, StyledInput } from '../ui/ui-items.styles';
+import UIBtn from '../ui/ui-btn';
 import ItemTile from '../item-tile/item-tile';
 import { MdAdd, MdFilterList, MdDelete } from 'react-icons/md';
 import { BsTagsFill } from 'react-icons/bs';
@@ -52,8 +51,8 @@ const SidebarTray = () => {
           maxLength={35}
           placeholder="Title"
         />
-        <SidebarBtn icon={<MdAdd />} color={theme.colors.turquoise} />
-        <SidebarBtn icon={<MdDelete />} color={theme.colors.bittersweet} />
+        <UIBtn icon={<MdAdd />} color={theme.colors.turquoise} />
+        <UIBtn icon={<MdDelete />} color={theme.colors.bittersweet} />
       </StyledInputGroup>
       {/* 
           Add info row, column headers table style. (title, current sort order, more?) 

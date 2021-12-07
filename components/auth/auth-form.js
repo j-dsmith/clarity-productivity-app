@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
+import axios from 'axios';
 import { createUser } from '../../helpers/auth';
 import {
   StyledLoginPage,
@@ -15,7 +16,6 @@ import { MdArrowForward } from 'react-icons/md';
 import { BsGoogle, BsGithub } from 'react-icons/bs';
 import { VscKey } from 'react-icons/vsc';
 import FormBtn from './form-btn';
-import axios from 'axios';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -58,12 +58,12 @@ const AuthForm = () => {
           email: emailValue,
           password: passwordValue,
         });
-
-        console.log(response);
+        router.replace('/');
       } catch (error) {
         const {
           response: { data },
         } = error;
+        alert(data.message);
       }
     }
   };

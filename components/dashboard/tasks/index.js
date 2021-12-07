@@ -1,30 +1,47 @@
+import { useContext } from 'react';
+import UserContext from '../../../store/user-ctx';
+
+import {
+  StyledTasksContainer,
+  StyledTaskList,
+  StyledTaskHeader,
+} from './tasks.styles';
+import { StyledInputGroup, StyledInput } from '../../ui/ui-items.styles';
+import { theme } from '../../../pages/_app';
+import { MdAdd } from 'react-icons/md';
 import TaskTile from './task-tile';
-import { StyledTasksContainer, StyledTaskList } from './tasks.styles';
-import { motion } from 'framer-motion';
+import UIBtn from '../../ui/ui-btn';
 
 const Tasks = () => {
-  const colors = [
-    'hsl(176, 56%, 55%)',
-    'hsl(20, 33%, 98%)',
-    'hsl(0, 100%, 71%)',
-    'hsl(50, 100%, 71%)',
-    'hsl(222, 100%, 61%)',
-    'hsl(267, 72%, 82%)',
-  ];
+  const { user } = useContext(UserContext);
+  const { tasks } = user;
 
-  //TODO: add render tasks once tasks are loaded from db
-  // apply random color to checkbox circle
-  // apply same random color for each tile to border left, same as project tray
+  const renderTasks = () => {
+    if (user.tasks !== undefined) {
+      return tasks.map((task) => (
+        <TaskTile
+          key={task._id}
+          content={task.content}
+          dueDate={task.dueDate}
+        />
+      ));
+    }
+    return null;
+  };
+
+  if (!user) return <div />;
 
   return (
     <StyledTasksContainer>
-      <StyledTaskList>
+      <StyledTaskHeader>
         <h3>Tasks</h3>
-        <ul>
-          <TaskTile color="hsl(176, 56%, 55%)" />
-          <TaskTile color="hsl(176, 56%, 55%)" />
-          <TaskTile color="hsl(176, 56%, 55%)" />
-        </ul>
+        <StyledInputGroup>
+          <StyledInput type="text" />
+          <UIBtn icon={<MdAdd />} color={theme.colors.turquoise} />
+        </StyledInputGroup>
+      </StyledTaskHeader>
+      <StyledTaskList>
+        <ul>{renderTasks()}</ul>
       </StyledTaskList>
     </StyledTasksContainer>
   );
