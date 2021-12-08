@@ -17,12 +17,4 @@ export const fetchProtectedUser = async () => {
   return response.data.user;
 };
 
-export const addTask = async (text) => {
-  const response = await axios.post('/api/tasks', {
-    text,
-  });
-
-  return response;
-};
-
 export default connectDB;

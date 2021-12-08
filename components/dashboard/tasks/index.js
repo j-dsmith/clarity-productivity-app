@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import UserContext from '../../../store/user-ctx';
-
+import { motion } from 'framer-motion';
 import {
   StyledTasksContainer,
   StyledTaskList,
@@ -8,36 +8,69 @@ import {
 } from './tasks.styles';
 import { StyledInputGroup, StyledInput } from '../../ui/ui-items.styles';
 import { theme } from '../../../pages/_app';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdDelete } from 'react-icons/md';
 import TaskTile from './task-tile';
 import UIBtn from '../../ui/ui-btn';
-import { addTask } from '../../../helpers/db';
+import { addTask, deleteTask, fetchTasks } from '../../../helpers/tasks';
 
 const Tasks = () => {
+  // State Initialization for new task input and active delete state
   const [taskTitle, setTaskTitle] = useState('');
-  const { user } = useContext(UserContext);
+  const [deleteActive, setDeleteActive] = useState(false);
+  // const [taskToDelete, setTaskToDelete] = useState('');
+  // Fetch the loaded user stored in context and destructure tasks array
+  const { user, setUser } = useContext(UserContext);
   const { tasks } = user;
 
   const renderTasks = () => {
+    // Check if user is undefined -> conditional check to prevent error
+    // while user is being fetched from context on page load
     if (user.tasks !== undefined) {
+      // Return a task tile with populated data from DB
       return tasks.map((task) => (
         <TaskTile
           key={task._id}
+          id={task._id}
           content={task.content}
           dueDate={task.dueDate}
+          deleteActive={deleteActive}
+          handler={deleteActive ? handleDeleteTask : handleCompleteTask}
         />
       ));
     }
+    // If user is undefined, return nothing -> prevents error while fetching user
     return null;
   };
 
   const handleAddTask = async () => {
-    console.log('clicked');
+    // Reset input
+    setTaskTitle('');
+    // Run add task helper to send POST request to /api/tasks
     const response = await addTask(taskTitle);
-    console.log(response);
+    // Re-fetch tasks to update list
+    await handleFetchTasks();
   };
 
-  if (!user) return <div />;
+  const handleDeleteTask = async (id) => {
+    //Run delete task helper to send DELETE request to /api/tasks/[taskId]
+    const response = await deleteTask(id);
+    // Re-fetch tasks to update list
+    await handleFetchTasks();
+  };
+
+  const handleFetchTasks = async () => {
+    // Run fetch helper to get updated tasks list from DB
+    const response = await fetchTasks();
+    const { tasks } = response.data;
+    // Set the tasks for current user to updated task list to trigger rerender of list
+    setUser({ ...user, tasks });
+  };
+
+  const handleCompleteTask = async () => {};
+
+  const toggleDeleteActive = () => {
+    setDeleteActive(!deleteActive);
+  };
 
   return (
     <StyledTasksContainer>
@@ -50,11 +83,17 @@ const Tasks = () => {
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
           />
-          <button onClick={() => handleAddTask()}></button>
           <UIBtn
             icon={<MdAdd />}
             color={theme.colors.turquoise}
+            outline={true}
             handler={handleAddTask}
+          />
+          <UIBtn
+            icon={<MdDelete />}
+            color={theme.colors.bittersweet}
+            handler={toggleDeleteActive}
+            outline={deleteActive ? false : true}
           />
         </StyledInputGroup>
       </StyledTaskHeader>

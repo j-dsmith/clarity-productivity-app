@@ -41,6 +41,7 @@ const AuthForm = () => {
         email: emailValue,
         password: passwordValue,
       });
+      console.log(result);
 
       if (!result.error) {
         router.replace('/');

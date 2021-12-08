@@ -18,17 +18,20 @@ export default NextAuth({
         const db = await connectDB();
 
         // Lookup user
-        const user = await User.findOne({ email: credentials.email });
-
+        const user = await User.findOne({ email: credentials.email }).select(
+          '+password'
+        );
         if (!user) {
           db.disconnect();
           throw new Error('No user found!');
         }
+
         // Check if found users password matches hashed password in db for given email
         const isValid = await verifyPassword(
           credentials.password,
           user.password
         );
+        console.log(isValid);
 
         if (!isValid) {
           db.disconnect();

@@ -8,7 +8,7 @@ export const hashPassword = async (password) => {
 };
 
 export const verifyPassword = async (password, hashedPassword) => {
-  const isValid = compare(password, hashedPassword);
+  const isValid = await compare(password, hashedPassword);
   return isValid;
 };
 

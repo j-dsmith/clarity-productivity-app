@@ -6,7 +6,8 @@ export const StyledBtn = styled.button`
   padding: 0.25rem;
   margin: 0 0.25rem;
   border-radius: 0.5rem;
-  background-color: transparent;
+  background-color: ${({ color, outline }) =>
+    outline ? 'transparent' : color};
   border: 1px solid ${({ color }) => color};
   color: ${({ theme }) => theme.colors.cultured};
   transition: all 100ms linear;
@@ -19,6 +20,7 @@ export const StyledBtn = styled.button`
 
   svg {
     height: 1rem;
+    margin-right: 1px;
     width: 1rem;
   }
 `;

@@ -24,7 +24,7 @@ const Stats = () => {
           title="Study Decks"
           gridArea="decks"
           content={numDecks}
-          color="hsl(227, 58%, 65%)"
+          color="hsl(176, 56%, 55%)"
         />
         <StatTile
           title="Total Projects"
@@ -37,7 +37,7 @@ const Stats = () => {
           title="Pomodoros"
           gridArea="pom"
           content={pomodorosCompleted}
-          color="hsl(176, 56%, 55%)"
+          color="hsl(227, 58%, 65%)"
         />
         <StatTile
           title="Completed Tasks"
