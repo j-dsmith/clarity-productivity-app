@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const StyledBtn = styled.button`
   display: grid;
   place-items: center;
+  height: 2rem;
+  width: 2rem;
   padding: 0.25rem;
   margin: 0 0.25rem;
   border-radius: 0.5rem;
@@ -19,9 +21,8 @@ export const StyledBtn = styled.button`
   }
 
   svg {
-    height: 1rem;
-    margin-right: 1px;
-    width: 1rem;
+    height: 1.25rem;
+    width: 1.25rem;
   }
 `;
 

@@ -4,9 +4,9 @@ import Dashboard from '../components/dashboard/index.js';
 import connectDB, { fetchProtectedUser } from '../helpers/db.js';
 
 import Layout from '../components/layout.js';
-import { fetchContext } from '../helpers/index.js';
+import { fetchContext, fetchWeather } from '../helpers/client.js';
 
-export default function Home() {
+export default function Home({ weather }) {
   const { data: session } = useSession();
   const { user, setUser } = fetchContext('user');
 
@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <Dashboard user={user} />
+      <Dashboard user={user} weather={weather} />
     </Layout>
   );
 }
@@ -36,6 +36,11 @@ export async function getServerSideProps({ req, res }) {
         permanent: false,
       },
     };
+  }
+
+  const response = await fetchWeather();
+  if (response) {
+    return { props: { session, weather: response.data } };
   }
 
   return { props: { session } };

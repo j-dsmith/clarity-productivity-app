@@ -15,6 +15,7 @@ export const StyledTile = styled.div`
   box-sizing: border-box;
   border-left: 2px solid ${({ theme }) => theme.colors.gray600};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray800};
+  box-shadow: ${({ theme }) => theme.shadow.md};
   transition: all 100ms ease-in-out;
 
   &:hover {

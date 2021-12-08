@@ -3,7 +3,7 @@ import { omit } from 'lodash';
 import axios from 'axios';
 
 const connectDB = async () => {
-  const db = await mongoose.connect(process.env.mongodburl, {
+  const db = await mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   });

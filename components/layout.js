@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 import Sidebar from './sidebar.js';
-import { useSession } from 'next-auth/react';
-import AuthForm from './auth/auth-form.js';
-import { fetchContext } from '../helpers/index.js';
 
 const StyledLayoutContainer = styled.section`
   height: 100%;

@@ -51,7 +51,7 @@ const SidebarTray = () => {
           maxLength={35}
           placeholder="Title"
         />
-        <UIBtn icon={<MdAdd />} color={theme.colors.turquoise} />
+        <UIBtn icon={<MdAdd />} color={theme.colors.turquoise} outline />
         <UIBtn icon={<MdDelete />} color={theme.colors.bittersweet} />
       </StyledInputGroup>
       {/* 

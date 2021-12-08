@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { fetchContext } from '../../helpers/index';
+import { fetchContext } from '../../helpers/client';
 import { StyledIcon } from './sidebar.styles';
 
 const SidebarItem = ({ title, icon, color, href }) => {

@@ -1,11 +1,13 @@
 import { StyledDashContainer } from './dashboard.styles';
-import { fetchContext } from '../../helpers/index';
+import { fetchContext } from '../../helpers/client';
 import Calendar from './calendar';
 import Tasks from './tasks';
 import Forecast from './forecast';
 import Stats from './stats';
 
-const Dashboard = ({ user }) => {
+const Dashboard = ({ weather }) => {
+  const { user } = fetchContext('user');
+
   const variants = {
     closed: {
       opacity: 0,
@@ -27,7 +29,7 @@ const Dashboard = ({ user }) => {
         variants={variants}
       >
         <Calendar />
-        <Stats user={user} />
+        <Forecast weather={weather} />
       </StyledDashContainer>
 
       <StyledDashContainer
@@ -37,7 +39,7 @@ const Dashboard = ({ user }) => {
         variants={variants}
       >
         <Tasks />
-        <Forecast />
+        <Stats user={user} />
       </StyledDashContainer>
     </>
   );
