@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import Sidebar from './sidebar.js';
 
-const StyledLayoutContainer = styled.section`
-  height: 100%;
-  min-height: 100%;
+const LayoutContainer = styled.section`
+  min-height: 100vh;
   width: 92%;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 8%;
   z-index: 0;
@@ -21,9 +20,9 @@ const Layout = ({ children }) => {
   return (
     <>
       <Sidebar />
-      <StyledLayoutContainer>
+      <LayoutContainer>
         <main>{children}</main>
-      </StyledLayoutContainer>
+      </LayoutContainer>
     </>
   );
 };

@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import {
-  StyledForecastContainer,
-  StyledWeatherIcon,
-  StyledLocationTile,
-  StyledForecastInfoTile,
+  ForecastContainer,
+  WeatherIcon,
+  LocationTile,
+  InfoTile,
   StyledForecastRow,
-  StyledForecastDayTile,
-  StyledForecastGroup,
+  FutureForecastTile,
+  DetailsContainer,
 } from './forecast.styles';
 import { forecastIconData } from './forecast-icon-data';
 import { MdLocationPin, MdWbSunny } from 'react-icons/md';
@@ -92,42 +92,44 @@ const Forecast = ({ weather }) => {
       )[0];
 
       return (
-        <StyledForecastDayTile key={date_epoch}>
-          <p>{forecastDate}</p>
-          <StyledWeatherIcon>
+        <FutureForecastTile key={date_epoch}>
+          <h4>{forecastDate}</h4>
+          <WeatherIcon>
             <Image
               src={`/weather/day/${iconUrl.icon}.png`}
               height={50}
               width={50}
             />
-          </StyledWeatherIcon>
+          </WeatherIcon>
           <p>
             H:{dayMaxTemp}° L:{dayMinTemp}°
           </p>
-        </StyledForecastDayTile>
+        </FutureForecastTile>
       );
     });
   };
 
   return (
-    <StyledForecastContainer>
-      <StyledForecastGroup bg>
-        <StyledLocationTile>
+    <ForecastContainer>
+      <DetailsContainer bg>
+        <LocationTile>
           <p>
-            {location.name} <MdLocationPin />
+            {location.name}
+            <MdLocationPin />
           </p>
+
           <h2>{current.temp_c}°</h2>
-        </StyledLocationTile>
-        <StyledForecastInfoTile>
-          <StyledWeatherIcon>{getCurrentWeatherIcon()}</StyledWeatherIcon>
+        </LocationTile>
+        <InfoTile>
+          <WeatherIcon>{getCurrentWeatherIcon()}</WeatherIcon>
           <p>{current.condition.text}</p>
           <p>
             H:{todayMaxTemp}° L:{todayMinTemp}°
           </p>
-        </StyledForecastInfoTile>
-      </StyledForecastGroup>
-      <StyledForecastGroup>{renderForecast()}</StyledForecastGroup>
-    </StyledForecastContainer>
+        </InfoTile>
+      </DetailsContainer>
+      <DetailsContainer>{renderForecast()}</DetailsContainer>
+    </ForecastContainer>
   );
 };
 

@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import {
-  StyledCalendarContainer,
-  StyledCalendarBtn,
-  StyledWeekday,
+  CalendarGrid,
+  CalendarContainer,
+  CalendarHeader,
+  CalendarBtn,
+  WeekdayHeader,
 } from './calendar.styles';
-import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
+import { MdArrowForwardIos } from 'react-icons/md';
 import CalendarMonth, {
   renderPrevMonthDays,
   renderCurrentMonthDays,
@@ -37,25 +39,29 @@ const Calendar = () => {
   };
 
   return (
-    <StyledCalendarContainer>
-      <StyledCalendarBtn colStart="1" onClick={() => handleClick()}>
-        <MdArrowBackIos />
-      </StyledCalendarBtn>
-      <h3>{`${calendarMonth.name} ${currentYear}`}</h3>
-      <StyledCalendarBtn colStart="7" onClick={() => handleClick('increment')}>
-        <MdArrowForwardIos />
-      </StyledCalendarBtn>
-      <StyledWeekday>Mo</StyledWeekday>
-      <StyledWeekday>Tu</StyledWeekday>
-      <StyledWeekday>We</StyledWeekday>
-      <StyledWeekday>Th</StyledWeekday>
-      <StyledWeekday>Fr</StyledWeekday>
-      <StyledWeekday>Sa</StyledWeekday>
-      <StyledWeekday>Su</StyledWeekday>
-      {renderPrevMonthDays(calendarMonth, currentYear, currentMonth)}
-      {renderCurrentMonthDays(calendarMonth)}
-      {renderNextMonthDays(calendarMonth)}
-    </StyledCalendarContainer>
+    <CalendarContainer>
+      <CalendarHeader>
+        <CalendarBtn colStart="1" onClick={() => handleClick()} rotate>
+          <MdArrowForwardIos />
+        </CalendarBtn>
+        <h3>{`${calendarMonth.name} ${currentYear}`}</h3>
+        <CalendarBtn colStart="7" onClick={() => handleClick('increment')}>
+          <MdArrowForwardIos />
+        </CalendarBtn>
+      </CalendarHeader>
+      <CalendarGrid>
+        <WeekdayHeader>Mo</WeekdayHeader>
+        <WeekdayHeader>Tu</WeekdayHeader>
+        <WeekdayHeader>We</WeekdayHeader>
+        <WeekdayHeader>Th</WeekdayHeader>
+        <WeekdayHeader>Fr</WeekdayHeader>
+        <WeekdayHeader>Sa</WeekdayHeader>
+        <WeekdayHeader>Su</WeekdayHeader>
+        {renderPrevMonthDays(calendarMonth, currentYear, currentMonth)}
+        {renderCurrentMonthDays(calendarMonth)}
+        {renderNextMonthDays(calendarMonth)}
+      </CalendarGrid>
+    </CalendarContainer>
   );
 };
 

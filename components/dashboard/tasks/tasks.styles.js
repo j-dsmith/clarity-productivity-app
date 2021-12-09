@@ -2,14 +2,13 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const StyledTasksContainer = styled.section`
-  /* padding: 2rem; */
-  margin: 0 0.5rem;
-  height: 100%;
+  grid-area: task;
+  margin: 0.75em 0.75em 1.5em 1.5em;
+  padding-bottom: 2em;
   background-color: ${({ theme }) => theme.colors.gray800};
   color: ${({ theme }) => theme.colors.cultured};
   border-radius: 1.5rem;
   box-shadow: ${({ theme }) => theme.shadow.xl};
-  flex: 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -18,27 +17,34 @@ export const StyledTasksContainer = styled.section`
 export const StyledTaskHeader = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 2rem 2rem 0 2rem;
+  padding: 1.5em;
+  padding-bottom: 0;
 
-  h3 {
+  h2 {
     margin: 0;
-    font-size: 1.5rem;
   }
 `;
 
 export const StyledTaskList = styled.div`
   height: 100%;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1em;
   overflow-y: scroll;
 
   ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    box-shadow: ${({ theme }) => theme.shadow.md};
+    border-block: 1px solid ${({ theme }) => theme.colors.gray700};
+
+    & * + * {
+      border-top: 1px solid ${({ theme }) => theme.colors.gray700};
+    }
   }
 `;
 
-export const StyledTaskTile = styled(motion.li)`
+export const StyledTaskTile = styled.div`
   height: 3rem;
   padding: 2rem;
   cursor: pointer;
@@ -47,8 +53,6 @@ export const StyledTaskTile = styled(motion.li)`
   justify-content: flex-start;
   align-items: center;
   border-left: 2px solid ${({ theme }) => theme.colors.gray800};
-  border-top: 1px solid ${({ theme }) => theme.colors.gray700};
-  box-shadow: ${({ theme }) => theme.shadow.md};
 
   // Custom Checkbox
   input[type='checkbox'] {

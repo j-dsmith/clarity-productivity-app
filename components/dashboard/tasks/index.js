@@ -28,14 +28,16 @@ const Tasks = () => {
     if (user.tasks !== undefined) {
       // Return a task tile with populated data from DB
       return tasks.map((task) => (
-        <TaskTile
-          key={task._id}
-          id={task._id}
-          content={task.content}
-          dueDate={task.dueDate}
-          deleteActive={deleteActive}
-          handler={deleteActive ? handleDeleteTask : handleCompleteTask}
-        />
+        <li>
+          <TaskTile
+            key={task._id}
+            id={task._id}
+            content={task.content}
+            dueDate={task.dueDate}
+            deleteActive={deleteActive}
+            handler={deleteActive ? handleDeleteTask : handleCompleteTask}
+          />
+        </li>
       ));
     }
     // If user is undefined, return nothing -> prevents error while fetching user
@@ -75,7 +77,7 @@ const Tasks = () => {
   return (
     <StyledTasksContainer>
       <StyledTaskHeader>
-        <h3>Tasks</h3>
+        <h2>Tasks</h2>
         <StyledInputGroup width="80%">
           <StyledInput
             type="text"
@@ -88,12 +90,14 @@ const Tasks = () => {
             color={theme.colors.turquoise}
             outline={true}
             handler={handleAddTask}
+            btnLg
           />
           <UIBtn
             icon={<MdDelete />}
             color={theme.colors.bittersweet}
             handler={toggleDeleteActive}
             outline={deleteActive ? false : true}
+            btnLg
           />
         </StyledInputGroup>
       </StyledTaskHeader>

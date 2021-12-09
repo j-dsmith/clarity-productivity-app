@@ -1,75 +1,82 @@
 import styled from 'styled-components';
 
-export const StyledCalendarContainer = styled.section`
-  padding: 1rem;
-  margin: 0 0.5rem;
-  height: 100%;
-  flex: 2;
+export const CalendarContainer = styled.section`
+  grid-area: cal;
+  padding: 1.5em;
+  margin: 1.5em 0.75em 0.75em 1.5em;
   background-color: ${({ theme }) => theme.colors.gray800};
   color: ${({ theme }) => theme.colors.cultured};
   border-radius: 1.5rem;
   box-shadow: ${({ theme }) => theme.shadow.xl};
-  display: grid;
-  place-items: center;
-  grid-template-columns: repeat(7, 14.28%);
-  grid-template-rows: repeat(8, 12.25%);
-  grid-template-areas: 'mon tue wed thu fri sat sun';
+`;
+
+export const CalendarHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 1em;
+  font-size: 1.5rem;
 
   h3 {
     padding: 0;
     margin: 0;
-    grid-column: 3 / span 3;
     text-align: center;
-    font-size: 1.5rem;
-    height: 100%;
-    width: 100%;
-    display: grid;
-    place-items: center;
   }
 `;
 
-export const StyledWeekday = styled.h5`
+export const CalendarGrid = styled.div`
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-template-areas: 'mon tue wed thu fri sat sun';
+`;
+
+export const WeekdayHeader = styled.h5`
   text-align: center;
-  height: 100%;
-  width: 100%;
   display: grid;
   place-items: center;
   grid-column: 'mon';
   font-size: 1rem;
+  margin: 0;
+  padding: 0.5em;
+  /* margin-block: 1em; */
 `;
 
-export const StyledCalendarBtn = styled.button`
+export const CalendarBtn = styled.button`
   border: none;
   background: transparent;
-  height: 2rem;
-  width: 2rem;
+  padding: 0.5em;
   grid-column: ${({ colStart }) => colStart + '/ span 1'};
   display: grid;
   place-items: center;
   color: ${({ theme }) => theme.colors.cultured};
   border: 1px solid ${({ theme }) => theme.colors.bittersweet};
-  border-radius: 30%;
-  transition: all 100ms linear;
+  border-radius: 0.875em;
   cursor: pointer;
+  transform: ${({ rotate }) => (rotate ? 'scaleX(-1)' : '')};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.bittersweet};
     box-shadow: ${({ theme }) => theme.shadow.md};
   }
+
+  svg {
+    font-size: 0.875rem;
+  }
 `;
 
-export const StyledCalendarDay = styled.p`
+export const CalendarDay = styled.p`
   grid-column: ${({ firstDay }) => firstDay};
-  height: 100%;
-  width: 100%;
   display: grid;
   place-items: center;
   grid-column: 'mon';
-  font-size: 1rem;
   text-align: center;
+  margin: 0;
+  padding: 0.5em;
 `;
 
-export const StyledCurrentDay = styled(StyledCalendarDay)`
+export const StyledCurrentDay = styled(CalendarDay)`
   height: 2.25rem;
   width: 2.25rem;
   border-radius: 50%;
@@ -77,7 +84,7 @@ export const StyledCurrentDay = styled(StyledCalendarDay)`
   box-shadow: ${({ theme }) => theme.shadow.lg};
 `;
 
-export const StyledFirstDay = styled(StyledCalendarDay)`
+export const StyledFirstDay = styled(CalendarDay)`
   position: relative;
   z-index: 1;
 
@@ -90,14 +97,12 @@ export const StyledFirstDay = styled(StyledCalendarDay)`
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 0;
-    height: 2.25rem;
-    width: 2.25rem;
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.bittersweet};
     box-shadow: ${({ theme }) => theme.shadow.lg};
   }
 `;
 
-export const StyledExtraDay = styled(StyledCalendarDay)`
+export const StyledExtraDay = styled(CalendarDay)`
   color: ${({ theme }) => theme.colors.gray200};
 `;

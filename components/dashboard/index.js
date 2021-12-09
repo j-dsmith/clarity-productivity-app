@@ -1,4 +1,4 @@
-import { StyledDashContainer } from './dashboard.styles';
+import { DashContainer } from './dashboard.styles';
 import { fetchContext } from '../../helpers/client';
 import Calendar from './calendar';
 import Tasks from './tasks';
@@ -22,7 +22,7 @@ const Dashboard = ({ weather }) => {
   };
   return (
     <>
-      <StyledDashContainer
+      <DashContainer
         initial="closed"
         animate="open"
         exit="closed"
@@ -30,17 +30,9 @@ const Dashboard = ({ weather }) => {
       >
         <Calendar />
         <Forecast weather={weather} />
-      </StyledDashContainer>
-
-      <StyledDashContainer
-        initial="closed"
-        animate="open"
-        exit="closed"
-        variants={variants}
-      >
         <Tasks />
         <Stats user={user} />
-      </StyledDashContainer>
+      </DashContainer>
     </>
   );
 };

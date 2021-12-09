@@ -1,5 +1,5 @@
 import {
-  StyledCalendarDay,
+  CalendarDay,
   StyledCurrentDay,
   StyledExtraDay,
 } from './calendar.styles';
@@ -44,12 +44,12 @@ export const renderCurrentMonthDays = (calendarMonth) => {
     // }
     if (day === 1) {
       return (
-        <StyledCalendarDay key={day} firstDay={calendarMonth.firstOfMonth}>
+        <CalendarDay key={day} firstDay={calendarMonth.firstOfMonth}>
           {day}
-        </StyledCalendarDay>
+        </CalendarDay>
       );
     }
-    return <StyledCalendarDay key={'current-' + day}>{day}</StyledCalendarDay>;
+    return <CalendarDay key={'current-' + day}>{day}</CalendarDay>;
   });
 };
 

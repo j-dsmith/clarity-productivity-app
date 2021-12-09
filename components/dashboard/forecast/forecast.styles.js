@@ -1,33 +1,31 @@
 import styled from 'styled-components';
 
-export const StyledForecastContainer = styled.section`
-  padding: 1rem;
-  margin: 0 0.5rem;
-  height: 100%;
+export const ForecastContainer = styled.section`
+  grid-area: fore;
+  padding: 1.5em;
+  margin: 1.5em 1.5em 0.75em 0.75em;
+
   background-color: ${({ theme }) => theme.colors.gray800};
   color: ${({ theme }) => theme.colors.cultured};
   border-radius: 1.5rem;
-  box-shadow: ${({ theme }) => theme.shadow.xl};
+  box-shadow: ${({ theme }) => theme.shadow.lg};
   display: flex;
   flex-direction: column;
 `;
 
-export const StyledForecastGroup = styled.div`
-  height: 50%;
+export const DetailsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0.5rem;
-  border-radius: 1rem;
+  border-radius: 1em;
   background-color: ${({ bg, theme }) => (bg ? theme.colors.gray700 : '')};
-
-  box-shadow: ${({ bg, theme }) => (bg ? theme.shadow.lg : '')};
+  box-shadow: ${({ bg, theme }) => (bg ? theme.shadow.xl : '')};
 `;
 
-export const StyledLocationTile = styled.div`
-  height: 100%;
-  padding: 0 1.5rem;
-  grid-area: location;
+export const LocationTile = styled.div`
+  width: 40%;
+  display: grid;
+  place-items: center;
 
   h2 {
     margin: 0;
@@ -42,44 +40,45 @@ export const StyledLocationTile = styled.div`
     padding: 0;
     display: flex;
     align-items: center;
+    color: ${({ theme }) => theme.colors.gray100};
 
     svg {
-      margin-left: 0.25rem;
+      margin-left: 0.25em;
+      color: ${({ theme }) => theme.colors.gray100};
     }
   }
 `;
 
-export const StyledForecastInfoTile = styled.div`
-  height: 100%;
-  padding: 0 1.5rem;
+export const InfoTile = styled.div`
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  grid-area: detail;
 
   p {
-    text-align: right;
+    font-size: 0.875rem;
     padding: 0;
-    margin: 0;
   }
 `;
 
-export const StyledForecastDayTile = styled.div`
+export const FutureForecastTile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  grid-row-start: day;
-  height: 90%;
+  justify-content: space-between;
   width: 40%;
+
+  h4 {
+    font-size: 1.125rem;
+  }
 
   p {
     text-align: center;
   }
 `;
 
-export const StyledWeatherIcon = styled.div`
+export const WeatherIcon = styled.div`
   display: grid;
-  place-content: center;
+  place-items: center;
 `;

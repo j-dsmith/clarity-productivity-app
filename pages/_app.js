@@ -34,6 +34,10 @@ export const theme = {
 
 const GlobalStyle = createGlobalStyle`
 
+*, *{
+  box-sizing: border-box
+}
+
 html,
 body {
   padding: 0;

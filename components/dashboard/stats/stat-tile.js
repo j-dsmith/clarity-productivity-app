@@ -1,8 +1,8 @@
 import { StyledStatTile } from './stats.styles';
 
-const StatTile = ({ title, content, color, gridArea }) => {
+const StatTile = ({ title, content, color }) => {
   return (
-    <StyledStatTile color={color} gridarea={gridArea}>
+    <StyledStatTile color={color}>
       <p>{title}</p>
       <h4>{content}</h4>
     </StyledStatTile>
