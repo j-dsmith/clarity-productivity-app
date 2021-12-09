@@ -1,22 +1,25 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const StyledTile = styled.div`
-  width: 100%;
-  height: 6rem;
-  background-color: ${({ theme }) => theme.colors.gray600};
-  color: ${({ theme }) => theme.colors.cultured};
-  padding: 1rem;
+export const GeneralTileContainer = styled.div`
+  height: 5rem;
+  background-color: ${({ theme }) => theme.colors.bluecrayola};
+  color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   cursor: pointer;
-  box-sizing: border-box;
+`;
+
+export const ProjectTileContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.gray600};
+  color: ${({ theme }) => theme.colors.cultured};
+  padding: 1rem;
   border-left: 2px solid ${({ theme }) => theme.colors.gray600};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray800};
-  box-shadow: ${({ theme }) => theme.shadow.md};
-  transition: all 100ms ease-in-out;
+  /* box-shadow: ${({ theme }) => theme.shadow.md}; */
+  /* transition: all 100ms ease-in-out; */
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray800};
@@ -34,11 +37,12 @@ export const StyledTile = styled.div`
   } */
 `;
 
-export const StyledTileHeader = styled.div`
-  width: 100%;
+export const TileHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  width: 100%;
+  padding: 0.75em;
 
   h3 {
     margin: 0 0.5rem 0 0;
@@ -46,7 +50,7 @@ export const StyledTileHeader = styled.div`
   }
 `;
 
-export const StyledTag = styled(motion.div)`
+export const Tag = styled(motion.div)`
   // Tag Container
   padding: 0.5rem;
   cursor: pointer;
@@ -67,14 +71,14 @@ export const StyledTag = styled(motion.div)`
   }
 `;
 
-export const StyledTileFooter = styled.div`
+export const TileFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 `;
 
-export const StyledDate = styled.div`
+export const Date = styled.div`
   font-size: 0.85rem;
   span {
     font-style: italic;
@@ -82,7 +86,7 @@ export const StyledDate = styled.div`
   }
 `;
 
-export const StyledNotesCounter = styled.div`
+export const NotesCounter = styled.div`
   display: flex;
   align-items: center;
 

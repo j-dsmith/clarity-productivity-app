@@ -8,6 +8,7 @@ const Projects = () => {
     <>
       <Layout>
         <SidebarTray />
+        <MyEditor />
       </Layout>
     </>
   );

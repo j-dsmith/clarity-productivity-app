@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const StyledTasksContainer = styled.section`
+export const TasksContainer = styled.section`
   grid-area: task;
   margin: 0.75em 0.75em 1.5em 1.5em;
   padding-bottom: 2em;
@@ -14,7 +14,7 @@ export const StyledTasksContainer = styled.section`
   justify-content: flex-start;
 `;
 
-export const StyledTaskHeader = styled.div`
+export const TaskHeader = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.5em;
@@ -25,7 +25,7 @@ export const StyledTaskHeader = styled.div`
   }
 `;
 
-export const StyledTaskList = styled.div`
+export const TaskList = styled.div`
   height: 100%;
   width: 100%;
   margin-bottom: 1em;
@@ -65,6 +65,11 @@ export const StyledTaskTile = styled.div`
     position: relative;
     border: 2px solid hsl(50, 100%, 71%);
     cursor: pointer;
+  }
+
+  p {
+    // Remove border applied by adjacent selector in ul
+    border: none;
   }
 
   // Cancel Icon

@@ -1,12 +1,7 @@
 import { useContext, useState } from 'react';
 import UserContext from '../../../store/user-ctx';
-import { motion } from 'framer-motion';
-import {
-  StyledTasksContainer,
-  StyledTaskList,
-  StyledTaskHeader,
-} from './tasks.styles';
-import { StyledInputGroup, StyledInput } from '../../ui/ui-items.styles';
+import { TasksContainer, TaskList, TaskHeader } from './tasks.styles';
+import { InputGroup, TextInput } from '../../ui/ui-items.styles';
 import { theme } from '../../../pages/_app';
 import { MdAdd, MdDelete } from 'react-icons/md';
 import TaskTile from './task-tile';
@@ -75,11 +70,11 @@ const Tasks = () => {
   };
 
   return (
-    <StyledTasksContainer>
-      <StyledTaskHeader>
+    <TasksContainer>
+      <TaskHeader>
         <h2>Tasks</h2>
-        <StyledInputGroup width="80%">
-          <StyledInput
+        <InputGroup width="80%">
+          <TextInput
             type="text"
             placeholder="Task Title"
             value={taskTitle}
@@ -99,12 +94,12 @@ const Tasks = () => {
             outline={deleteActive ? false : true}
             btnLg
           />
-        </StyledInputGroup>
-      </StyledTaskHeader>
-      <StyledTaskList>
+        </InputGroup>
+      </TaskHeader>
+      <TaskList>
         <ul>{renderTasks()}</ul>
-      </StyledTaskList>
-    </StyledTasksContainer>
+      </TaskList>
+    </TasksContainer>
   );
 };
 

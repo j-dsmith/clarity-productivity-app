@@ -1,8 +1,4 @@
-import {
-  CalendarDay,
-  StyledCurrentDay,
-  StyledExtraDay,
-} from './calendar.styles';
+import { CalendarDay, StyledCurrentDay, ExtraDay } from './calendar.styles';
 
 export const renderPrevMonthDays = (
   calendarMonth,
@@ -24,7 +20,7 @@ export const renderPrevMonthDays = (
   prevMonthDays.reverse();
 
   return prevMonthDays.map((day) => (
-    <StyledExtraDay key={'prev-' + day}>{day}</StyledExtraDay>
+    <ExtraDay key={'prev-' + day}>{day}</ExtraDay>
   ));
 };
 
@@ -60,7 +56,7 @@ export const renderNextMonthDays = (calendarMonth) => {
   }
 
   return nextMonthDays.map((day) => (
-    <StyledExtraDay key={'prev-' + day}>{day}</StyledExtraDay>
+    <ExtraDay key={'prev-' + day}>{day}</ExtraDay>
   ));
 };
 

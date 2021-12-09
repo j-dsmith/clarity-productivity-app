@@ -33,6 +33,8 @@ export const StyledIcon = styled.div`
   place-items: center;
   color: ${({ theme }) => theme.colors.cultured};
   background-color: ${({ theme }) => theme.colors.gray700};
+  border: 1px solid ${({ theme }) => theme.colors.gray700};
+
   box-shadow: ${({ theme }) => theme.shadow.lg};
   cursor: pointer;
   transition: all 150ms linear;
@@ -40,6 +42,8 @@ export const StyledIcon = styled.div`
   &:hover {
     color: ${({ color }) => color};
     border-radius: 1.5rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray600};
+
     /* background-color: ${({ btntype, theme }) =>
       btntype === 'logout' ? theme.colors.gray900 : theme.colors.gray700}; */
   }

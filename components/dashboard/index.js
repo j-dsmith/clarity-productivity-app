@@ -11,13 +11,13 @@ const Dashboard = ({ weather }) => {
   const variants = {
     closed: {
       opacity: 0,
-      y: 10,
-      transition: { duration: 0.1 },
+      y: 20,
+      transition: { duration: 0.3 },
     },
     open: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.1 },
+      transition: { duration: 0.3 },
     },
   };
   return (

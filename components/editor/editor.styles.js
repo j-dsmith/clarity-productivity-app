@@ -1,20 +1,44 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { EditorContent } from '@tiptap/react';
 
-export const StyledEditorContainer = styled.div`
+export const EditorContainer = styled(motion.div)`
   width: 78%;
-  height: 100vh;
-  min-height: 100vh;
+  height: clamp(100vh, 100vh, 100vh);
   position: absolute;
   right: 0;
   top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
+
+export const EditorHeader = styled.div`
+  flex-basis: 10%;
+  background-color: ${({ theme }) => theme.colors.gray500};
+  display: flex;
+  align-items: center;
+`;
+
+export const NoteTitleInput = styled.input`
+  height: 100%;
+  width: 35ch;
+  margin: 0;
+  padding: 0 0 0 0.5em;
+  border: none;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: transparent;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const StyledEditorContent = styled(EditorContent)`
-  border: 2px solid red;
-  padding: 1rem;
-  height: 90%;
-  width: 100%;
+  padding: 2em;
+  flex-basis: 85%;
   position: relative;
   overflow-y: scroll;
   color: ${({ theme }) => theme.colors.cultured};
@@ -84,16 +108,18 @@ export const StyledEditorContent = styled(EditorContent)`
 `;
 
 export const StyledToolbar = styled.div`
-  height: 5%;
+  flex-basis: 5%;
   position: relative;
-  border: 2px solid blue;
+  border-block: 1px solid ${({ theme }) => theme.colors.gray800};
+  padding: 0.5em 1em;
+
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
 `;
 
-export const StyledToolbarBtn = styled.button`
+export const ToolbarBtn = styled.button`
   background-color: transparent;
   border: none;
   color: ${({ theme }) => theme.colors.cultured};

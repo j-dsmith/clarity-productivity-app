@@ -1,15 +1,15 @@
-import { StyledBtn } from './ui-items.styles';
+import { StyledUIBtn } from './ui-items.styles';
 
 const UIBtn = ({ handler, color, icon, outline, btnLg }) => {
   return (
-    <StyledBtn
+    <StyledUIBtn
       onClick={() => handler()}
       color={color}
       outline={outline}
       btnLg={btnLg}
     >
       {icon}
-    </StyledBtn>
+    </StyledUIBtn>
   );
 };
 

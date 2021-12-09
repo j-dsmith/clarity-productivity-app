@@ -1,9 +1,5 @@
 import { useContext } from 'react';
-import {
-  StyledStatsContainer,
-  StyledStatsHeader,
-  TileContainer,
-} from './stats.styles';
+import { StatsContainer, StatsHeader, TileContainer } from './stats.styles';
 import StatTile from './stat-tile';
 import UserContext from '../../../store/user-ctx';
 
@@ -18,10 +14,10 @@ const Stats = () => {
   if (!user) return <div />;
 
   return (
-    <StyledStatsContainer>
-      <StyledStatsHeader>
+    <StatsContainer>
+      <StatsHeader>
         <h2>Stats</h2>
-      </StyledStatsHeader>
+      </StatsHeader>
 
       <TileContainer>
         <StatTile
@@ -46,7 +42,7 @@ const Stats = () => {
           color="hsl(50, 100%, 71%)"
         />
       </TileContainer>
-    </StyledStatsContainer>
+    </StatsContainer>
   );
 };
 

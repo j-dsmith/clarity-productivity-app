@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const StyledTray = styled(motion.div)`
+export const TrayContainer = styled(motion.div)`
   background-color: ${({ theme }) => theme.colors.gray700};
   width: 22%;
   height: 100vh;
@@ -12,7 +12,7 @@ export const StyledTray = styled(motion.div)`
   padding: 1rem;
 `;
 
-export const StyledTrayHeader = styled.div`
+export const TrayHeader = styled.div`
   color: ${({ theme }) => theme.colors.cultured};
   display: flex;
   justify-content: flex-start;
@@ -31,7 +31,7 @@ export const StyledTrayHeader = styled.div`
   }
 `;
 
-export const StyledContentSection = styled.ul`
+export const ContentList = styled.ul`
   list-style: none;
   margin: 2rem -1rem;
   padding: 0;

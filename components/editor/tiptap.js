@@ -2,8 +2,14 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
-import { StyledEditorContainer, StyledEditorContent } from './editor.styles';
+import {
+  EditorContainer,
+  EditorHeader,
+  StyledEditorContent,
+  NoteTitleInput,
+} from './editor.styles';
 import ToolBar from './toolbar';
+import SaveNoteBtn from '../ui/save-note-btn';
 
 const MyEditor = () => {
   const editor = useEditor({
@@ -17,11 +23,38 @@ const MyEditor = () => {
     content: '',
   });
 
+  const variants = {
+    closed: {
+      opacity: 0,
+      x: 0,
+      transition: { duration: 0.2 },
+    },
+    open: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.2, delay: 0.5 },
+    },
+    exit: {
+      opacity: 0,
+      x: -20,
+      transition: { duration: 0.075 },
+    },
+  };
+
   return (
-    <StyledEditorContainer>
+    <EditorContainer
+      variants={variants}
+      initial="closed"
+      animate="open"
+      exit="exit"
+    >
+      <EditorHeader>
+        <NoteTitleInput type="text" placeholder="Title" maxLength="50" />
+        <SaveNoteBtn />
+      </EditorHeader>
       <ToolBar editor={editor} />
       <StyledEditorContent editor={editor} />
-    </StyledEditorContainer>
+    </EditorContainer>
   );
 };
 

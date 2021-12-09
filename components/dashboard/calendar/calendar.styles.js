@@ -103,6 +103,6 @@ export const StyledFirstDay = styled(CalendarDay)`
   }
 `;
 
-export const StyledExtraDay = styled(CalendarDay)`
+export const ExtraDay = styled(CalendarDay)`
   color: ${({ theme }) => theme.colors.gray200};
 `;

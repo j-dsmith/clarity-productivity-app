@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const StyledBtn = styled.button`
+export const StyledUIBtn = styled.button`
   display: grid;
   place-items: center;
-  font-size: ${({ btnLg }) => (btnLg ? '1.5rem' : '1rem')};
+  font-size: ${({ btnLg }) => (btnLg ? '1.5rem' : '1.25rem')};
   padding: 0.25em;
   margin: 0 0.25em;
   border-radius: 0.5em;
@@ -20,7 +20,28 @@ export const StyledBtn = styled.button`
   }
 `;
 
-export const StyledInputGroup = styled.div`
+export const StyledSaveBtn = styled.button`
+  margin-inline: auto;
+  padding: 0.5em;
+  font-size: 1.5rem;
+  color: ${({ theme }) => theme.colors.cultured};
+  box-shadow: ${({ theme }) => theme.shadow.xl};
+  background-color: ${({ theme }) => theme.colors.gray200};
+  border: 1px solid ${({ theme }) => theme.colors.gray200};
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 150ms linear;
+
+  &:hover {
+    border-radius: 0.75em;
+    border: 1px solid ${({ theme }) => theme.colors.turquoise};
+    background-color: ${({ theme }) => theme.colors.gray700};
+
+    color: ${({ theme }) => theme.colors.turquoise};
+  }
+`;
+
+export const InputGroup = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,7 +49,7 @@ export const StyledInputGroup = styled.div`
   width: ${({ width }) => width};
 `;
 
-export const StyledInput = styled.input`
+export const TextInput = styled.input`
   width: 100%;
   border-radius: 0.5rem;
   border: none;
@@ -36,6 +57,7 @@ export const StyledInput = styled.input`
   margin-right: 0.5em;
   font-size: 0.875rem;
   background-color: ${({ theme }) => theme.colors.gray500};
+  border: 1px solid ${({ theme }) => theme.colors.gray400};
   color: ${({ theme }) => theme.colors.cultured};
   box-shadow: ${({ theme }) => theme.shadow.lg};
 

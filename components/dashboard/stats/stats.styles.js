@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const StyledStatsContainer = styled.section`
+export const StatsContainer = styled.section`
   grid-area: stat;
   padding: 1.5em;
   margin: 0.75em 1.5em 1.5em 0.75em;
@@ -46,7 +46,7 @@ export const StyledStatTile = styled(motion.div)`
   }
 `;
 
-export const StyledStatsHeader = styled.div`
+export const StatsHeader = styled.div`
   h2 {
     margin: 0;
     margin-bottom: 1em;

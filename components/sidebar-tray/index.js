@@ -1,15 +1,12 @@
-import {
-  StyledTray,
-  StyledTrayHeader,
-  StyledContentSection,
-} from './tray.styles';
-import { StyledInputGroup, StyledInput } from '../ui/ui-items.styles';
+import { useState } from 'react';
+import { TrayContainer, TrayHeader, ContentList } from './tray.styles';
+import { InputGroup, TextInput } from '../ui/ui-items.styles';
 import UIBtn from '../ui/ui-btn';
-import ItemTile from '../item-tile/item-tile';
+import GeneralFolder from '../sidebar-items/general-folder';
+import ProjectTile from '../sidebar-items/project-tile';
 import { MdAdd, MdFilterList, MdDelete } from 'react-icons/md';
 import { BsTagsFill } from 'react-icons/bs';
 import { theme } from '../../pages/_app';
-import { useState } from 'react';
 
 const SidebarTray = () => {
   // Initialize active state for tray type
@@ -38,13 +35,18 @@ const SidebarTray = () => {
   };
 
   return (
-    <StyledTray variants={tray} initial="closed" animate="open" exit="closed">
-      <StyledTrayHeader>
+    <TrayContainer
+      variants={tray}
+      initial="closed"
+      animate="open"
+      exit="closed"
+    >
+      <TrayHeader>
         <h2>{trayType === 'projects' ? 'Projects' : 'PROJECT_TITLE'}</h2>
         <BsTagsFill />
-      </StyledTrayHeader>
-      <StyledInputGroup width="100%">
-        <StyledInput
+      </TrayHeader>
+      <InputGroup width="100%">
+        <TextInput
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           type="text"
@@ -53,17 +55,16 @@ const SidebarTray = () => {
         />
         <UIBtn icon={<MdAdd />} color={theme.colors.turquoise} outline />
         <UIBtn icon={<MdDelete />} color={theme.colors.bittersweet} />
-      </StyledInputGroup>
+      </InputGroup>
       {/* 
           Add info row, column headers table style. (title, current sort order, more?) 
           <SidebarBtn icon={<MdFilterList />} color={theme.colors.bluecrayola} />
       */}
-      <StyledContentSection>
-        <ItemTile title="PRoject 1" />
-        <ItemTile title="PRoject 1" />
-        <ItemTile title="PRoject 1" />
-      </StyledContentSection>
-    </StyledTray>
+      <ContentList>
+        <GeneralFolder />
+        <ProjectTile title="Placeholder" />
+      </ContentList>
+    </TrayContainer>
   );
 };
 
