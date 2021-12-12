@@ -15,6 +15,7 @@ export const EditorContainer = styled(motion.div)`
 
 export const EditorHeader = styled.div`
   flex-basis: 10%;
+  padding-right: 1em;
   background-color: ${({ theme }) => theme.colors.gray500};
   display: flex;
   align-items: center;
@@ -141,7 +142,6 @@ export const ToolbarBtn = styled.button`
   }
 
   svg {
-    height: 1.25rem;
-    width: 1.25rem;
+    font-size: 1.25rem;
   }
 `;

@@ -9,15 +9,17 @@ const handler = async (req, res) => {
   switch (req.method) {
     case 'DELETE':
       try {
-        const { taskId } = req.query;
+        const { projectId } = req.query;
 
         const db = await connectDB();
         const user = await User.findOne({ email });
-        const updatedTasks = user.tasks.filter(({ _id }) => _id != taskId);
-        user.tasks = updatedTasks;
+        const updatedProjects = user.projects.filter(
+          ({ _id }) => _id != projectId
+        );
+        user.projects = updatedProjects;
         await user.save();
         db.disconnect();
-        res.status(200).json({ message: 'Task deleted successfully' });
+        res.status(200).json({ message: 'Project deleted successfully' });
       } catch (error) {
         console.log(error.message);
         res.status(400).json({ message: error.message });

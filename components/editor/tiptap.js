@@ -10,6 +10,9 @@ import {
 } from './editor.styles';
 import ToolBar from './toolbar';
 import SaveNoteBtn from '../ui/save-note-btn';
+import { MdSaveAlt } from 'react-icons/md';
+import { theme } from '../../pages/_app';
+import UIBtn from '../ui/ui-btn';
 
 const MyEditor = () => {
   const editor = useEditor({
@@ -41,6 +44,8 @@ const MyEditor = () => {
     },
   };
 
+  const handleSaveNote = () => {};
+
   return (
     <EditorContainer
       variants={variants}
@@ -50,7 +55,7 @@ const MyEditor = () => {
     >
       <EditorHeader>
         <NoteTitleInput type="text" placeholder="Title" maxLength="50" />
-        <SaveNoteBtn />
+        <SaveNoteBtn handler={handleSaveNote} />
       </EditorHeader>
       <ToolBar editor={editor} />
       <StyledEditorContent editor={editor} />

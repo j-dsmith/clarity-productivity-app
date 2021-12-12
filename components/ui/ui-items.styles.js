@@ -21,24 +21,31 @@ export const StyledUIBtn = styled.button`
 `;
 
 export const StyledSaveBtn = styled.button`
-  margin-inline: auto;
-  padding: 0.5em;
-  font-size: 1.5rem;
+  margin-left: auto;
+  /* padding: 0.25em; */
+  font-size: 1.75rem;
   color: ${({ theme }) => theme.colors.cultured};
-  box-shadow: ${({ theme }) => theme.shadow.xl};
-  background-color: ${({ theme }) => theme.colors.gray200};
-  border: 1px solid ${({ theme }) => theme.colors.gray200};
-  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 20%;
   cursor: pointer;
-  transition: all 150ms linear;
+  transition: all 100ms ease-in-out;
 
   &:hover {
-    border-radius: 0.75em;
-    border: 1px solid ${({ theme }) => theme.colors.turquoise};
-    background-color: ${({ theme }) => theme.colors.gray700};
-
-    color: ${({ theme }) => theme.colors.turquoise};
+    box-shadow: ${({ theme }) => theme.shadow.xl};
+    background-color: ${({ theme }) => theme.colors.gray800};
+    border: 1px solid ${({ theme }) => theme.colors.gray600};
   }
+`;
+
+export const StyledDeleteBtn = styled.button`
+  background-color: ${({ theme }) => theme.colors.bittersweet};
+  color: ${({ theme }) => theme.colors.cultured};
+  font-size: 0.875rem;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.75em;
+  cursor: pointer;
 `;
 
 export const InputGroup = styled.div`
@@ -53,7 +60,7 @@ export const TextInput = styled.input`
   width: 100%;
   border-radius: 0.5rem;
   border: none;
-  padding: 1em;
+  padding: 0.5em;
   margin-right: 0.5em;
   font-size: 0.875rem;
   background-color: ${({ theme }) => theme.colors.gray500};

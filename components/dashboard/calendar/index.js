@@ -41,7 +41,7 @@ const Calendar = () => {
   return (
     <CalendarContainer>
       <CalendarHeader>
-        <CalendarBtn colStart="1" onClick={() => handleClick()} rotate>
+        <CalendarBtn colStart="1" onClick={() => handleClick()} rotate="true">
           <MdArrowForwardIos />
         </CalendarBtn>
         <h3>{`${calendarMonth.name} ${currentYear}`}</h3>

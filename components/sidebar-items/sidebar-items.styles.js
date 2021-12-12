@@ -15,15 +15,18 @@ export const GeneralTileContainer = styled.div`
 export const ProjectTileContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.gray600};
   color: ${({ theme }) => theme.colors.cultured};
-  padding: 1rem;
+  padding: 1em;
   border-left: 2px solid ${({ theme }) => theme.colors.gray600};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray800};
-  /* box-shadow: ${({ theme }) => theme.shadow.md}; */
-  /* transition: all 100ms ease-in-out; */
+  cursor: pointer;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray800};
-    border-left: 2px solid ${({ theme }) => theme.colors.bluecrayola};
+    border-left: 2px solid
+      ${({ theme, deleteactive }) =>
+        deleteactive === 'true'
+          ? theme.colors.bittersweet
+          : theme.colors.bluecrayola};
   }
 
   /* &::before:hover {
@@ -42,10 +45,11 @@ export const TileHeader = styled.div`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  padding: 0.75em;
+  margin-block: 0.25em;
+  /* padding: 0.75em; */
 
   h3 {
-    margin: 0 0.5rem 0 0;
+    margin: 0 0.5em 0 0;
     padding: 0;
   }
 `;
@@ -89,8 +93,15 @@ export const Date = styled.div`
 export const NotesCounter = styled.div`
   display: flex;
   align-items: center;
+  padding: 0.5em 0;
+  color: ${({ theme, deleteactive }) =>
+    deleteactive === 'true' ? theme.colors.bittersweet : theme.colors.cultured};
 
   span {
     margin-right: 0.25rem;
+  }
+
+  svg {
+    font-size: 1.25rem;
   }
 `;

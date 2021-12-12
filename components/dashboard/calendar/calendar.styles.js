@@ -54,7 +54,7 @@ export const CalendarBtn = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.bittersweet};
   border-radius: 0.875em;
   cursor: pointer;
-  transform: ${({ rotate }) => (rotate ? 'scaleX(-1)' : '')};
+  transform: ${({ rotate }) => (rotate === 'true' ? 'scaleX(-1)' : '')};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.bittersweet};

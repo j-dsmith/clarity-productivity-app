@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { getSession, useSession } from 'next-auth/react';
 import Dashboard from '../components/dashboard/index.js';
-import connectDB, { fetchProtectedUser } from '../helpers/db.js';
+import { fetchProtectedUser } from '../helpers/db.js';
 
 import Layout from '../components/layout.js';
 import { fetchContext, fetchWeather } from '../helpers/client.js';
@@ -13,8 +13,8 @@ export default function Home({ weather }) {
   useEffect(() => {
     if (session) {
       (async () => {
-        const user = await fetchProtectedUser();
-        setUser(user);
+        const fetchedUser = await fetchProtectedUser();
+        setUser(fetchedUser);
       })();
     }
   }, [session]);

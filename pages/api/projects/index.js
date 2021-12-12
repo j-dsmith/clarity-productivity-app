@@ -7,21 +7,33 @@ const handler = async (req, res) => {
   const { email } = session.user;
 
   switch (req.method) {
-    case 'DELETE':
+    case 'GET':
       try {
-        const { taskId } = req.query;
-
         const db = await connectDB();
         const user = await User.findOne({ email });
-        const updatedTasks = user.tasks.filter(({ _id }) => _id != taskId);
-        user.tasks = updatedTasks;
-        await user.save();
+        res.status(200).json({ projects: user.projects });
         db.disconnect();
-        res.status(200).json({ message: 'Task deleted successfully' });
       } catch (error) {
         console.log(error.message);
         res.status(400).json({ message: error.message });
       }
+      break;
+
+    case 'POST':
+      try {
+        const { projectTitle } = req.body;
+        const newProject = { title: projectTitle };
+        const db = await connectDB();
+        const user = await User.findOne({ email });
+        user.projects.push(newProject);
+        await user.save();
+        db.disconnect();
+        res.status(200).json({ message: 'Project added successfully' });
+      } catch (error) {
+        console.log(error.message);
+        res.status(400).json({ message: error.message });
+      }
+      break;
   }
 };
 

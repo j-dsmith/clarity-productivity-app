@@ -20,23 +20,22 @@ const Tasks = () => {
   const renderTasks = () => {
     // Check if user is undefined -> conditional check to prevent error
     // while user is being fetched from context on page load
-    if (user.tasks !== undefined) {
-      // Return a task tile with populated data from DB
-      return tasks.map((task) => (
-        <li>
-          <TaskTile
-            key={task._id}
-            id={task._id}
-            content={task.content}
-            dueDate={task.dueDate}
-            deleteActive={deleteActive}
-            handler={deleteActive ? handleDeleteTask : handleCompleteTask}
-          />
-        </li>
-      ));
+    if (user.tasks === undefined) {
+      // If user is undefined, return nothing -> prevents error while fetching user
+      return null;
     }
-    // If user is undefined, return nothing -> prevents error while fetching user
-    return null;
+    // Return a task tile with populated data from DB
+    return tasks.map((task) => (
+      <li key={task._id}>
+        <TaskTile
+          id={task._id}
+          content={task.content}
+          dueDate={task.dueDate}
+          deleteActive={deleteActive}
+          handler={deleteActive ? handleDeleteTask : handleCompleteTask}
+        />
+      </li>
+    ));
   };
 
   const handleAddTask = async () => {
@@ -49,7 +48,7 @@ const Tasks = () => {
   };
 
   const handleDeleteTask = async (id) => {
-    //Run delete task helper to send DELETE request to /api/tasks/[taskId]
+    // Run delete task helper to send DELETE request to /api/tasks/[taskId]
     const response = await deleteTask(id);
     // Re-fetch tasks to update list
     await handleFetchTasks();
@@ -85,14 +84,12 @@ const Tasks = () => {
             color={theme.colors.turquoise}
             outline={true}
             handler={handleAddTask}
-            btnLg
           />
           <UIBtn
             icon={<MdDelete />}
             color={theme.colors.bittersweet}
             handler={toggleDeleteActive}
             outline={deleteActive ? false : true}
-            btnLg
           />
         </InputGroup>
       </TaskHeader>
