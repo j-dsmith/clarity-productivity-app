@@ -14,7 +14,7 @@ const ProjectTile = ({
   createdAt,
   numNotes,
   deleteActive,
-  handler,
+  handleDeleteProject,
   id,
 }) => {
   const tag = {
@@ -26,18 +26,19 @@ const ProjectTile = ({
   //TODO: Create renderTags function to render tags based on project tags from db
   if (deleteActive) {
     return (
-      <ProjectTileContainer deleteactive="true" onClick={() => handler(id)}>
+      <ProjectTileContainer
+        deleteactive="true"
+        onClick={() => handleDeleteProject(id)}
+      >
         <TileHeader>
           <h3>{title}</h3>
           {/* <Tag variants={tag} whileHover="hover" color="red" /> */}
         </TileHeader>
         <TileFooter>
           <Date>
-            {/* Add correct date of creation from db */}
             Created: <span>{createdAt}</span>
           </Date>
           <NotesCounter deleteactive="true">
-            {/* Fix Hardcoded value, insert number of notes for the project */}
             {deleteActive ? (
               <MdCancel />
             ) : (

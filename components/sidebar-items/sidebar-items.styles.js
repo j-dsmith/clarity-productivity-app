@@ -28,17 +28,9 @@ export const ProjectTileContainer = styled.div`
           ? theme.colors.bittersweet
           : theme.colors.bluecrayola};
   }
-
-  /* &::before:hover {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background-color: ${({ theme }) => theme.colors.bluecrayola};
-  } */
 `;
+
+export const NoteTileContainer = styled(ProjectTileContainer)``;
 
 export const TileHeader = styled.div`
   display: flex;

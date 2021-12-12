@@ -1,27 +1,25 @@
 import { useState } from 'react';
-import Link from 'next/link';
+import { theme } from '../../pages/_app';
 import { TrayContainer, TrayHeader, ContentList } from './tray.styles';
 import { InputGroup, TextInput } from '../ui/ui-items.styles';
 import UIBtn from '../ui/ui-btn';
-import GeneralFolder from '../sidebar-items/general-folder';
-import ProjectTile from '../sidebar-items/project-tile';
 import { MdAdd, MdFilterList, MdDelete } from 'react-icons/md';
 import { BsTagsFill } from 'react-icons/bs';
-import { theme } from '../../pages/_app';
 import { fetchContext } from '../../helpers/client';
 import {
   addProject,
   deleteProject,
   fetchProjects,
 } from '../../helpers/projects';
+import { addNote } from '../../helpers/notes';
+import ProjectsList from './projects-list';
+import NotesList from './notes-list';
 
-const SidebarTray = ({ staticTray }) => {
+const SidebarTray = ({ route, heading, currentProjectId }) => {
   const { user, setUser } = fetchContext('user');
   const { projects } = user;
 
-  // Initialize active state for tray type
-  const [trayType, setTrayType] = useState('projects');
-  // initialize state for controlled input
+  // initialize state for controlled input of either project or note title
   const [title, setTitle] = useState('');
   const [deleteActive, setDeleteActive] = useState(false);
 
@@ -50,6 +48,12 @@ const SidebarTray = ({ staticTray }) => {
     await handleFetchProjects();
   };
 
+  const handleAddNote = async () => {
+    console.log(title, currentProjectId, route);
+    const response = await addNote(title, currentProjectId);
+    setTitle('');
+  };
+
   const handleDeleteProject = async (projectId) => {
     // Run delete task helper to send DELETE request to /api/projects/[projectId]
     const response = await deleteProject(projectId);
@@ -67,39 +71,15 @@ const SidebarTray = ({ staticTray }) => {
     setDeleteActive(!deleteActive);
   };
 
-  const renderProjects = () => {
-    if (projects === undefined) {
-      return null;
-    }
-
-    return projects.map(({ _id, title, createdAt, notes }) => {
-      const formattedTimestamp = new Date(createdAt).toLocaleDateString();
-      const numNotes = notes.length;
-      return (
-        <ProjectTile
-          key={_id}
-          id={_id}
-          title={title}
-          createdAt={formattedTimestamp}
-          numNotes={numNotes}
-          deleteActive={deleteActive}
-          handler={handleDeleteProject}
-        />
-      );
-    });
-  };
-
-  const renderNotes = (projectId) => {};
-
   return (
     <TrayContainer
       variants={tray}
-      initial={staticTray ? 'open' : 'closed'}
+      initial="closed"
       animate="open"
       // exit="closed"
     >
       <TrayHeader>
-        <h2>{trayType === 'projects' ? 'Projects' : 'PROJECT_TITLE'}</h2>
+        <h2>{heading}</h2>
         <BsTagsFill />
       </TrayHeader>
       <InputGroup width="100%">
@@ -115,7 +95,7 @@ const SidebarTray = ({ staticTray }) => {
           icon={<MdAdd />}
           color={theme.colors.turquoise}
           outline
-          handler={handleAddProject}
+          handler={route === 'project' ? handleAddProject : handleAddNote}
           disabled={!title ? true : false}
         />
         <UIBtn
@@ -130,10 +110,22 @@ const SidebarTray = ({ staticTray }) => {
           <SidebarBtn icon={<MdFilterList />} color={theme.colors.bluecrayola} />
       */}
       <ContentList>
-        <GeneralFolder />
+        {/* <GeneralFolder /> */}
         {/* Render Projects */}
-
-        {renderProjects()}
+        {route === 'projects' ? (
+          <ProjectsList
+            projects={projects}
+            deleteActive={deleteActive}
+            handleDeleteProject={handleDeleteProject}
+          />
+        ) : (
+          <NotesList
+            projects={projects}
+            currentProjectId={currentProjectId}
+            deleteActive={deleteActive}
+            // handleDeleteNote={handleDeleteNote}
+          />
+        )}
       </ContentList>
     </TrayContainer>
   );
