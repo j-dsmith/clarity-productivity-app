@@ -1,29 +1,22 @@
-import { useContext, useState } from 'react';
-import UserContext from '../../../store/user-ctx';
-import { TasksContainer, TaskList, TaskHeader } from './tasks.styles';
-import { InputGroup, TextInput } from '../../ui/ui-items.styles';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { theme } from '../../../pages/_app';
 import { MdAdd, MdDelete } from 'react-icons/md';
-import TaskTile from './task-tile';
+import { TasksContainer, TaskList, TaskHeader } from './tasks.styles';
+import { InputGroup, TextInput } from '../../ui/ui-items.styles';
 import UIBtn from '../../ui/ui-btn';
-import { addTask, deleteTask, fetchTasks } from '../../../helpers/tasks';
+import { addTask, deleteTask } from '../../../helpers/tasks';
+import { refreshData } from '../../../helpers/client';
+import TaskTile from './task-tile';
 
-const Tasks = () => {
+const Tasks = ({ user: { tasks } }) => {
   // State Initialization for new task input and active delete state
   const [taskTitle, setTaskTitle] = useState('');
   const [deleteActive, setDeleteActive] = useState(false);
-  // const [taskToDelete, setTaskToDelete] = useState('');
-  // Fetch the loaded user stored in context and destructure tasks array
-  const { user, setUser } = useContext(UserContext);
-  const { tasks } = user;
+
+  const router = useRouter();
 
   const renderTasks = () => {
-    // Check if user is undefined -> conditional check to prevent error
-    // while user is being fetched from context on page load
-    if (user.tasks === undefined) {
-      // If user is undefined, return nothing -> prevents error while fetching user
-      return null;
-    }
     // Return a task tile with populated data from DB
     return tasks.map((task) => (
       <li key={task._id}>
@@ -43,23 +36,13 @@ const Tasks = () => {
     setTaskTitle('');
     // Run add task helper to send POST request to /api/tasks
     const response = await addTask(taskTitle);
-    // Re-fetch tasks to update list
-    await handleFetchTasks();
+    refreshData(router);
   };
 
   const handleDeleteTask = async (id) => {
     // Run delete task helper to send DELETE request to /api/tasks/[taskId]
     const response = await deleteTask(id);
-    // Re-fetch tasks to update list
-    await handleFetchTasks();
-  };
-
-  const handleFetchTasks = async () => {
-    // Run fetch helper to get updated tasks list from DB
-    const response = await fetchTasks();
-    const { tasks } = response.data;
-    // Set the tasks for current user to updated task list to trigger rerender of list
-    setUser({ ...user, tasks });
+    refreshData(router);
   };
 
   const handleCompleteTask = async () => {};

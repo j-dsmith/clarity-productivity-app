@@ -1,17 +1,11 @@
-import { useContext } from 'react';
 import { StatsContainer, StatsHeader, TileContainer } from './stats.styles';
 import StatTile from './stat-tile';
-import UserContext from '../../../store/user-ctx';
 
-const Stats = () => {
-  const { user } = useContext(UserContext);
+const Stats = ({ user }) => {
   const { decks, projects, pomodorosCompleted, tasksCompleted } = user;
 
-  const numProjects = projects === undefined ? 0 : projects.length;
-  const numDecks = decks === undefined ? 0 : decks.length;
-
-  //TODO: render loading spinner if no user
-  if (!user) return <div />;
+  const numProjects = projects.length;
+  const numDecks = decks.length;
 
   return (
     <StatsContainer>

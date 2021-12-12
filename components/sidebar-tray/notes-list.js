@@ -1,19 +1,24 @@
 import NoteTile from '../sidebar-items/note-tile';
 
-const NotesList = ({ currentProjectId, projects }) => {
+const NotesList = ({
+  notes,
+  handleDeleteNote,
+  deleteActive,
+  currentProjectId,
+}) => {
   const renderNotes = () => {
-    if (projects === undefined || currentProjectId === undefined) {
-      return;
-    }
-
-    const currentProject = projects.filter(
-      ({ _id }) => _id === currentProjectId
-    )[0];
-
-    return currentProject.notes.map(({ title, _id, createdAt }) => {
+    return notes.map(({ title, _id, createdAt }) => {
       const formattedTimestamp = new Date(createdAt).toLocaleDateString();
       return (
-        <NoteTile key={_id} title={title} createdAt={formattedTimestamp} />
+        <NoteTile
+          key={_id}
+          noteId={_id}
+          currentProjectId={currentProjectId}
+          title={title}
+          createdAt={formattedTimestamp}
+          handleDeleteNote={handleDeleteNote}
+          deleteActive={deleteActive}
+        />
       );
     });
   };

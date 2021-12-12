@@ -16,16 +16,9 @@ const handler = async (req, res) => {
         const db = await connectDB();
         const user = await User.findOne({ email });
 
-        // const selectedProject = user.projects.filter(
-        //   ({ _id }) => _id == projectId
-        // )[0];
-        // selectedProject.notes.push({ title: title, content: [] });
-
         user.projects.forEach((project) => {
           if (project._id == projectId) {
-            console.log('match');
             project.notes.push({ title });
-            console.log(project);
           }
         });
 
@@ -33,6 +26,33 @@ const handler = async (req, res) => {
         db.disconnect();
         res.status(200).json({
           message: `Note added to project with projectId: ${projectId}`,
+        });
+      } catch (error) {
+        console.log(error.message);
+        res.status(400).json({ message: error.message });
+      }
+      break;
+
+    case 'DELETE':
+      try {
+        const { slug } = req.query;
+        const [projectId, notes, noteId] = slug;
+
+        const db = await connectDB();
+        const user = await User.findOne({ email });
+
+        user.projects.forEach((project) => {
+          if (project._id == projectId) {
+            const updatedNotes = project.notes.filter(
+              ({ _id }) => _id != noteId
+            );
+            project.notes = updatedNotes;
+          }
+        });
+        await user.save();
+        db.disconnect();
+        res.status(200).json({
+          message: `Note delete from project with projectId: ${projectId}`,
         });
       } catch (error) {
         console.log(error.message);

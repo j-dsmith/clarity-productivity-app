@@ -17,4 +17,8 @@ export const fetchProtectedUser = async () => {
   return response.data.user;
 };
 
+export const serializeData = (data) => {
+  return JSON.parse(JSON.stringify(data));
+};
+
 export default connectDB;

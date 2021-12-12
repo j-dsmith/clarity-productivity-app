@@ -1,27 +1,23 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { theme } from '../../pages/_app';
 import { TrayContainer, TrayHeader, ContentList } from './tray.styles';
 import { InputGroup, TextInput } from '../ui/ui-items.styles';
 import UIBtn from '../ui/ui-btn';
-import { MdAdd, MdFilterList, MdDelete } from 'react-icons/md';
+import { MdAdd, MdDelete } from 'react-icons/md';
 import { BsTagsFill } from 'react-icons/bs';
-import { fetchContext } from '../../helpers/client';
-import {
-  addProject,
-  deleteProject,
-  fetchProjects,
-} from '../../helpers/projects';
-import { addNote } from '../../helpers/notes';
+import { refreshData } from '../../helpers/client';
+import { addProject, deleteProject } from '../../helpers/projects';
+import { addNote, deleteNote } from '../../helpers/notes';
 import ProjectsList from './projects-list';
 import NotesList from './notes-list';
 
-const SidebarTray = ({ route, heading, currentProjectId }) => {
-  const { user, setUser } = fetchContext('user');
-  const { projects } = user;
-
+const SidebarTray = ({ route, heading, notes, projects, currentProjectId }) => {
   // initialize state for controlled input of either project or note title
   const [title, setTitle] = useState('');
   const [deleteActive, setDeleteActive] = useState(false);
+
+  const router = useRouter();
 
   const tray = {
     closed: {
@@ -45,26 +41,24 @@ const SidebarTray = ({ route, heading, currentProjectId }) => {
   const handleAddProject = async () => {
     const response = await addProject(title);
     setTitle('');
-    await handleFetchProjects();
+    refreshData(router);
   };
 
   const handleAddNote = async () => {
-    console.log(title, currentProjectId, route);
     const response = await addNote(title, currentProjectId);
     setTitle('');
+    refreshData(router);
   };
 
   const handleDeleteProject = async (projectId) => {
     // Run delete task helper to send DELETE request to /api/projects/[projectId]
     const response = await deleteProject(projectId);
-
-    await handleFetchProjects();
+    refreshData(router);
   };
 
-  const handleFetchProjects = async () => {
-    const response = await fetchProjects();
-    const { projects } = response.data;
-    setUser({ ...user, projects });
+  const handleDeleteNote = async (currentProjectId, noteId) => {
+    const response = await deleteNote(currentProjectId, noteId);
+    refreshData(router);
   };
 
   const toggleDeleteActive = () => {
@@ -95,7 +89,7 @@ const SidebarTray = ({ route, heading, currentProjectId }) => {
           icon={<MdAdd />}
           color={theme.colors.turquoise}
           outline
-          handler={route === 'project' ? handleAddProject : handleAddNote}
+          handler={route === 'projects' ? handleAddProject : handleAddNote}
           disabled={!title ? true : false}
         />
         <UIBtn
@@ -110,7 +104,6 @@ const SidebarTray = ({ route, heading, currentProjectId }) => {
           <SidebarBtn icon={<MdFilterList />} color={theme.colors.bluecrayola} />
       */}
       <ContentList>
-        {/* <GeneralFolder /> */}
         {/* Render Projects */}
         {route === 'projects' ? (
           <ProjectsList
@@ -120,10 +113,10 @@ const SidebarTray = ({ route, heading, currentProjectId }) => {
           />
         ) : (
           <NotesList
-            projects={projects}
-            currentProjectId={currentProjectId}
+            notes={notes}
             deleteActive={deleteActive}
-            // handleDeleteNote={handleDeleteNote}
+            handleDeleteNote={handleDeleteNote}
+            currentProjectId={currentProjectId}
           />
         )}
       </ContentList>

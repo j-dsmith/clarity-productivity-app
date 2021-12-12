@@ -1,29 +1,15 @@
-import { useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { fetchContext } from '../../helpers/client';
-import { fetchProtectedUser } from '../../helpers/db.js';
+import { getSession } from 'next-auth/react';
 import SidebarTray from '../../components/sidebar-tray';
-import ProjectsList from '../../components/sidebar-tray/projects-list';
 import Layout from '../../components/layout';
 import MyEditor from '../../components/editor/tiptap';
+import { User } from '../../models/user';
+import connectDB, { serializeData } from '../../helpers/db.js';
 
-const Projects = () => {
-  const { data: session } = useSession();
-  const { user, setUser } = fetchContext('user');
-
-  useEffect(() => {
-    if (session) {
-      (async () => {
-        const fetchedUser = await fetchProtectedUser();
-        setUser(fetchedUser);
-      })();
-    }
-  }, [session]);
-
+const Projects = ({ projects }) => {
   return (
     <>
       <Layout>
-        <SidebarTray heading="Projects" route="projects" />
+        <SidebarTray heading="Projects" route="projects" projects={projects} />
         <MyEditor />
       </Layout>
     </>
@@ -31,3 +17,17 @@ const Projects = () => {
 };
 
 export default Projects;
+
+export async function getServerSideProps({ req, params }) {
+  const session = await getSession({ req });
+  const {
+    user: { email },
+  } = session;
+
+  const db = await connectDB();
+  const user = await User.findOne({ email });
+
+  db.disconnect();
+
+  return { props: { projects: serializeData(user.projects) } };
+}

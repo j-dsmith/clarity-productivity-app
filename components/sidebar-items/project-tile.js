@@ -6,7 +6,7 @@ import {
   TileHeader,
   Date,
   TileFooter,
-  NotesCounter,
+  InfoBox,
 } from './sidebar-items.styles';
 
 const ProjectTile = ({
@@ -38,16 +38,9 @@ const ProjectTile = ({
           <Date>
             Created: <span>{createdAt}</span>
           </Date>
-          <NotesCounter deleteactive="true">
-            {deleteActive ? (
-              <MdCancel />
-            ) : (
-              <>
-                <span>{numNotes}</span>
-                <MdDescription />
-              </>
-            )}
-          </NotesCounter>
+          <InfoBox deleteactive="true">
+            <MdCancel />
+          </InfoBox>
         </TileFooter>
       </ProjectTileContainer>
     );
@@ -65,17 +58,10 @@ const ProjectTile = ({
             {/* Add correct date of creation from db */}
             Created: <span>{createdAt}</span>
           </Date>
-          <NotesCounter>
-            {/* Fix Hardcoded value, insert number of notes for the project */}
-            {deleteActive ? (
-              <MdCancel />
-            ) : (
-              <>
-                <span>{numNotes}</span>
-                <MdDescription />
-              </>
-            )}
-          </NotesCounter>
+          <InfoBox>
+            <span>{numNotes}</span>
+            <MdDescription />
+          </InfoBox>
         </TileFooter>
       </ProjectTileContainer>
     </Link>

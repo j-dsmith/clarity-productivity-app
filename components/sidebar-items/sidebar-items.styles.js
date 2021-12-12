@@ -82,7 +82,7 @@ export const Date = styled.div`
   }
 `;
 
-export const NotesCounter = styled.div`
+export const InfoBox = styled.div`
   display: flex;
   align-items: center;
   padding: 0.5em 0;

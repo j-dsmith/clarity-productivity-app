@@ -7,3 +7,10 @@ export const addNote = async (title, projectId) => {
 
   return response;
 };
+
+export const deleteNote = async (projectId, noteId) => {
+  const response = await axios.delete(
+    `/api/projects/${projectId}/notes/${noteId}`
+  );
+  return response;
+};

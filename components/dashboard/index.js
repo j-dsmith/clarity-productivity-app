@@ -5,9 +5,7 @@ import Tasks from './tasks';
 import Forecast from './forecast';
 import Stats from './stats';
 
-const Dashboard = ({ weather }) => {
-  const { user } = fetchContext('user');
-
+const Dashboard = ({ weather, user }) => {
   const variants = {
     closed: {
       opacity: 0,
@@ -30,7 +28,7 @@ const Dashboard = ({ weather }) => {
       >
         <Calendar />
         <Forecast weather={weather} />
-        <Tasks />
+        <Tasks user={user} />
         <Stats user={user} />
       </DashContainer>
     </>

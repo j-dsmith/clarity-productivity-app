@@ -13,8 +13,3 @@ export const deleteProject = async (projectId) => {
   console.log(response);
   return response;
 };
-
-export const fetchProjects = async () => {
-  const response = await axios.get('/api/projects');
-  return response;
-};
