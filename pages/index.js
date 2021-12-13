@@ -1,12 +1,31 @@
 import { getSession } from 'next-auth/react';
 import Dashboard from '../components/dashboard/index.js';
-import connectDB, { serializeData } from '../helpers/db.js';
-import { User } from '../models/user.js';
-
+import useSWR from 'swr';
+import { fetchData } from '../helpers/client.js';
 import Layout from '../components/layout.js';
-import { fetchWeather } from '../helpers/client.js';
 
-export default function Home({ weather, user }) {
+export default function Home({}) {
+  let user;
+  let weather;
+  const weatherURL = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=auto&days=2&aqi=no&alerts=no`;
+
+  const { data: fetchedUser, error: userError } = useSWR(
+    '/api/user',
+    fetchData
+  );
+  if (fetchedUser) {
+    user = fetchedUser.data;
+  }
+
+  const { data: fetchedForecast, error: forecastError } = useSWR(
+    weatherURL,
+    fetchData
+  );
+
+  if (fetchedForecast) {
+    weather = fetchedForecast;
+  }
+
   return (
     <Layout>
       <Dashboard user={user} weather={weather} />
@@ -26,19 +45,5 @@ export async function getServerSideProps({ req }) {
     };
   }
 
-  const {
-    user: { email },
-  } = session;
-
-  const db = await connectDB();
-  const user = await User.findOne({ email });
-
-  const response = await fetchWeather();
-  if (response) {
-    return {
-      props: { session, weather: response.data, user: serializeData(user) },
-    };
-  }
-
-  return { props: { session, user: serializeData(user) } };
+  return { props: { session } };
 }

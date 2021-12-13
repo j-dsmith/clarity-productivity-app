@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { theme } from '../../pages/_app';
 import { TrayContainer, TrayHeader, ContentList } from './tray.styles';
-import { InputGroup, TextInput } from '../ui/ui-items.styles';
+import { InputGroup, TextInput, SpinnerContainer } from '../ui/ui-items.styles';
 import UIBtn from '../ui/ui-btn';
 import { MdAdd, MdDelete } from 'react-icons/md';
 import { BsTagsFill } from 'react-icons/bs';
@@ -11,6 +11,7 @@ import { addProject, deleteProject } from '../../helpers/projects';
 import { addNote, deleteNote } from '../../helpers/notes';
 import ProjectsList from './projects-list';
 import NotesList from './notes-list';
+import Loader from 'react-loader-spinner';
 
 const SidebarTray = ({
   route,
@@ -112,6 +113,7 @@ const SidebarTray = ({
       */}
       <ContentList>
         {/* Render Projects */}
+
         {route === 'projects' ? (
           <ProjectsList
             projects={projects}
@@ -127,6 +129,16 @@ const SidebarTray = ({
           />
         )}
       </ContentList>
+      {!projects && route === 'projects' && (
+        <SpinnerContainer>
+          <Loader
+            type="Oval"
+            color="hsl(212, 13%, 48%)"
+            height={75}
+            width={75}
+          />
+        </SpinnerContainer>
+      )}
     </TrayContainer>
   );
 };

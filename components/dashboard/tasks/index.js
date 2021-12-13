@@ -1,20 +1,28 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useSWRConfig } from 'swr';
 import { theme } from '../../../pages/_app';
 import { MdAdd, MdDelete } from 'react-icons/md';
 import { TasksContainer, TaskList, TaskHeader } from './tasks.styles';
-import { InputGroup, TextInput } from '../../ui/ui-items.styles';
+import {
+  InputGroup,
+  SpinnerContainer,
+  TextInput,
+} from '../../ui/ui-items.styles';
 import UIBtn from '../../ui/ui-btn';
 import { addTask, deleteTask } from '../../../helpers/tasks';
-import { refreshData } from '../../../helpers/client';
 import TaskTile from './task-tile';
+import Loader from 'react-loader-spinner';
 
-const Tasks = ({ user: { tasks } }) => {
+const Tasks = ({ user }) => {
+  let tasks;
+  if (user) {
+    tasks = user.tasks;
+  }
   // State Initialization for new task input and active delete state
   const [taskTitle, setTaskTitle] = useState('');
   const [deleteActive, setDeleteActive] = useState(false);
 
-  const router = useRouter();
+  const { mutate } = useSWRConfig();
 
   const renderTasks = () => {
     // Return a task tile with populated data from DB
@@ -36,15 +44,16 @@ const Tasks = ({ user: { tasks } }) => {
     setTaskTitle('');
     // Run add task helper to send POST request to /api/tasks
     const response = await addTask(taskTitle);
-    refreshData(router);
+    mutate('/api/user');
   };
 
   const handleDeleteTask = async (id) => {
     // Run delete task helper to send DELETE request to /api/tasks/[taskId]
     const response = await deleteTask(id);
-    refreshData(router);
+    mutate('/api/user');
   };
 
+  //TODO: Add in functionality to complete tasks and updated completed count
   const handleCompleteTask = async () => {};
 
   const toggleDeleteActive = () => {
@@ -66,18 +75,29 @@ const Tasks = ({ user: { tasks } }) => {
             icon={<MdAdd />}
             color={theme.colors.turquoise}
             outline={true}
-            handler={handleAddTask}
+            handler={tasks && handleAddTask}
           />
           <UIBtn
             icon={<MdDelete />}
             color={theme.colors.bittersweet}
-            handler={toggleDeleteActive}
+            handler={tasks && toggleDeleteActive}
             outline={deleteActive ? false : true}
           />
         </InputGroup>
       </TaskHeader>
       <TaskList>
-        <ul>{renderTasks()}</ul>
+        {tasks ? (
+          <ul>{renderTasks()}</ul>
+        ) : (
+          <SpinnerContainer>
+            <Loader
+              type="Oval"
+              color="hsl(212, 13%, 48%)"
+              height={75}
+              width={75}
+            />
+          </SpinnerContainer>
+        )}
       </TaskList>
     </TasksContainer>
   );

@@ -8,13 +8,12 @@ const handler = async (req, res) => {
     const { email } = session.user;
 
     try {
-      await connectDB();
+      const db = await connectDB();
       const user = await User.findOne({ email });
-      if (user) {
-        res.status(200).json({ user });
-      }
+      db.disconnect();
+      res.status(200).json({ data: user });
     } catch (error) {
-      console.log('error from user api route');
+      console.log(error.message);
       res.status(400).json({ message: error.message });
     }
   }

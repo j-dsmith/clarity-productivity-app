@@ -11,8 +11,8 @@ const handler = async (req, res) => {
       try {
         const db = await connectDB();
         const user = await User.findOne({ email });
-        res.status(200).json({ projects: user.projects });
         db.disconnect();
+        res.status(200).json({ data: user.projects });
       } catch (error) {
         console.log(error.message);
         res.status(400).json({ message: error.message });

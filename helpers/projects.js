@@ -1,4 +1,5 @@
 import axios from 'axios';
+import useSWR from 'swr';
 
 export const addProject = async (projectTitle) => {
   const response = await axios.post('/api/projects', {
@@ -10,6 +11,6 @@ export const addProject = async (projectTitle) => {
 
 export const deleteProject = async (projectId) => {
   const response = await axios.delete(`/api/projects/${projectId}`);
-  console.log(response);
+
   return response;
 };

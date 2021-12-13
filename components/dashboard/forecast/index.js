@@ -4,15 +4,30 @@ import {
   WeatherIcon,
   LocationTile,
   InfoTile,
-  StyledForecastRow,
   FutureForecastTile,
   DetailsContainer,
 } from './forecast.styles';
 import { forecastIconData } from './forecast-icon-data';
-import { MdLocationPin, MdWbSunny } from 'react-icons/md';
+import { MdLocationPin } from 'react-icons/md';
+import Loader from 'react-loader-spinner';
+import { SpinnerContainer } from '../../ui/ui-items.styles';
 
 const Forecast = ({ weather }) => {
-  // Get location, forecast, and current weather objects
+  if (!weather) {
+    return (
+      <ForecastContainer>
+        <SpinnerContainer>
+          <Loader
+            type="Oval"
+            color="hsl(212, 13%, 48%)"
+            height={75}
+            width={75}
+          />
+        </SpinnerContainer>
+      </ForecastContainer>
+    );
+  }
+
   const { location, forecast, current } = weather;
   // Get forecast array from weather forecast
   const { forecastday } = forecast;

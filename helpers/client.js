@@ -1,8 +1,8 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import AnimationContext from '../store/animation-ctx';
-import UserContext from '../store/user-ctx';
+import useSWR from 'swr';
 
 //* Fetch animation context
 export const fetchContext = (contextType) => {
@@ -24,4 +24,10 @@ export const fetchWeather = async () => {
 
 export const refreshData = (router) => {
   router.replace(router.asPath);
+};
+
+//? Fetcher for SWR method
+export const fetchData = async (url) => {
+  const response = await axios.get(url);
+  return response.data;
 };

@@ -1,7 +1,28 @@
 import { StatsContainer, StatsHeader, TileContainer } from './stats.styles';
+import { SpinnerContainer } from '../../ui/ui-items.styles';
 import StatTile from './stat-tile';
+import Loader from 'react-loader-spinner';
 
 const Stats = ({ user }) => {
+  if (!user) {
+    return (
+      <StatsContainer>
+        <StatsHeader>
+          <h2>Stats</h2>
+        </StatsHeader>
+
+        <SpinnerContainer>
+          <Loader
+            type="Oval"
+            color="hsl(212, 13%, 48%)"
+            height={75}
+            width={75}
+          />
+        </SpinnerContainer>
+      </StatsContainer>
+    );
+  }
+
   const { decks, projects, pomodorosCompleted, tasksCompleted } = user;
 
   const numProjects = projects.length;

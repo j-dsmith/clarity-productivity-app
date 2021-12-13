@@ -4,12 +4,13 @@ import { motion } from 'framer-motion';
 export const TrayContainer = styled(motion.div)`
   background-color: ${({ theme }) => theme.colors.gray700};
   width: 22%;
-  height: 100vh;
   min-height: 100vh;
   position: absolute;
   z-index: 1;
   box-shadow: ${({ theme }) => theme.shadow.lg};
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const TrayHeader = styled.div`
@@ -36,4 +37,5 @@ export const ContentList = styled.ul`
   margin: 2rem -1rem;
   padding: 0;
   margin-top: 2rem;
+  position: relative;
 `;

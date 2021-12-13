@@ -72,3 +72,11 @@ export const TextInput = styled.input`
     outline: none;
   }
 `;
+
+export const SpinnerContainer = styled.div`
+  width: 100%;
+  min-height: 100%;
+  margin-block: auto;
+  display: grid;
+  place-items: center;
+`;

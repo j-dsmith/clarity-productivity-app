@@ -14,7 +14,7 @@ export const data = [
     title: 'home',
     href: '/',
     icon: <MdHome />,
-    color: colors.naplesyellow,
+    color: colors.bluecrayola,
   },
   {
     title: 'projects',
@@ -26,18 +26,18 @@ export const data = [
     title: 'decks',
     href: '/study',
     icon: <MdNote />,
-    color: colors.turquoise,
+    color: colors.bluecrayola,
   },
   {
     title: 'timer',
     href: '/study/timer',
     icon: <MdAlarm />,
-    color: colors.discord,
+    color: colors.bluecrayola,
   },
   {
     title: 'trash',
     href: '/trash',
     icon: <MdDelete />,
-    color: colors.bittersweet,
+    color: colors.bluecrayola,
   },
 ];
