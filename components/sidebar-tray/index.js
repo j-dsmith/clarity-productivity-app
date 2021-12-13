@@ -12,7 +12,14 @@ import { addNote, deleteNote } from '../../helpers/notes';
 import ProjectsList from './projects-list';
 import NotesList from './notes-list';
 
-const SidebarTray = ({ route, heading, notes, projects, currentProjectId }) => {
+const SidebarTray = ({
+  route,
+  heading,
+  notes,
+  projects,
+  currentProjectId,
+  trayFixed,
+}) => {
   // initialize state for controlled input of either project or note title
   const [title, setTitle] = useState('');
   const [deleteActive, setDeleteActive] = useState(false);
@@ -68,13 +75,13 @@ const SidebarTray = ({ route, heading, notes, projects, currentProjectId }) => {
   return (
     <TrayContainer
       variants={tray}
-      initial="closed"
+      initial={trayFixed ? 'open' : 'closed'}
       animate="open"
       // exit="closed"
     >
       <TrayHeader>
         <h2>{heading}</h2>
-        <BsTagsFill />
+        {route === 'projects' && <BsTagsFill />}
       </TrayHeader>
       <InputGroup width="100%">
         <TextInput

@@ -20,6 +20,16 @@ export default Projects;
 
 export async function getServerSideProps({ req, params }) {
   const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false,
+      },
+    };
+  }
+
   const {
     user: { email },
   } = session;

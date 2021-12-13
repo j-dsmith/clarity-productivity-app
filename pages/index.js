@@ -16,12 +16,6 @@ export default function Home({ weather, user }) {
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
-  const {
-    user: { email },
-  } = session;
-
-  const db = await connectDB();
-  const user = await User.findOne({ email });
 
   if (!session) {
     return {
@@ -31,6 +25,13 @@ export async function getServerSideProps({ req }) {
       },
     };
   }
+
+  const {
+    user: { email },
+  } = session;
+
+  const db = await connectDB();
+  const user = await User.findOne({ email });
 
   const response = await fetchWeather();
   if (response) {

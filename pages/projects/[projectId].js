@@ -15,6 +15,7 @@ const ProjectPage = ({ currentProjectTitle, notes, currentProjectId }) => {
           currentProjectId={currentProjectId}
           route="notes"
           notes={notes}
+          trayFixed={true}
         />
         <MyEditor />
       </Layout>
@@ -26,6 +27,16 @@ export default ProjectPage;
 
 export async function getServerSideProps({ req, params }) {
   const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false,
+      },
+    };
+  }
+
   const {
     user: { email },
   } = session;
