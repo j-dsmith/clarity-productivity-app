@@ -13,3 +13,8 @@ export const deleteTask = async (taskId) => {
 
   return response;
 };
+
+export const completeTask = async (taskId) => {
+  const response = await axios.put(`/api/tasks/${taskId}`);
+  return response;
+};

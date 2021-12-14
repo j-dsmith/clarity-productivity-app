@@ -51,18 +51,19 @@ export const CalendarBtn = styled.button`
   display: grid;
   place-items: center;
   color: ${({ theme }) => theme.colors.cultured};
-  border: 1px solid ${({ theme }) => theme.colors.bittersweet};
-  border-radius: 0.875em;
+  border: 1px solid ${({ theme }) => theme.colors.gray800};
+  border-radius: 0.5em;
   cursor: pointer;
   transform: ${({ rotate }) => (rotate === 'true' ? 'scaleX(-1)' : '')};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.bittersweet};
-    box-shadow: ${({ theme }) => theme.shadow.md};
+    box-shadow: ${({ theme }) => theme.shadow.xl};
+    background-color: ${({ theme }) => theme.colors.gray500};
+    border: 1px solid ${({ theme }) => theme.colors.gray400};
   }
 
   svg {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 `;
 
@@ -73,32 +74,13 @@ export const CalendarDay = styled.p`
   grid-column: 'mon';
   text-align: center;
   margin: 0;
-  padding: 0.5em;
-`;
+  height: 2em;
+  width: 2em;
 
-export const StyledCurrentDay = styled(CalendarDay)`
-  height: 2.25rem;
-  width: 2.25rem;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.bittersweet};
-  box-shadow: ${({ theme }) => theme.shadow.lg};
-`;
-
-export const StyledFirstDay = styled(CalendarDay)`
-  position: relative;
-  z-index: 1;
-
-  &::before {
-    content: '1';
-    display: grid;
-    place-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 0;
+  &.today {
+    border: 1px solid ${({ theme }) => theme.colors.brandPrimary};
     border-radius: 50%;
-    background-color: ${({ theme }) => theme.colors.bittersweet};
+    background-color: ${({ theme }) => theme.colors.brandPrimary};
     box-shadow: ${({ theme }) => theme.shadow.lg};
   }
 `;

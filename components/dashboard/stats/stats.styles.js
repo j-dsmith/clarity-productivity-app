@@ -16,21 +16,17 @@ export const StatsContainer = styled.section`
 export const TileContainer = styled.div`
   width: 100%;
   flex-basis: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
 `;
 
 export const StyledStatTile = styled(motion.div)`
-  padding: 1em;
-  flex-basis: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  margin: 10%;
+  place-items: center;
   margin-bottom: 1.5em;
-  border-left: 2px solid ${({ color }) => color};
+  border-left: 2px solid ${({ theme }) => theme.colors.brandPrimary};
 
   p {
     margin: 0;
@@ -42,7 +38,6 @@ export const StyledStatTile = styled(motion.div)`
     margin: 0;
     padding: 0;
     font-size: 2.5rem;
-    color: ${({ color }) => color};
   }
 `;
 

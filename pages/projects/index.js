@@ -1,12 +1,8 @@
 import useSWR from 'swr';
-import { getSession } from 'next-auth/react';
 import SidebarTray from '../../components/sidebar-tray';
 import Layout from '../../components/layout';
-import MyEditor from '../../components/editor/tiptap';
-// import { User } from '../../models/user';
-import connectDB, { serializeData } from '../../helpers/db.js';
 import { fetchData } from '../../helpers/client';
-import axios from 'axios';
+import SelectProjectBanner from '../../components/ui/select-project-banner';
 
 const Projects = ({}) => {
   let projects;
@@ -19,7 +15,7 @@ const Projects = ({}) => {
     <>
       <Layout>
         <SidebarTray heading="Projects" route="projects" projects={projects} />
-        <MyEditor />
+        <SelectProjectBanner />
       </Layout>
     </>
   );

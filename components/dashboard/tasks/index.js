@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useSWRConfig } from 'swr';
 import { theme } from '../../../pages/_app';
 import { MdAdd, MdDelete } from 'react-icons/md';
@@ -27,7 +28,11 @@ const Tasks = ({ user }) => {
   const renderTasks = () => {
     // Return a task tile with populated data from DB
     return tasks.map((task) => (
-      <li key={task._id}>
+      <motion.li
+        key={task._id}
+        initial={{ y: 10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+      >
         <TaskTile
           id={task._id}
           content={task.content}
@@ -35,7 +40,7 @@ const Tasks = ({ user }) => {
           deleteActive={deleteActive}
           handler={deleteActive ? handleDeleteTask : handleCompleteTask}
         />
-      </li>
+      </motion.li>
     ));
   };
 
@@ -67,15 +72,16 @@ const Tasks = ({ user }) => {
         <InputGroup width="80%">
           <TextInput
             type="text"
-            placeholder="Task Title"
+            placeholder={deleteActive ? '' : 'Task Title'}
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
+            disabled={deleteActive}
           />
           <UIBtn
             icon={<MdAdd />}
-            color={theme.colors.turquoise}
-            outline={true}
+            color={theme.colors.brandPrimary}
             handler={tasks && handleAddTask}
+            disabled={!taskTitle || deleteActive ? true : false}
           />
           <UIBtn
             icon={<MdDelete />}

@@ -17,7 +17,6 @@ const ProjectPage = ({ currentProjectTitle, notes, currentProjectId }) => {
           notes={notes}
           trayFixed={true}
         />
-        <MyEditor />
       </Layout>
     </>
   );

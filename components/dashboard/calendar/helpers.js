@@ -26,9 +26,13 @@ export const renderPrevMonthDays = (
 
 export const renderCurrentMonthDays = (calendarMonth) => {
   const currentMonthDays = [];
+  const today = new Date().getDate();
+  const currentMonth = new Date().getMonth();
+
+  const { numDays, monthIdx, firstOfMonth } = calendarMonth;
 
   // Add current month days to array
-  for (let i = 1; i <= calendarMonth.numDays; i++) {
+  for (let i = 1; i <= numDays; i++) {
     currentMonthDays.push(i);
   }
 
@@ -40,12 +44,23 @@ export const renderCurrentMonthDays = (calendarMonth) => {
     // }
     if (day === 1) {
       return (
-        <CalendarDay key={day} firstDay={calendarMonth.firstOfMonth}>
+        <CalendarDay
+          key={day}
+          firstDay={firstOfMonth}
+          className={today === day && monthIdx === currentMonth ? 'today' : ''}
+        >
           {day}
         </CalendarDay>
       );
     }
-    return <CalendarDay key={'current-' + day}>{day}</CalendarDay>;
+    return (
+      <CalendarDay
+        key={'current-' + day}
+        className={today === day && monthIdx === currentMonth ? 'today' : ''}
+      >
+        {day}
+      </CalendarDay>
+    );
   });
 };
 
@@ -102,6 +117,8 @@ export default class CalendarMonth {
     this.name = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(
       new Date(year, month)
     );
+
+    this.monthIdx = new Date(year, month).getMonth();
 
     // Calculate number of days for current month
     this.numDays = new Date(year, month + 1, 0).getDate();

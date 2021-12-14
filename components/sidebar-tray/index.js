@@ -90,15 +90,15 @@ const SidebarTray = ({
           onChange={(e) => setTitle(e.target.value)}
           type="text"
           maxLength={35}
-          placeholder="Title"
+          placeholder={deleteActive ? '' : 'Title'}
+          disabled={deleteActive}
         />
 
         <UIBtn
           icon={<MdAdd />}
-          color={theme.colors.turquoise}
-          outline
+          color={theme.colors.brandPrimary}
           handler={route === 'projects' ? handleAddProject : handleAddNote}
-          disabled={!title ? true : false}
+          disabled={!title || deleteActive ? true : false}
         />
         <UIBtn
           icon={<MdDelete />}

@@ -35,7 +35,7 @@ export const TaskList = styled.div`
     list-style: none;
     padding: 0;
     margin: 0;
-    box-shadow: ${({ theme }) => theme.shadow.md};
+
     border-block: 1px solid ${({ theme }) => theme.colors.gray700};
 
     & * + * {
@@ -54,40 +54,59 @@ export const StyledTaskTile = styled.div`
   align-items: center;
   border-left: 2px solid ${({ theme }) => theme.colors.gray800};
 
-  // Custom Checkbox
-  input[type='checkbox'] {
-    visibility: hidden;
-  }
-  label {
-    height: 1.5rem;
-    width: 1.5rem;
-    border-radius: 50%;
-    position: relative;
-    border: 2px solid hsl(50, 100%, 71%);
-    cursor: pointer;
-  }
-
-  p {
-    // Remove border applied by adjacent selector in ul
-    border: none;
-  }
-
-  // Cancel Icon
-  svg {
-    margin-right: 1rem;
-    height: 1.5rem;
-    width: 1.5rem;
-    color: ${({ theme }) => theme.colors.bittersweet};
-  }
-
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray700};
     border-left: 2px solid
       ${({ theme, deleteactive }) =>
         deleteactive === 'true'
           ? theme.colors.bittersweet
-          : theme.colors.naplesyellow};
+          : theme.colors.brandPrimary};
+  }
+  p {
+    // Remove border applied by adjacent selector in ul
+    border: none;
+    font-size: 1.25rem;
+  }
+`;
 
-    //TODO: Set border left to color of tile checkbox -> use project tray tiles as reference
+export const CheckboxGroup = styled.div`
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 1em;
+  margin-right: 1em;
+
+  // Custom Checkbox
+  input[type='checkbox'] {
+    visibility: hidden;
+    position: absolute;
+  }
+`;
+
+export const CheckboxLabel = styled.label`
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  position: relative;
+
+  div {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: ${({ theme, ischecked }) => theme.colors.cultured};
+  }
+
+  svg {
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    font-size: 2rem;
+    color: ${({ theme }) => theme.colors.brandPrimary};
+    border: none;
   }
 `;

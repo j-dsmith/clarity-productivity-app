@@ -65,15 +65,15 @@ export const StyledFormHeader = styled.div`
     }
 
     #tasks-span {
-      background-color: ${({ theme }) => theme.colors.naplesyellow};
+      background-color: ${({ theme }) => theme.colors.brandPrimary};
     }
     #projects-span {
-      background-color: ${({ theme }) => theme.colors.bluecrayola};
+      background-color: ${({ theme }) => theme.colors.brandPrimary};
       color: ${({ theme }) => theme.colors.cultured};
       text-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.4);
     }
     #decks-span {
-      background-color: ${({ theme }) => theme.colors.turquoise};
+      background-color: ${({ theme }) => theme.colors.brandPrimary};
     }
   }
 `;
@@ -118,7 +118,7 @@ export const StyledFormBtn = styled(motion.button)`
   border: ${({ outline, theme }) =>
     outline ? `1px solid ${theme.colors.gray700}` : 'none'};
   background-color: ${({ outline, theme }) =>
-    outline ? theme.colors.cultured : theme.colors.bluecrayola};
+    outline ? theme.colors.cultured : theme.colors.brandPrimary};
   color: ${({ textcolor, theme }) =>
     textcolor === 'light' ? theme.colors.cultured : theme.colors.gray700};
   font-size: 1rem;

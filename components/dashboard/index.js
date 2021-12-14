@@ -1,5 +1,4 @@
 import { DashContainer } from './dashboard.styles';
-import { fetchContext } from '../../helpers/client';
 import Calendar from './calendar';
 import Tasks from './tasks';
 import Forecast from './forecast';

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export const GeneralTileContainer = styled.div`
   height: 5rem;
-  background-color: ${({ theme }) => theme.colors.bluecrayola};
+  background-color: ${({ theme }) => theme.colors.brandPrimary};
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@ export const ProjectTileContainer = styled.div`
       ${({ theme, deleteactive }) =>
         deleteactive === 'true'
           ? theme.colors.bittersweet
-          : theme.colors.bluecrayola};
+          : theme.colors.brandPrimary};
   }
 `;
 

@@ -17,12 +17,9 @@ export const theme = {
     gray700: 'hsl(210, 13%, 25%)',
     gray800: 'hsl(212, 14%, 19%)',
     gray900: 'hsl(240, 14%, 1%)',
-    turquoise: 'hsl(176, 56%, 55%)',
     cultured: 'hsl(20, 33%, 98%)',
     bittersweet: 'hsl(0, 100%, 71%)',
-    naplesyellow: 'hsl(50, 100%, 71%)',
-    bluecrayola: 'hsl(222, 100%, 61%)',
-    discord: 'hsl(227, 58%, 65%)',
+    brandPrimary: 'hsl(222, 100%, 61%)',
   },
   shadow: {
     md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',

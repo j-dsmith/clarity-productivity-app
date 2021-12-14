@@ -10,11 +10,8 @@ import {
 } from './editor.styles';
 import ToolBar from './toolbar';
 import SaveNoteBtn from '../ui/save-note-btn';
-import { MdSaveAlt } from 'react-icons/md';
-import { theme } from '../../pages/_app';
-import UIBtn from '../ui/ui-btn';
 
-const MyEditor = () => {
+const MyEditor = (initialContent) => {
   const editor = useEditor({
     extensions: [
       StarterKit,

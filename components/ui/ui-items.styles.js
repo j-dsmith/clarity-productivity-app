@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const StyledUIBtn = styled.button`
@@ -16,8 +17,20 @@ export const StyledUIBtn = styled.button`
 
   &:hover {
     background-color: ${({ color }) => color};
-    box-shadow: ${({ theme }) => theme.shadow.md};
   }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.gray400};
+    border: 1px solid ${({ theme }) => theme.colors.gray400};
+  }
+
+  &:disabled&:hover {
+    background-color: ${({ theme }) => theme.colors.gray400};
+  }
+`;
+
+export const UIBtnOutline = styled(StyledUIBtn)`
+  background-color: transparent;
 `;
 
 export const StyledSaveBtn = styled.button`
@@ -80,3 +93,30 @@ export const SpinnerContainer = styled.div`
   display: grid;
   place-items: center;
 `;
+
+export const BannerContainer = styled(motion.div)`
+  position: absolute;
+  left: 25%;
+  top: 22.5%;
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.cultured};
+  font-size: 2rem;
+
+  p {
+    padding: 0;
+    margin: 0;
+    margin-left: 0.5em;
+    height: 3rem;
+  }
+
+  span {
+    color: ${({ theme }) => theme.colors.brandPrimary};
+  }
+
+  svg {
+    font-size: 3rem;
+  }
+`;
+
+export const ArrowContainer = styled(motion.div)``;
