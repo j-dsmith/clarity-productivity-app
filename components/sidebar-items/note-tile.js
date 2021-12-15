@@ -12,7 +12,7 @@ const NoteTile = ({
   title,
   noteId,
   createdAt,
-  content,
+
   currentProjectId,
   handleDeleteNote,
   deleteActive,
@@ -39,23 +39,21 @@ const NoteTile = ({
   }
 
   return (
-    // <Link>
-    <NoteTileContainer
-      onClick={() => handleDeleteNote(currentProjectId, noteId)}
-    >
-      <TileHeader>
-        <h3>{title}</h3>
-      </TileHeader>
-      <TileFooter>
-        <Date>
-          Created: <span>{createdAt}</span>
-        </Date>
-        <InfoBox>
-          <MdEdit />
-        </InfoBox>
-      </TileFooter>
-    </NoteTileContainer>
-    // </Link>
+    <Link href={`/projects/${currentProjectId}/notes/${noteId}`}>
+      <NoteTileContainer>
+        <TileHeader>
+          <h3>{title}</h3>
+        </TileHeader>
+        <TileFooter>
+          <Date>
+            Created: <span>{createdAt}</span>
+          </Date>
+          <InfoBox>
+            <MdEdit />
+          </InfoBox>
+        </TileFooter>
+      </NoteTileContainer>
+    </Link>
   );
 };
 

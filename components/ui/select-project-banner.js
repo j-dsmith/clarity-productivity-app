@@ -11,7 +11,11 @@ const SelectProjectBanner = () => {
         initial={{ x: 0 }}
         animate={{
           x: -5,
-          transition: { yoyo: Infinity, duration: 0.5 },
+          transition: {
+            repeat: Infinity,
+            repeatType: 'reverse',
+            duration: 0.5,
+          },
         }}
       >
         <MdArrowBack />

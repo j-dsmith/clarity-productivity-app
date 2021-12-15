@@ -4,16 +4,16 @@ import axios from 'axios';
 import AnimationContext from '../store/animation-ctx';
 import useSWR from 'swr';
 
-//* Fetch animation context
-export const fetchContext = (contextType) => {
-  if (contextType === 'animation') {
-    const animationCtx = useContext(AnimationContext);
-    return {
-      trayOpenState: animationCtx.trayOpenState,
-      toggleTrayOpenState: animationCtx.toggleTrayOpenState,
-    };
-  }
-};
+// //* Fetch animation context
+// export const fetchContext = (contextType) => {
+//   if (contextType === 'animation') {
+//     const animationCtx = useContext(AnimationContext);
+//     return {
+//       trayOpenState: animationCtx.trayOpenState,
+//       toggleTrayOpenState: animationCtx.toggleTrayOpenState,
+//     };
+//   }
+// };
 
 export const fetchWeather = async () => {
   const response = await axios.get(

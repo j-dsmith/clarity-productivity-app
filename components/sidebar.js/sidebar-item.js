@@ -1,17 +1,31 @@
 import Link from 'next/link';
-import { fetchContext } from '../../helpers/client';
 import { StyledIcon } from './sidebar.styles';
+import { useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import AnimationContext from '../../store/animation-ctx';
 
 const SidebarItem = ({ title, icon, color, href }) => {
-  const { trayOpenState, toggleTrayOpenState } = fetchContext('animation');
+  const animationCtx = useContext(AnimationContext);
+  const { trayOpen, toggleTrayOpen } = animationCtx;
 
-  const toggleTray = (title) => {
-    if (title === 'Projects') {
-      toggleTrayOpenState();
-    } else if (title !== 'Projects' && trayOpenState === 'open') {
-      toggleTrayOpenState();
+  const router = useRouter();
+
+  const handleTrayState = (path) => {
+    if (path.includes('projects')) {
+      toggleTrayOpen(true);
+
+      return;
     }
+    toggleTrayOpen(false);
   };
+
+  // const toggleTray = (title) => {
+  //   if (title === 'Projects') {
+  //     toggleTrayOpenState();
+  //   } else if (title !== 'Projects' && trayOpenState === 'open') {
+  //     toggleTrayOpenState();
+  //   }
+  // };
 
   const handleClick = (title) => {
     toggleTray(title);
@@ -19,7 +33,10 @@ const SidebarItem = ({ title, icon, color, href }) => {
 
   return (
     <Link href={href}>
-      <StyledIcon color={color} onClick={() => handleClick(title)}>
+      <StyledIcon
+        color={color}
+        onClick={() => handleTrayState(router.pathname)}
+      >
         {icon}
       </StyledIcon>
     </Link>

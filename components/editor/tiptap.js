@@ -7,11 +7,21 @@ import {
   EditorHeader,
   StyledEditorContent,
   NoteTitleInput,
+  NoteTitle,
 } from './editor.styles';
 import ToolBar from './toolbar';
 import SaveNoteBtn from '../ui/save-note-btn';
+import { updateNote } from '../../helpers/notes';
+import { useSWRConfig } from 'swr';
+import { refreshData } from '../../helpers/client';
+import { useRouter } from 'next/router';
 
-const MyEditor = (initialContent) => {
+const MyEditor = ({ note, currentProjectId }) => {
+  const { title, content, _id } = note;
+  const startingContent = content.length > 0 ? content[0] : '';
+
+  const router = useRouter();
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -20,7 +30,7 @@ const MyEditor = (initialContent) => {
         types: ['heading', 'paragraph'],
       }),
     ],
-    content: '',
+    content: startingContent,
   });
 
   const variants = {
@@ -41,7 +51,11 @@ const MyEditor = (initialContent) => {
     },
   };
 
-  const handleSaveNote = () => {};
+  const handleSaveNote = async () => {
+    const currentContent = editor.getJSON();
+    const response = await updateNote(currentProjectId, _id, currentContent);
+    refreshData(router);
+  };
 
   return (
     <EditorContainer
@@ -51,7 +65,11 @@ const MyEditor = (initialContent) => {
       exit="exit"
     >
       <EditorHeader>
-        <NoteTitleInput type="text" placeholder="Title" maxLength="50" />
+        {title ? (
+          <NoteTitle>{title}</NoteTitle>
+        ) : (
+          <NoteTitleInput type="text" placeholder="Title" maxLength="50" />
+        )}
         <SaveNoteBtn handler={handleSaveNote} />
       </EditorHeader>
       <ToolBar editor={editor} />

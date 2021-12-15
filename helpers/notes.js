@@ -14,3 +14,11 @@ export const deleteNote = async (projectId, noteId) => {
   );
   return response;
 };
+
+export const updateNote = async (projectId, noteId, currentContent) => {
+  const response = await axios.put(
+    `/api/projects/${projectId}/notes/${noteId}`,
+    currentContent
+  );
+  return response;
+};

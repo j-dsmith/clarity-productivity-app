@@ -58,6 +58,36 @@ const handler = async (req, res) => {
         console.log(error.message);
         res.status(400).json({ message: error.message });
       }
+      break;
+
+    case 'PUT':
+      try {
+        const currentContent = req.body;
+        const { slug } = req.query;
+        const [projectId, , noteId] = slug;
+
+        const db = await connectDB();
+        const user = await User.findOne({ email });
+
+        user.projects.forEach((project) => {
+          if (project._id == projectId) {
+            project.notes.forEach((note) => {
+              if (note._id == noteId) {
+                note.content = currentContent;
+              }
+            });
+          }
+        });
+
+        await user.save();
+        db.disconnect();
+        res.status(200).json({
+          message: `Note with id: ${noteId} updated from projectId: ${projectId}`,
+        });
+      } catch (error) {
+        console.log(error.message);
+        res.status(400).json({ message: error.message });
+      }
   }
 };
 

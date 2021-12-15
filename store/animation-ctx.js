@@ -1,22 +1,20 @@
-import { createContext } from 'react';
-import { useCycle } from 'framer-motion';
+import { createContext, useState } from 'react';
 
 const AnimationContext = createContext({
-  trayOpenState: '',
-  toggleTrayOpenState: function () {},
+  trayOpen: false,
+  toggleTrayOpen: function () {},
 });
 
 export const AnimationContextProvider = ({ children }) => {
-  const [trayOpenState, cycleTrayOpenState] = useCycle('closed', 'open');
+  const [trayOpen, setTrayOpen] = useState(false);
 
-  function toggleTrayOpenState() {
-    console.log(trayOpenState);
-    cycleTrayOpenState();
+  function toggleTrayOpen(status) {
+    setTrayOpen(status);
   }
 
   const context = {
-    trayOpenState,
-    toggleTrayOpenState,
+    trayOpen,
+    toggleTrayOpen,
   };
 
   return (

@@ -22,7 +22,7 @@ export const EditorHeader = styled.div`
 `;
 
 export const NoteTitleInput = styled.input`
-  height: 100%;
+  min-height: 100%;
   width: 35ch;
   margin: 0;
   padding: 0 0 0 0.5em;
@@ -35,6 +35,15 @@ export const NoteTitleInput = styled.input`
   &:focus {
     outline: none;
   }
+`;
+export const NoteTitle = styled.h2`
+  margin: 0;
+  padding: 0 0 0 0.5em;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  width: 35ch;
 `;
 
 export const StyledEditorContent = styled(EditorContent)`

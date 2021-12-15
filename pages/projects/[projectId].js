@@ -1,4 +1,5 @@
 import { getSession } from 'next-auth/react';
+import useSWR from 'swr';
 import Layout from '../../components/layout';
 import SidebarTray from '../../components/sidebar-tray';
 import MyEditor from '../../components/editor/tiptap';

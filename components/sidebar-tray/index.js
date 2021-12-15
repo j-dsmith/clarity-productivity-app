@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useSWRConfig } from 'swr';
 import { theme } from '../../pages/_app';
 import { TrayContainer, TrayHeader, ContentList } from './tray.styles';
 import { InputGroup, TextInput, SpinnerContainer } from '../ui/ui-items.styles';
 import UIBtn from '../ui/ui-btn';
 import { MdAdd, MdDelete } from 'react-icons/md';
 import { BsTagsFill } from 'react-icons/bs';
-import { refreshData } from '../../helpers/client';
 import { addProject, deleteProject } from '../../helpers/projects';
 import { addNote, deleteNote } from '../../helpers/notes';
 import ProjectsList from './projects-list';
@@ -25,7 +24,7 @@ const SidebarTray = ({
   const [title, setTitle] = useState('');
   const [deleteActive, setDeleteActive] = useState(false);
 
-  const router = useRouter();
+  const { mutate } = useSWRConfig();
 
   const tray = {
     closed: {
@@ -46,31 +45,60 @@ const SidebarTray = ({
     },
   };
 
+  //TODO: refactor data fetching to use SWR
+
   const handleAddProject = async () => {
     const response = await addProject(title);
     setTitle('');
-    refreshData(router);
+    mutate('/api/projects');
   };
 
   const handleAddNote = async () => {
     const response = await addNote(title, currentProjectId);
     setTitle('');
-    refreshData(router);
+    mutate('/api/projects');
   };
 
   const handleDeleteProject = async (projectId) => {
     // Run delete task helper to send DELETE request to /api/projects/[projectId]
     const response = await deleteProject(projectId);
-    refreshData(router);
+    mutate('/api/projects');
   };
 
   const handleDeleteNote = async (currentProjectId, noteId) => {
     const response = await deleteNote(currentProjectId, noteId);
-    refreshData(router);
+    mutate('/api/projects');
   };
 
   const toggleDeleteActive = () => {
     setDeleteActive(!deleteActive);
+  };
+
+  const renderSpinner = (route) => {
+    if (route === 'projects' && !projects) {
+      return (
+        <SpinnerContainer>
+          <Loader
+            type="Oval"
+            color="hsl(212, 13%, 48%)"
+            height={75}
+            width={75}
+          />
+        </SpinnerContainer>
+      );
+    }
+    if (route === 'notes' && !notes) {
+      return (
+        <SpinnerContainer>
+          <Loader
+            type="Oval"
+            color="hsl(212, 13%, 48%)"
+            height={75}
+            width={75}
+          />
+        </SpinnerContainer>
+      );
+    }
   };
 
   return (
@@ -82,7 +110,6 @@ const SidebarTray = ({
     >
       <TrayHeader>
         <h2>{heading}</h2>
-        {route === 'projects' && <BsTagsFill />}
       </TrayHeader>
       <InputGroup width="100%">
         <TextInput
@@ -129,16 +156,7 @@ const SidebarTray = ({
           />
         )}
       </ContentList>
-      {!projects && route === 'projects' && (
-        <SpinnerContainer>
-          <Loader
-            type="Oval"
-            color="hsl(212, 13%, 48%)"
-            height={75}
-            width={75}
-          />
-        </SpinnerContainer>
-      )}
+      {renderSpinner(route)}
     </TrayContainer>
   );
 };

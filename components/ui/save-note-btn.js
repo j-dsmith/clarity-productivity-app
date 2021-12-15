@@ -1,9 +1,9 @@
 import { StyledSaveBtn } from './ui-items.styles';
 import { MdSaveAlt } from 'react-icons/md';
 
-const SaveNoteBtn = () => {
+const SaveNoteBtn = ({ handler }) => {
   return (
-    <StyledSaveBtn>
+    <StyledSaveBtn onClick={() => handler()}>
       <MdSaveAlt />
     </StyledSaveBtn>
   );
