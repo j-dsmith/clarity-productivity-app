@@ -1,21 +1,25 @@
 import { getSession } from 'next-auth/react';
 import useSWR from 'swr';
-import Layout from '../../components/layout';
+import { fetchData } from '../../helpers/client';
 import SidebarTray from '../../components/sidebar-tray';
-import MyEditor from '../../components/editor/tiptap';
+import Layout from '../../components/layout';
 
-import connectDB, { serializeData } from '../../helpers/db';
-import { User } from '../../models/user';
+const ProjectPage = ({ currentProjectId }) => {
+  const { data, error } = useSWR(
+    `/api/projects/${currentProjectId}`,
+    fetchData
+  );
 
-const ProjectPage = ({ currentProjectTitle, notes, currentProjectId }) => {
+  const selectedProject = data ? data.selectedProject : null;
+
   return (
     <>
       <Layout>
         <SidebarTray
-          heading={currentProjectTitle}
+          heading={selectedProject ? selectedProject.title : ''}
           currentProjectId={currentProjectId}
           route="notes"
-          notes={notes}
+          selectedProject={selectedProject}
           trayFixed={true}
         />
       </Layout>
@@ -37,24 +41,12 @@ export async function getServerSideProps({ req, params }) {
     };
   }
 
-  const {
-    user: { email },
-  } = session;
   const { projectId } = params;
-
-  const db = await connectDB();
-  const user = await User.findOne({ email });
-  const currentNotes = user.projects.filter(({ _id }) => _id == projectId)[0]
-    .notes;
-  db.disconnect();
 
   return {
     props: {
-      currentProjectTitle: user.projects.filter(
-        ({ _id }) => _id == projectId
-      )[0].title,
       currentProjectId: projectId,
-      notes: serializeData(currentNotes),
+      session,
     },
   };
 }

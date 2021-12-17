@@ -7,6 +7,24 @@ const handler = async (req, res) => {
   const { email } = session.user;
 
   switch (req.method) {
+    case 'GET':
+      try {
+        const { projectId } = req.query;
+
+        const db = await connectDB();
+        const user = await User.findOne({ email });
+        const selectedProject = user.projects.find(
+          ({ _id }) => _id == projectId
+        );
+
+        db.disconnect();
+        res.status(200).json({ selectedProject });
+      } catch (error) {
+        console.log(error.message);
+        res.status(400).json({ message: error.message });
+      }
+      break;
+
     case 'DELETE':
       try {
         const { projectId } = req.query;

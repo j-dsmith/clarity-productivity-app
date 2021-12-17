@@ -52,28 +52,16 @@ export const StyledFormHeader = styled.div`
   }
 
   p {
-    width: 60%;
+    width: 70%;
     line-height: 1.5rem;
     font-size: 1.25rem;
     color: ${({ theme }) => theme.colors.gray700};
 
-    span {
-      text-shadow: none;
-
-      color: ${({ theme }) => theme.colors.gray800};
-      padding: 0 0.125rem;
-    }
-
-    #tasks-span {
-      background-color: ${({ theme }) => theme.colors.brandPrimary};
-    }
-    #projects-span {
+    .highlight {
       background-color: ${({ theme }) => theme.colors.brandPrimary};
       color: ${({ theme }) => theme.colors.cultured};
       text-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.4);
-    }
-    #decks-span {
-      background-color: ${({ theme }) => theme.colors.brandPrimary};
+      padding: 0 0.125rem;
     }
   }
 `;
@@ -91,7 +79,7 @@ export const StyledFormControls = styled.div`
   width: 45%;
 `;
 
-export const StyledTextInput = styled(motion.input)`
+export const StyledTextInput = styled.input`
   height: 4rem;
   margin: 0 3rem 1rem 3rem;
   border-radius: 1rem;
@@ -102,7 +90,8 @@ export const StyledTextInput = styled(motion.input)`
   color: ${({ theme }) => theme.colors.gray700};
 
   &:focus {
-    outline: none;
+    outline: 2px solid ${({ theme }) => theme.colors.brandPrimary};
+    box-shadow: 0 0 5px ${({ theme }) => theme.colors.brandPrimary};
   }
 `;
 
@@ -119,6 +108,7 @@ export const StyledFormBtn = styled(motion.button)`
     outline ? `1px solid ${theme.colors.gray700}` : 'none'};
   background-color: ${({ outline, theme }) =>
     outline ? theme.colors.cultured : theme.colors.brandPrimary};
+
   color: ${({ textcolor, theme }) =>
     textcolor === 'light' ? theme.colors.cultured : theme.colors.gray700};
   font-size: 1rem;

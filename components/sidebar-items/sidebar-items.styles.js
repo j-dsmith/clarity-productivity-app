@@ -1,17 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const GeneralTileContainer = styled.div`
-  height: 5rem;
-  background-color: ${({ theme }) => theme.colors.brandPrimary};
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  cursor: pointer;
-`;
-
 export const ProjectTileContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.gray600};
   color: ${({ theme }) => theme.colors.cultured};

@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import useSWR from 'swr';
-
 import SidebarTray from '../../components/sidebar-tray';
 import Layout from '../../components/layout';
 import { fetchData } from '../../helpers/client';
@@ -11,11 +10,9 @@ const Projects = () => {
   const animationCtx = useContext(AnimationContext);
   const { trayOpen } = animationCtx;
 
-  let projects;
   const { data, error } = useSWR('/api/projects', fetchData);
-  if (data) {
-    projects = [...data.data];
-  }
+
+  const projects = data ? [...data.data] : null;
 
   return (
     <>
@@ -33,9 +30,3 @@ const Projects = () => {
 };
 
 export default Projects;
-
-export async function getServerSideProps(context) {
-  console.log(context.req.headers.referer);
-
-  return { props: {} };
-}

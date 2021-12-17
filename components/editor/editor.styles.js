@@ -59,6 +59,7 @@ export const StyledEditorContent = styled(EditorContent)`
 
     p {
       line-height: 1.5rem;
+      font-size: 1rem;
       padding: 0;
       margin: 0;
     }
@@ -85,8 +86,28 @@ export const StyledEditorContent = styled(EditorContent)`
       line-height: 1.1;
     }
 
+    h1 {
+      font-size: 2rem;
+    }
+    h2 {
+      font-size: 1.75rem;
+    }
+    h3 {
+      font-size: 1.675rem;
+    }
+    h4 {
+      font-size: 1.5rem;
+    }
+    h5 {
+      font-size: 1.25rem;
+    }
+    h6 {
+      font-size: 1.125rem;
+    }
+
     code {
       color: ${({ theme }) => theme.colors.gray100};
+      font-size: 1rem;
     }
 
     pre {
@@ -137,6 +158,7 @@ export const ToolbarBtn = styled.button`
   border-radius: 20%;
   transition: all 100ms ease-in-out;
   border: 1px solid transparent;
+  padding: 0.25em;
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadow.xl};

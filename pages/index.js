@@ -5,26 +5,21 @@ import { fetchData } from '../helpers/client.js';
 import Layout from '../components/layout.js';
 
 export default function Home({}) {
-  let user;
-  let weather;
   const weatherURL = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=auto&days=2&aqi=no&alerts=no`;
 
   const { data: fetchedUser, error: userError } = useSWR(
     '/api/user',
     fetchData
   );
-  if (fetchedUser) {
-    user = fetchedUser.data;
-  }
+
+  const user = fetchedUser ? fetchedUser.data : null;
 
   const { data: fetchedForecast, error: forecastError } = useSWR(
     weatherURL,
     fetchData
   );
 
-  if (fetchedForecast) {
-    weather = fetchedForecast;
-  }
+  const weather = fetchedForecast ? fetchedForecast : null;
 
   return (
     <Layout>

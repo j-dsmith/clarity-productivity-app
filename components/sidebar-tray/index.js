@@ -5,17 +5,18 @@ import { TrayContainer, TrayHeader, ContentList } from './tray.styles';
 import { InputGroup, TextInput, SpinnerContainer } from '../ui/ui-items.styles';
 import UIBtn from '../ui/ui-btn';
 import { MdAdd, MdDelete } from 'react-icons/md';
-import { BsTagsFill } from 'react-icons/bs';
 import { addProject, deleteProject } from '../../helpers/projects';
 import { addNote, deleteNote } from '../../helpers/notes';
 import ProjectsList from './projects-list';
 import NotesList from './notes-list';
 import Loader from 'react-loader-spinner';
+import { refreshData } from '../../helpers/client';
+import { useRouter } from 'next/router';
 
 const SidebarTray = ({
   route,
   heading,
-  notes,
+  selectedProject,
   projects,
   currentProjectId,
   trayFixed,
@@ -25,6 +26,7 @@ const SidebarTray = ({
   const [deleteActive, setDeleteActive] = useState(false);
 
   const { mutate } = useSWRConfig();
+  const router = useRouter();
 
   const tray = {
     closed: {
@@ -56,7 +58,7 @@ const SidebarTray = ({
   const handleAddNote = async () => {
     const response = await addNote(title, currentProjectId);
     setTitle('');
-    mutate('/api/projects');
+    refreshData(router);
   };
 
   const handleDeleteProject = async (projectId) => {
@@ -67,7 +69,7 @@ const SidebarTray = ({
 
   const handleDeleteNote = async (currentProjectId, noteId) => {
     const response = await deleteNote(currentProjectId, noteId);
-    mutate('/api/projects');
+    refreshData(router);
   };
 
   const toggleDeleteActive = () => {
@@ -87,7 +89,7 @@ const SidebarTray = ({
         </SpinnerContainer>
       );
     }
-    if (route === 'notes' && !notes) {
+    if (route === 'notes' && !selectedProject) {
       return (
         <SpinnerContainer>
           <Loader
@@ -149,7 +151,7 @@ const SidebarTray = ({
           />
         ) : (
           <NotesList
-            notes={notes}
+            selectedProject={selectedProject}
             deleteActive={deleteActive}
             handleDeleteNote={handleDeleteNote}
             currentProjectId={currentProjectId}

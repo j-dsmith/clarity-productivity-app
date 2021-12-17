@@ -3,8 +3,18 @@ import {
   StyledStaticIcon,
   StyledDynamicIcon,
 } from './auth.styles';
+import { SpinnerContainer } from '../ui/ui-items.styles';
+import Loader from 'react-loader-spinner';
 
-const FormBtn = ({ text, icon, iconType, textcolor, outline }) => {
+const FormBtn = ({
+  text,
+  icon,
+  iconType,
+  textcolor,
+  outline,
+  isLoading,
+  isDisabled,
+}) => {
   //animation variants
   const btn = {
     hover: {
@@ -18,8 +28,8 @@ const FormBtn = ({ text, icon, iconType, textcolor, outline }) => {
   const iconVariant = {
     rest: {
       opacity: 0,
-      transition: { duration: 0.1 },
-      x: -5,
+      transition: { duration: 0 },
+      x: -10,
     },
     hover: {
       opacity: 1,
@@ -29,6 +39,24 @@ const FormBtn = ({ text, icon, iconType, textcolor, outline }) => {
     static: { opacity: 1 },
   };
 
+  const renderIcon = () => {
+    if (isLoading) {
+      return (
+        <StyledStaticIcon>
+          <Loader type="Oval" color="#fff" height={15} width={15} />
+        </StyledStaticIcon>
+      );
+    }
+
+    if (!isLoading && iconType !== 'provider') {
+      return (
+        <StyledDynamicIcon variants={iconVariant}>{icon}</StyledDynamicIcon>
+      );
+    }
+
+    return <StyledStaticIcon>{icon}</StyledStaticIcon>;
+  };
+
   return (
     <StyledFormBtn
       variants={btn}
@@ -36,13 +64,10 @@ const FormBtn = ({ text, icon, iconType, textcolor, outline }) => {
       whileHover="hover"
       textcolor={textcolor}
       outline={outline}
+      disabled={isDisabled}
     >
       {text}
-      {iconType !== 'provider' ? (
-        <StyledDynamicIcon variants={iconVariant}>{icon}</StyledDynamicIcon>
-      ) : (
-        <StyledStaticIcon>{icon}</StyledStaticIcon>
-      )}
+      {renderIcon()}
     </StyledFormBtn>
   );
 };

@@ -7,6 +7,32 @@ const handler = async (req, res) => {
   const { email } = session.user;
 
   switch (req.method) {
+    case 'GET':
+      try {
+        const { slug } = req.query;
+        const [projectId, , noteId] = slug;
+
+        const db = await connectDB();
+        const user = await User.findOne({ email });
+
+        const selectedProject = user.projects.find(
+          ({ _id }) => _id == projectId
+        );
+
+        const selectedNote = selectedProject.notes.find(
+          ({ _id }) => _id == noteId
+        );
+
+        db.disconnect();
+        res.status(200).json({
+          selectedNote,
+        });
+      } catch (error) {
+        console.log(error.message);
+        res.status(400).json({ message: error.message });
+      }
+      break;
+
     case 'POST':
       try {
         const { slug } = req.query;

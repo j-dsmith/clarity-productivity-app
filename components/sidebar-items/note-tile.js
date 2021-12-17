@@ -12,7 +12,6 @@ const NoteTile = ({
   title,
   noteId,
   createdAt,
-
   currentProjectId,
   handleDeleteNote,
   deleteActive,

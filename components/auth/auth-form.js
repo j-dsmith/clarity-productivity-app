@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
 import axios from 'axios';
-import { createUser } from '../../helpers/auth';
 import {
   StyledLoginPage,
   StyledFormContainer,
@@ -21,6 +20,7 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   //get router
   const router = useRouter();
@@ -33,6 +33,7 @@ const AuthForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (isLogin) {
       // Log user in
@@ -60,6 +61,7 @@ const AuthForm = () => {
           password: passwordValue,
         });
         router.replace('/');
+        setIsLoading(false);
       } catch (error) {
         const {
           response: { data },
@@ -69,25 +71,16 @@ const AuthForm = () => {
     }
   };
 
-  const inputVariant = {
-    hover: {
-      transition: { duration: 0.5, type: 'spring' },
-      scale: 1.06,
-      boxShadow:
-        '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-    },
-  };
-
   return (
     <StyledLoginPage>
       <StyledFormContainer>
         <StyledFormHeader>
           <h1>{isLogin ? 'Login to Your Account' : 'Create Account'}</h1>
           <p>
-            Track <span id="tasks-span">tasks</span>, organize ideas into{' '}
-            <span id="projects-span">projects</span>, review with{' '}
-            <span id="decks-span">study decks</span>, and write out your next
-            masterpiece in a fully featured RichText editor
+            Track <span className="highlight">tasks</span>, organize ideas into{' '}
+            <span className="highlight">projects</span>, review with{' '}
+            <span className="highlight">study decks</span>, and write out your
+            next masterpiece in a fully featured RichText editor
           </p>
         </StyledFormHeader>
         <StyledForm onSubmit={submitHandler}>
@@ -100,7 +93,6 @@ const AuthForm = () => {
               value={emailValue}
               onChange={(e) => setEmailValue(e.target.value)}
               required
-              variants={inputVariant}
               whileHover="hover"
             />
             <StyledTextInput
@@ -111,14 +103,14 @@ const AuthForm = () => {
               value={passwordValue}
               onChange={(e) => setPasswordValue(e.target.value)}
               required
-              variants={inputVariant}
               whileHover="hover"
             />
             <FormBtn
               text={isLogin ? 'Login to Your Account' : 'Create Account'}
               textcolor="light"
-              // outline="false"
               icon={<MdArrowForward />}
+              isLoading={isLoading}
+              isDisabled={!emailValue || !passwordValue ? true : false}
             />
           </StyledFormControls>
           <StyledDivider>/</StyledDivider>

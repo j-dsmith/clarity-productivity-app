@@ -45,9 +45,11 @@ export const StyledSaveBtn = styled.button`
   transition: all 100ms ease-in-out;
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadow.xl};
-    background-color: ${({ theme }) => theme.colors.gray800};
-    border: 1px solid ${({ theme }) => theme.colors.gray600};
+    box-shadow: ${({ theme, saving }) => (saving ? 'none' : theme.shadow.xl)};
+    background-color: ${({ theme, saving }) =>
+      saving ? 'transparent' : theme.colors.gray800};
+    border: 1px solid
+      ${({ theme, saving }) => (saving ? 'none' : theme.colors.gray600)};
   }
 `;
 
@@ -94,6 +96,15 @@ export const SpinnerContainer = styled.div`
   place-items: center;
 `;
 
+export const SpinnerPage = styled.div`
+  width: 78%;
+  height: clamp(100vh, 100vh, 100vh);
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+`;
 export const BannerContainer = styled(motion.div)`
   position: absolute;
   left: 25%;

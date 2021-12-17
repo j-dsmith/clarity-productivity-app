@@ -1,27 +1,35 @@
-import connectDB from '../../helpers/db';
-import { User } from '../../models/user';
 import { getSession } from 'next-auth/react';
-import { serializeData } from '../../helpers/db';
-import MyEditor from '../../components/editor/tiptap';
+import MyEditor from '../../components/editor';
 import SidebarTray from '../../components/sidebar-tray';
 import Layout from '../../components/layout';
+import useSWR from 'swr';
+import { fetchData } from '../../helpers/client';
 
-const NotePage = ({
-  currentProjectTitle,
-  currentProjectId,
-  notes,
-  selectedNote,
-}) => {
+const NotePage = ({ currentProjectId, noteId }) => {
+  const { data: projectData, error: projectError } = useSWR(
+    `/api/projects/${currentProjectId}`,
+    fetchData
+  );
+
+  const selectedProject = projectData ? projectData.selectedProject : null;
+
+  const { data: noteData, error: noteError } = useSWR(
+    `/api/projects/${currentProjectId}/notes/${noteId}`,
+    fetchData
+  );
+
+  const note = noteData ? noteData.selectedNote : null;
+
   return (
     <Layout>
       <SidebarTray
-        heading={currentProjectTitle}
+        heading={selectedProject ? selectedProject.title : ''}
         currentProjectId={currentProjectId}
         route="notes"
-        notes={notes}
+        selectedProject={selectedProject}
         trayFixed={true}
       />
-      <MyEditor currentProjectId={currentProjectId} note={selectedNote} />
+      <MyEditor currentProjectId={currentProjectId} note={note} />
     </Layout>
   );
 };
@@ -40,28 +48,13 @@ export async function getServerSideProps({ req, params: { slug } }) {
     };
   }
 
-  const {
-    user: { email },
-  } = session;
   const [currentProjectId, , noteId] = slug;
-
-  const db = await connectDB();
-  const user = await User.findOne({ email });
-  const currentNotes = user.projects.filter(
-    ({ _id }) => _id == currentProjectId
-  )[0].notes;
-  const selectedNote = currentNotes.filter(({ _id }) => _id == noteId)[0];
-
-  db.disconnect();
 
   return {
     props: {
-      currentProjectTitle: user.projects.filter(
-        ({ _id }) => _id == currentProjectId
-      )[0].title,
       currentProjectId,
-      notes: serializeData(currentNotes),
-      selectedNote: serializeData(selectedNote),
+      noteId,
+      session,
     },
   };
 }

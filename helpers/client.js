@@ -29,5 +29,6 @@ export const refreshData = (router) => {
 //? Fetcher for SWR method
 export const fetchData = async (url) => {
   const response = await axios.get(url);
+
   return response.data;
 };

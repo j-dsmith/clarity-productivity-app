@@ -133,7 +133,7 @@ const Forecast = ({ weather }) => {
             <MdLocationPin />
           </p>
 
-          <h2>{current.temp_c}°</h2>
+          <h2>{Math.floor(current.temp_c)}°</h2>
         </LocationTile>
         <InfoTile>
           <WeatherIcon>{getCurrentWeatherIcon()}</WeatherIcon>
