@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 export const StyledSidebar = styled.nav`
   height: 100vh;
   min-height: 100vh;
-  width: 8%;
+  width: min(8vw, 8rem);
   background-color: ${({ theme }) => theme.colors.gray800};
   box-shadow: ${({ theme }) => theme.shadow.lg};
   position: fixed;
@@ -27,7 +27,7 @@ export const SidebarItemList = styled.ul`
 
 export const StyledIcon = styled.div`
   margin: 0.5rem;
-  padding: 0.75rem;
+  padding: 0.75em;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -49,7 +49,6 @@ export const StyledIcon = styled.div`
   }
 
   svg {
-    height: 2.5rem;
-    width: 2.5rem;
+    font-size: calc(2.5rem + 0.5vw);
   }
 `;

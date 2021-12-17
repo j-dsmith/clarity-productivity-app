@@ -51,15 +51,14 @@ export const CalendarBtn = styled.button`
   display: grid;
   place-items: center;
   color: ${({ theme }) => theme.colors.cultured};
-  border: 1px solid ${({ theme }) => theme.colors.gray800};
-  border-radius: 0.5em;
+
+  border-radius: 0.75em;
   cursor: pointer;
   transform: ${({ rotate }) => (rotate === 'true' ? 'scaleX(-1)' : '')};
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadow.xl};
     background-color: ${({ theme }) => theme.colors.gray500};
-    border: 1px solid ${({ theme }) => theme.colors.gray400};
   }
 
   svg {

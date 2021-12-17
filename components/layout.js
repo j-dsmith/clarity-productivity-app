@@ -3,16 +3,15 @@ import Sidebar from './sidebar.js';
 
 const LayoutContainer = styled.section`
   min-height: 100vh;
-  width: 92%;
+  width: max(92vw, calc(100vw - 8rem));
   position: relative;
   top: 0;
-  left: 8%;
+  left: min(8vw, 8rem);
   z-index: 0;
   background-color: ${({ theme }) => theme.colors.gray600};
+  display: flex;
 
   main {
-    height: 100%;
-    width: 100%;
   }
 `;
 
