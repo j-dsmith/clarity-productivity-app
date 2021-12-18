@@ -1,27 +1,40 @@
+// Dependencies
+import { useEffect } from 'react';
 import { getSession } from 'next-auth/react';
 import useSWR from 'swr';
-import { fetchData } from '../../helpers/client';
-import SidebarTray from '../../components/sidebar-tray';
+
+// Style
 import Layout from '../../components/layout';
 
-const ProjectPage = ({ currentProjectId }) => {
-  const { data, error } = useSWR(
-    `/api/projects/${currentProjectId}`,
-    fetchData
-  );
+// Helpers
+import { fetchContext, fetchData } from '../../helpers/client';
 
-  const selectedProject = data ? data.selectedProject : null;
+// Components
+import SidebarTray from '../../components/sidebar-tray';
+import NotesList from '../../components/sidebar-tray/notes-list';
+
+const ProjectPage = ({ currentProjectId }) => {
+  const { data: fetchedUser, error } = useSWR('/api/user', fetchData);
+
+  const { setUser } = fetchContext('user');
+  const { trayOpen } = fetchContext('animation');
+
+  useEffect(() => {
+    if (fetchedUser) {
+      setUser(fetchedUser.data);
+    }
+  }, [fetchedUser]);
 
   return (
     <>
       <Layout>
         <SidebarTray
-          heading={selectedProject ? selectedProject.title : ''}
           currentProjectId={currentProjectId}
           route="notes"
-          selectedProject={selectedProject}
-          trayFixed={true}
-        />
+          trayFixed={trayOpen}
+        >
+          <NotesList currentProjectId={currentProjectId} />
+        </SidebarTray>
       </Layout>
     </>
   );

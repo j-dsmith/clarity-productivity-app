@@ -1,28 +1,29 @@
-import { useContext } from 'react';
+import { useEffect } from 'react';
 import useSWR from 'swr';
 import SidebarTray from '../../components/sidebar-tray';
 import Layout from '../../components/layout';
-import { fetchData } from '../../helpers/client';
+import { fetchContext, fetchData } from '../../helpers/client';
 import SelectProjectBanner from '../../components/ui/select-project-banner';
-import AnimationContext from '../../store/animation-ctx';
+import ProjectsList from '../../components/sidebar-tray/projects-list';
 
 const Projects = () => {
-  const animationCtx = useContext(AnimationContext);
-  const { trayOpen } = animationCtx;
+  const { trayOpen } = fetchContext('animation');
+  const { setUser } = fetchContext('user');
 
-  const { data, error } = useSWR('/api/projects', fetchData);
+  const { data: fetchedUser, error } = useSWR('/api/user', fetchData);
 
-  const projects = data ? [...data.data] : null;
+  useEffect(() => {
+    if (fetchedUser) {
+      setUser(fetchedUser.data);
+    }
+  }, [fetchedUser]);
 
   return (
     <>
       <Layout>
-        <SidebarTray
-          heading="Projects"
-          route="projects"
-          projects={projects}
-          trayFixed={trayOpen}
-        />
+        <SidebarTray heading="Projects" route="projects" trayFixed={trayOpen}>
+          <ProjectsList />
+        </SidebarTray>
         <SelectProjectBanner />
       </Layout>
     </>

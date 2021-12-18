@@ -6,7 +6,7 @@ import AnimationContext from '../../store/animation-ctx';
 
 const SidebarItem = ({ title, icon, color, href }) => {
   const animationCtx = useContext(AnimationContext);
-  const { trayOpen, toggleTrayOpen } = animationCtx;
+  const { toggleTrayOpen } = animationCtx;
 
   const router = useRouter();
 

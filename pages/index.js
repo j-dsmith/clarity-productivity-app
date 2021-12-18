@@ -3,16 +3,25 @@ import Dashboard from '../components/dashboard/index.js';
 import useSWR from 'swr';
 import { fetchData } from '../helpers/client.js';
 import Layout from '../components/layout.js';
+import { useContext, useEffect } from 'react';
+import UserContext from '../store/user-ctx.js';
 
 export default function Home({}) {
   const weatherURL = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=auto&days=2&aqi=no&alerts=no`;
+
+  const userCtx = useContext(UserContext);
+  const { user, setUser } = userCtx;
 
   const { data: fetchedUser, error: userError } = useSWR(
     '/api/user',
     fetchData
   );
 
-  const user = fetchedUser ? fetchedUser.data : null;
+  useEffect(() => {
+    if (fetchedUser) {
+      setUser(fetchedUser.data);
+    }
+  }, [fetchedUser]);
 
   const { data: fetchedForecast, error: forecastError } = useSWR(
     weatherURL,
@@ -23,7 +32,7 @@ export default function Home({}) {
 
   return (
     <Layout>
-      <Dashboard user={user} weather={weather} />
+      <Dashboard weather={weather} />
     </Layout>
   );
 }

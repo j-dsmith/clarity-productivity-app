@@ -3,17 +3,21 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import AnimationContext from '../store/animation-ctx';
 import useSWR from 'swr';
+import UserContext from '../store/user-ctx';
 
 // //* Fetch animation context
-// export const fetchContext = (contextType) => {
-//   if (contextType === 'animation') {
-//     const animationCtx = useContext(AnimationContext);
-//     return {
-//       trayOpenState: animationCtx.trayOpenState,
-//       toggleTrayOpenState: animationCtx.toggleTrayOpenState,
-//     };
-//   }
-// };
+export const fetchContext = (contextType) => {
+  if (contextType === 'animation') {
+    const animationCtx = useContext(AnimationContext);
+    return {
+      ...animationCtx,
+    };
+  }
+  if (contextType === 'user') {
+    const userCtx = useContext(UserContext);
+    return { ...userCtx };
+  }
+};
 
 export const fetchWeather = async () => {
   const response = await axios.get(

@@ -1,16 +1,23 @@
+// Dependencies
 import { useState } from 'react';
 import { useSWRConfig } from 'swr';
+
+// Style
 import {
   MdCancel,
   MdCheckCircle,
   MdOutlineRadioButtonUnchecked,
 } from 'react-icons/md';
 import { StyledTaskTile, CheckboxGroup, CheckboxLabel } from './tasks.styles';
+
+//Helpers
 import { completeTask } from '../../../helpers/tasks';
 
 const TaskTile = ({ content, deleteActive, handler, id }) => {
+  // Init checked state for task completion
   const [checked, setChecked] = useState(false);
 
+  // Get mutate function from SWR to update refresh tasks after completing a note
   const { mutate } = useSWRConfig();
 
   const handleChecked = async (e, taskId) => {

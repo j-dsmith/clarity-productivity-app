@@ -2,9 +2,12 @@ import { StatsContainer, StatsHeader, TileContainer } from './stats.styles';
 import { SpinnerContainer } from '../../ui/ui-items.styles';
 import StatTile from './stat-tile';
 import Loader from 'react-loader-spinner';
+import { fetchContext } from '../../../helpers/client';
 
-const Stats = ({ user }) => {
-  if (!user) {
+const Stats = ({}) => {
+  const { user } = fetchContext('user');
+
+  if (Object.keys(user).length === 0) {
     return (
       <StatsContainer>
         <StatsHeader>
@@ -24,7 +27,6 @@ const Stats = ({ user }) => {
   }
 
   const { decks, projects, pomodorosCompleted, tasksCompleted } = user;
-
   const numProjects = projects.length;
   const numDecks = decks.length;
 

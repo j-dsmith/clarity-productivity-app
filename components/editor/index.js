@@ -36,8 +36,6 @@ const MyEditor = ({ note, currentProjectId }) => {
   const [saving, setSaving] = useState(false);
   // Get properties from note
   const { title, content, _id } = note;
-  // Set starting content
-  const startingContent = content && content.length > 0 ? content[0] : '';
 
   const router = useRouter();
 
@@ -49,7 +47,7 @@ const MyEditor = ({ note, currentProjectId }) => {
         types: ['heading', 'paragraph'],
       }),
     ],
-    content: startingContent,
+    content: content[0],
   });
 
   const variants = {

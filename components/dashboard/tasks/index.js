@@ -1,6 +1,13 @@
+// Dependencies
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useSWRConfig } from 'swr';
+
+// Helpers
+import { addTask, deleteTask } from '../../../helpers/tasks';
+import { fetchContext } from '../../../helpers/client';
+
+// Style
 import { theme } from '../../../pages/_app';
 import { MdAdd, MdDelete } from 'react-icons/md';
 import { TasksContainer, TaskList, TaskHeader } from './tasks.styles';
@@ -9,21 +16,42 @@ import {
   SpinnerContainer,
   TextInput,
 } from '../../ui/ui-items.styles';
+
+// Components
 import UIBtn from '../../ui/ui-btn';
-import { addTask, deleteTask } from '../../../helpers/tasks';
 import TaskTile from './task-tile';
 import Loader from 'react-loader-spinner';
 
-const Tasks = ({ user }) => {
-  let tasks;
-  if (user) {
-    tasks = user.tasks;
-  }
+const Tasks = () => {
   // State Initialization for new task input and active delete state
   const [taskTitle, setTaskTitle] = useState('');
   const [deleteActive, setDeleteActive] = useState(false);
 
   const { mutate } = useSWRConfig();
+
+  const { user } = fetchContext('user');
+
+  if (Object.keys(user).length === 0) {
+    return (
+      <TasksContainer>
+        <TaskHeader>
+          <h2>Tasks</h2>
+        </TaskHeader>
+        <TaskList>
+          <SpinnerContainer>
+            <Loader
+              type="Oval"
+              color="hsl(212, 13%, 48%)"
+              height={75}
+              width={75}
+            />
+          </SpinnerContainer>
+        </TaskList>
+      </TasksContainer>
+    );
+  }
+
+  const { tasks } = user;
 
   const renderTasks = () => {
     // Return a task tile with populated data from DB
@@ -58,9 +86,6 @@ const Tasks = ({ user }) => {
     mutate('/api/user');
   };
 
-  //TODO: Add in functionality to complete tasks and updated completed count
-  const handleCompleteTask = async () => {};
-
   const toggleDeleteActive = () => {
     setDeleteActive(!deleteActive);
   };
@@ -92,18 +117,7 @@ const Tasks = ({ user }) => {
         </InputGroup>
       </TaskHeader>
       <TaskList>
-        {tasks ? (
-          <ul>{renderTasks()}</ul>
-        ) : (
-          <SpinnerContainer>
-            <Loader
-              type="Oval"
-              color="hsl(212, 13%, 48%)"
-              height={75}
-              width={75}
-            />
-          </SpinnerContainer>
-        )}
+        <ul>{renderTasks()}</ul>
       </TaskList>
     </TasksContainer>
   );
