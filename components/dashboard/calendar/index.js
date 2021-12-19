@@ -1,4 +1,7 @@
+// Dependencies
 import { useState } from 'react';
+
+// Style
 import {
   CalendarGrid,
   CalendarContainer,
@@ -7,6 +10,8 @@ import {
   WeekdayHeader,
 } from './calendar.styles';
 import { MdArrowForwardIos } from 'react-icons/md';
+
+// Helpers
 import CalendarMonth, {
   renderPrevMonthDays,
   renderCurrentMonthDays,

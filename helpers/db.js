@@ -1,5 +1,5 @@
+// Dependencies
 import mongoose from 'mongoose';
-import { omit } from 'lodash';
 import axios from 'axios';
 
 const connectDB = async () => {

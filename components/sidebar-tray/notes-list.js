@@ -1,20 +1,22 @@
 // Dependencies
+import { useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useSWRConfig } from 'swr';
-import { useState } from 'react';
 
 // Style
 import { InputGroup, TextInput, SpinnerContainer } from '../ui/ui-items.styles';
-import { TrayHeader, ContentList } from './tray.styles';
+import { TrayHeader, ContentList, ProjectsLink } from './tray.styles';
 import { MdAdd, MdDelete } from 'react-icons/md';
 import { theme } from '../../pages/_app';
 
 // Helpers
 import { fetchContext } from '../../helpers/client';
+import { addNote, deleteNote } from '../../helpers/notes';
 
 // Components
-import NoteTile from '../sidebar-items/note-tile';
+import NoteTile from '../tray-tiles/note-tile';
 import Loader from 'react-loader-spinner';
 import UIBtn from '../ui/ui-btn';
 
@@ -25,7 +27,11 @@ const NotesList = ({ currentProjectId }) => {
   // Mutate function to refresh data
   const { mutate } = useSWRConfig();
 
+  // Get user and tray toggle function stored in context
   const { user } = fetchContext('user');
+  const { toggleTrayOpen } = fetchContext('animation');
+
+  const router = useRouter();
 
   if (Object.keys(user).length === 0) {
     return (
@@ -41,11 +47,9 @@ const NotesList = ({ currentProjectId }) => {
   );
   const { title: currentProjectTitle, notes } = currentProject;
 
-  const router = useRouter();
-
   const handleAddNote = async () => {
-    const response = await addNote(title, currentProjectId);
-    setTitle('');
+    const response = await addNote(newNoteTitle, currentProjectId);
+    setNewNoteTitle('');
     mutate('/api/user');
   };
 
@@ -100,12 +104,17 @@ const NotesList = ({ currentProjectId }) => {
   return (
     <>
       <TrayHeader>
+        <Link href="/projects">
+          <ProjectsLink onClick={() => toggleTrayOpen(true)}>
+            Projects
+          </ProjectsLink>
+        </Link>
         <h2>{currentProjectTitle}</h2>
       </TrayHeader>
       <InputGroup width="100%">
         <TextInput
           value={newNoteTitle}
-          onChange={(e) => setNoteTitle(e.target.value)}
+          onChange={(e) => setNewNoteTitle(e.target.value)}
           type="text"
           maxLength={35}
           placeholder={deleteActive ? '' : 'Title'}

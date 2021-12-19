@@ -1,10 +1,41 @@
+// Dependencies
+import { useState } from 'react';
+import { useSWRConfig } from 'swr';
+
+// Style
 import { StyledToolbar, ToolbarBtn } from './editor.styles';
 import * as RiIcons from 'react-icons/ri';
 import { BsBlockquoteLeft } from 'react-icons/bs';
 import { VscClearAll, VscHorizontalRule } from 'react-icons/vsc';
 import { IoIosReturnLeft } from 'react-icons/io';
 
-const ToolBar = ({ editor }) => {
+// Helpers
+import { updateNote } from '../../helpers/notes';
+
+// Components
+import SaveNoteBtn from '../ui/save-note-btn';
+
+const ToolBar = ({ editor, currentProjectId, currentNoteId }) => {
+  // Init saving state for button spinner
+  const [saving, setSaving] = useState(false);
+
+  const { mutate } = useSWRConfig();
+
+  const handleSaveNote = async () => {
+    setSaving(true);
+    const currentContent = editor.getJSON();
+
+    const response = await updateNote(
+      currentProjectId,
+      currentNoteId,
+      currentContent
+    );
+    if (response.statusText === 'OK') {
+      setSaving(false);
+    }
+    mutate('/api/user');
+  };
+
   if (!editor) {
     return null;
   }
@@ -166,6 +197,7 @@ const ToolBar = ({ editor }) => {
       <ToolbarBtn onClick={() => editor.chain().focus().redo().run()}>
         <RiIcons.RiArrowGoForwardLine />
       </ToolbarBtn>
+      <SaveNoteBtn saving={saving} handler={handleSaveNote} />
     </StyledToolbar>
   );
 };

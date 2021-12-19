@@ -1,6 +1,9 @@
+// Dependencies
+import { signOut } from 'next-auth/react';
+
+// Style
 import { MdLogout } from 'react-icons/md';
 import { StyledIcon } from './sidebar.styles';
-import { signOut } from 'next-auth/react';
 
 const LogoutBtn = () => {
   return (

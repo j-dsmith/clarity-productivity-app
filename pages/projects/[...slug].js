@@ -1,26 +1,40 @@
+// Dependencies
+import { useEffect } from 'react';
 import { getSession } from 'next-auth/react';
-import MyEditor from '../../components/editor';
-import SidebarTray from '../../components/sidebar-tray';
-import Layout from '../../components/layout';
-import { User } from '../../models/user';
-import connectDB, { serializeData } from '../../helpers/db';
+import useSWR from 'swr';
 
-const NotePage = ({
-  currentProjectId,
-  currentProjectTitle,
-  notes,
-  selectedNote,
-}) => {
+// Style
+import Layout from '../../components/layout';
+
+// Helpers
+import { fetchData, fetchContext } from '../../helpers/client';
+
+// Components
+import MyEditor from '../../components/editor/my-editor';
+import SidebarTray from '../../components/sidebar-tray';
+import NotesList from '../../components/sidebar-tray/notes-list';
+
+const NotePage = ({ currentProjectId, currentNoteId }) => {
+  const { data: fetchedUser, error } = useSWR('/api/user', fetchData);
+
+  const { setUser } = fetchContext('user');
+  const { trayOpen } = fetchContext('animation');
+
+  useEffect(() => {
+    if (fetchedUser) {
+      setUser(fetchedUser.data);
+    }
+  }, [fetchedUser]);
+
   return (
     <Layout>
-      <SidebarTray
-        heading={currentProjectTitle}
+      <SidebarTray route="notes" trayFixed={true}>
+        <NotesList currentProjectId={currentProjectId} />
+      </SidebarTray>
+      <MyEditor
         currentProjectId={currentProjectId}
-        route="notes"
-        notes={notes}
-        trayFixed={true}
+        currentNoteId={currentNoteId}
       />
-      <MyEditor currentProjectId={currentProjectId} note={selectedNote} />
     </Layout>
   );
 };
@@ -41,25 +55,13 @@ export async function getServerSideProps({ req, params: { slug } }) {
   const {
     user: { email },
   } = session;
-  const [currentProjectId, , noteId] = slug;
-
-  const db = await connectDB();
-  const user = await User.findOne({ email });
-  const currentNotes = user.projects.filter(
-    ({ _id }) => _id == currentProjectId
-  )[0].notes;
-  const selectedNote = currentNotes.filter(({ _id }) => _id == noteId)[0];
-  console.log(selectedNote);
-  db.disconnect();
+  const [currentProjectId, , currentNoteId] = slug;
 
   return {
     props: {
-      currentProjectTitle: user.projects.filter(
-        ({ _id }) => _id == currentProjectId
-      )[0].title,
       currentProjectId,
-      notes: serializeData(currentNotes),
-      selectedNote: serializeData(selectedNote),
+      currentNoteId,
+      session,
     },
   };
 }

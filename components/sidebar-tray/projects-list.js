@@ -16,7 +16,7 @@ import { addProject, deleteProject } from '../../helpers/projects';
 // Components
 import Loader from 'react-loader-spinner';
 import UIBtn from '../ui/ui-btn';
-import ProjectTile from '../sidebar-items/project-tile';
+import ProjectTile from '../tray-tiles/project-tile';
 
 const ProjectsList = ({}) => {
   const [newProjectTitle, setNewProjectTitle] = useState('');

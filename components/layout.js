@@ -1,4 +1,7 @@
+// Dependencies
 import styled from 'styled-components';
+
+// Components
 import Sidebar from './sidebar.js';
 
 const LayoutContainer = styled.section`

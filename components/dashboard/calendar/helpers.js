@@ -1,4 +1,5 @@
-import { CalendarDay, StyledCurrentDay, ExtraDay } from './calendar.styles';
+// Style
+import { CalendarDay, ExtraDay } from './calendar.styles';
 
 export const renderPrevMonthDays = (
   calendarMonth,

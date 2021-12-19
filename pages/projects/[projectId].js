@@ -28,11 +28,7 @@ const ProjectPage = ({ currentProjectId }) => {
   return (
     <>
       <Layout>
-        <SidebarTray
-          currentProjectId={currentProjectId}
-          route="notes"
-          trayFixed={trayOpen}
-        >
+        <SidebarTray route="notes" trayFixed={true}>
           <NotesList currentProjectId={currentProjectId} />
         </SidebarTray>
       </Layout>
@@ -54,11 +50,11 @@ export async function getServerSideProps({ req, params }) {
     };
   }
 
-  const { projectId } = params;
+  const { projectId: currentProjectId } = params;
 
   return {
     props: {
-      currentProjectId: projectId,
+      currentProjectId,
       session,
     },
   };

@@ -29,8 +29,10 @@ const Tasks = () => {
 
   const { mutate } = useSWRConfig();
 
+  // Get user from context
   const { user } = fetchContext('user');
 
+  // Check if user is empty object or if loaded successfully
   if (Object.keys(user).length === 0) {
     return (
       <TasksContainer>

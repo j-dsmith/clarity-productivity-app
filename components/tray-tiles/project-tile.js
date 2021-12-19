@@ -1,8 +1,10 @@
+// Dependencies
 import Link from 'next/link';
+
+// Style
 import { MdCancel, MdDescription } from 'react-icons/md';
 import {
   ProjectTileContainer,
-  Tag,
   TileHeader,
   Date,
   TileFooter,
@@ -17,13 +19,6 @@ const ProjectTile = ({
   handleDeleteProject,
   id,
 }) => {
-  const tag = {
-    hover: {
-      scale: 1.5,
-    },
-  };
-
-  //TODO: Create renderTags function to render tags based on project tags from db
   if (deleteActive) {
     return (
       <ProjectTileContainer
@@ -51,11 +46,9 @@ const ProjectTile = ({
       <ProjectTileContainer>
         <TileHeader>
           <h3>{title}</h3>
-          {/* <Tag variants={tag} whileHover="hover" color="red" /> */}
         </TileHeader>
         <TileFooter>
           <Date>
-            {/* Add correct date of creation from db */}
             Created: <span>{createdAt}</span>
           </Date>
           <InfoBox>

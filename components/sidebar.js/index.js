@@ -1,6 +1,11 @@
-import { StyledSidebar, SidebarItemList } from './sidebar.styles';
-import SidebarItem from './sidebar-item';
+// Dependencies
 import { data } from './sidebar-data';
+
+// Style
+import { StyledSidebar, SidebarItemList } from './sidebar.styles';
+
+// Components
+import SidebarItem from './sidebar-item';
 import LogoutBtn from './logout-btn';
 
 const Sidebar = () => {

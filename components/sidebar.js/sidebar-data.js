@@ -1,3 +1,4 @@
+// Style
 import { MdHome, MdFolder, MdNote, MdAlarm, MdDelete } from 'react-icons/md';
 
 const colors = {

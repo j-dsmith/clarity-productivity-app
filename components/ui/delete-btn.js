@@ -1,3 +1,4 @@
+// Style
 import { StyledDeleteBtn } from './ui-items.styles';
 
 const DeleteBtn = () => {

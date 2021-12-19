@@ -1,3 +1,4 @@
+// Dependencies
 import { hash, compare } from 'bcryptjs';
 import axios from 'axios';
 import { signIn } from 'next-auth/react';

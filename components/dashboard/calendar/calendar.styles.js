@@ -51,8 +51,7 @@ export const CalendarBtn = styled.button`
   display: grid;
   place-items: center;
   color: ${({ theme }) => theme.colors.cultured};
-
-  border-radius: 0.75em;
+  border-radius: 30%;
   cursor: pointer;
   transform: ${({ rotate }) => (rotate === 'true' ? 'scaleX(-1)' : '')};
 
@@ -78,7 +77,7 @@ export const CalendarDay = styled.p`
 
   &.today {
     border: 1px solid ${({ theme }) => theme.colors.brandPrimary};
-    border-radius: 50%;
+    border-radius: 30%;
     background-color: ${({ theme }) => theme.colors.brandPrimary};
     box-shadow: ${({ theme }) => theme.shadow.lg};
   }

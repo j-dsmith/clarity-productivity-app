@@ -1,4 +1,8 @@
+// Dependencies
 import Image from 'next/image';
+import { forecastIconData } from './forecast-icon-data';
+
+// Style
 import {
   ForecastContainer,
   WeatherIcon,
@@ -7,10 +11,11 @@ import {
   FutureForecastTile,
   DetailsContainer,
 } from './forecast.styles';
-import { forecastIconData } from './forecast-icon-data';
-import { MdLocationPin } from 'react-icons/md';
-import Loader from 'react-loader-spinner';
 import { SpinnerContainer } from '../../ui/ui-items.styles';
+import { MdLocationPin } from 'react-icons/md';
+
+// Components
+import Loader from 'react-loader-spinner';
 
 const Forecast = ({ weather }) => {
   if (!weather) {

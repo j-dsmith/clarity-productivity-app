@@ -1,4 +1,7 @@
+// Style
 import { DashContainer } from './dashboard.styles';
+
+// Components
 import Calendar from './calendar';
 import Tasks from './tasks';
 import Forecast from './forecast';

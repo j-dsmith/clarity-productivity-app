@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export const TrayContainer = styled(motion.div)`
   background-color: ${({ theme }) => theme.colors.gray700};
@@ -16,8 +17,9 @@ export const TrayContainer = styled(motion.div)`
 export const TrayHeader = styled.div`
   color: ${({ theme }) => theme.colors.cultured};
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 0.5rem 0;
   background-color: ${({ theme }) => theme.colors.gray700};
 
@@ -25,11 +27,16 @@ export const TrayHeader = styled.div`
     padding: 0;
     margin: 0 1rem 0 0;
   }
+`;
 
-  svg {
-    color: ${({ theme }) => theme.colors.gray100};
-    cursor: pointer;
-  }
+export const ProjectsLink = styled.div`
+  color: ${({ theme }) => theme.colors.brandPrimary};
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1em;
+  padding: 0.25em;
+  border-radius: 0.5em;
 `;
 
 export const ContentList = styled.ul`

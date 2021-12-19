@@ -1,3 +1,4 @@
+// Style
 import { MdArrowBack } from 'react-icons/md';
 import { BannerContainer, ArrowContainer } from './ui-items.styles';
 

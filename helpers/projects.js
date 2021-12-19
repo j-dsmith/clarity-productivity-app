@@ -1,5 +1,5 @@
+// Dependencies
 import axios from 'axios';
-import useSWR from 'swr';
 
 export const addProject = async (projectTitle) => {
   const response = await axios.post('/api/projects', {

@@ -7,7 +7,7 @@ export const StyledUIBtn = styled.button`
   font-size: ${({ btnLg }) => (btnLg ? '1.5rem' : '1.25rem')};
   padding: 0.25em;
   margin: 0 0.25em;
-  border-radius: 0.5em;
+  border-radius: 30%;
   background-color: ${({ color, outline }) =>
     outline ? 'transparent' : color};
   border: 1px solid ${({ color }) => color};
@@ -34,22 +34,24 @@ export const UIBtnOutline = styled(StyledUIBtn)`
 `;
 
 export const StyledSaveBtn = styled.button`
-  margin-left: auto;
-  /* padding: 0.25em; */
-  font-size: 1.75rem;
+  padding: 0.5em 0;
+  width: 3.5rem;
+  margin-left: 0.5em;
+  font-size: 1rem;
   color: ${({ theme }) => theme.colors.cultured};
-  background-color: transparent;
-  border: 1px solid transparent;
-  border-radius: 20%;
+  background-color: ${({ theme, saving }) =>
+    saving ? theme.colors.gray800 : theme.colors.brandPrimary};
+  border: 1px solid
+    ${({ theme, saving }) => (saving ? theme.colors.gray600 : 'transparent')};
+  box-shadow: ${({ theme, saving }) => (saving ? theme.shadow.xl : 'none')};
+  border-radius: 0.5rem;
   cursor: pointer;
   transition: all 100ms ease-in-out;
 
   &:hover {
-    box-shadow: ${({ theme, saving }) => (saving ? 'none' : theme.shadow.xl)};
-    background-color: ${({ theme, saving }) =>
-      saving ? 'transparent' : theme.colors.gray800};
-    border: 1px solid
-      ${({ theme, saving }) => (saving ? 'none' : theme.colors.gray600)};
+    box-shadow: ${({ theme }) => theme.shadow.xl};
+    background-color: ${({ theme }) => theme.colors.gray800};
+    border: 1px solid ${({ theme }) => theme.colors.gray600};
   }
 `;
 

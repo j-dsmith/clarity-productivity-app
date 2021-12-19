@@ -1,12 +1,19 @@
+// Style
 import { StatsContainer, StatsHeader, TileContainer } from './stats.styles';
 import { SpinnerContainer } from '../../ui/ui-items.styles';
-import StatTile from './stat-tile';
-import Loader from 'react-loader-spinner';
+
+// Helpers
 import { fetchContext } from '../../../helpers/client';
 
-const Stats = ({}) => {
+// Components
+import StatTile from './stat-tile';
+import Loader from 'react-loader-spinner';
+
+const Stats = () => {
+  // Get user from context
   const { user } = fetchContext('user');
 
+  // Check if user is empty object or if loaded successfully
   if (Object.keys(user).length === 0) {
     return (
       <StatsContainer>
@@ -26,6 +33,7 @@ const Stats = ({}) => {
     );
   }
 
+  // Get properties from user for displaying stats
   const { decks, projects, pomodorosCompleted, tasksCompleted } = user;
   const numProjects = projects.length;
   const numDecks = decks.length;

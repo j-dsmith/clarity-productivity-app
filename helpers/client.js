@@ -1,9 +1,8 @@
-import { useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import axios from 'axios';
+// Dependencies
+import { useContext } from 'react';
 import AnimationContext from '../store/animation-ctx';
-import useSWR from 'swr';
 import UserContext from '../store/user-ctx';
+import axios from 'axios';
 
 // //* Fetch animation context
 export const fetchContext = (contextType) => {

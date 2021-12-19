@@ -47,7 +47,7 @@ export const NoteTitle = styled.h2`
 `;
 
 export const StyledEditorContent = styled(EditorContent)`
-  padding: 2em;
+  padding: 1em 2em;
   flex-basis: 85%;
   position: relative;
   overflow-y: scroll;
@@ -158,7 +158,7 @@ export const ToolbarBtn = styled.button`
   border-radius: 20%;
   transition: all 100ms ease-in-out;
   border: 1px solid transparent;
-  padding: 0.25em;
+  padding: 0.5em;
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadow.xl};

@@ -1,3 +1,4 @@
+// Style
 import { StyledStatTile } from './stats.styles';
 
 const StatTile = ({ title, content, color }) => {

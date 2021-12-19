@@ -1,4 +1,7 @@
+// Dependencies
 import Link from 'next/link';
+
+// Style
 import {
   NoteTileContainer,
   TileFooter,
