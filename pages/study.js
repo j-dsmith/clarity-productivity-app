@@ -1,5 +1,7 @@
+import Pomodoro from '../components/pomodoro';
+
 const StudyPage = () => {
-  return <div>Study</div>;
+  return <Pomodoro />;
 };
 
 export default StudyPage;
