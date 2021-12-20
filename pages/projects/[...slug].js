@@ -18,7 +18,6 @@ const NotePage = ({ currentProjectId, currentNoteId }) => {
   const { data: fetchedUser, error } = useSWR('/api/user', fetchData);
 
   const { setUser } = fetchContext('user');
-  const { trayOpen } = fetchContext('animation');
 
   useEffect(() => {
     if (fetchedUser) {

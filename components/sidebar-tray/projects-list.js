@@ -42,8 +42,8 @@ const ProjectsList = ({}) => {
   };
 
   const handleAddProject = async () => {
-    const response = await addProject(title);
-    setTitle('');
+    const response = await addProject(newProjectTitle);
+    setNewProjectTitle('');
     mutate('/api/user');
   };
 
