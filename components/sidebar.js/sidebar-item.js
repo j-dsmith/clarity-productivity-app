@@ -8,7 +8,7 @@ import { fetchContext } from '../../helpers/client';
 // Style
 import { StyledIcon } from './sidebar.styles';
 
-const SidebarItem = ({ icon, color, href }) => {
+const SidebarItem = ({ title, icon, color, href }) => {
   const { toggleTrayOpen } = fetchContext('animation');
 
   const router = useRouter();
@@ -22,15 +22,22 @@ const SidebarItem = ({ icon, color, href }) => {
     toggleTrayOpen(false);
   };
 
+  if (title === 'home' || title === 'projects')
+    return (
+      <Link href={href}>
+        <StyledIcon
+          color={color}
+          onClick={() => handleTrayState(router.pathname)}
+        >
+          {icon}
+        </StyledIcon>
+      </Link>
+    );
+
   return (
-    <Link href={href}>
-      <StyledIcon
-        color={color}
-        onClick={() => handleTrayState(router.pathname)}
-      >
-        {icon}
-      </StyledIcon>
-    </Link>
+    <StyledIcon color={color} onClick={() => alert('Feature in development')}>
+      {icon}
+    </StyledIcon>
   );
 };
 
