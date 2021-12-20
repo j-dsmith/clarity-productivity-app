@@ -5,6 +5,7 @@ import {
 } from './auth.styles';
 import { SpinnerContainer } from '../ui/ui-items.styles';
 import Loader from 'react-loader-spinner';
+import { signIn } from 'next-auth/react';
 
 const FormBtn = ({
   text,
@@ -14,6 +15,8 @@ const FormBtn = ({
   outline,
   isLoading,
   isDisabled,
+
+  provider,
 }) => {
   //animation variants
   const btn = {
@@ -65,6 +68,7 @@ const FormBtn = ({
       textcolor={textcolor}
       outline={outline}
       disabled={isDisabled}
+      onClick={() => signIn(provider)}
     >
       {text}
       {renderIcon()}

@@ -14,6 +14,8 @@ export const StyledLoginPage = styled.section`
 export const StyledFormContainer = styled.div`
   height: 70%;
   width: 70%;
+  display: flex;
+  flex-direction: column;
 
   .loginStateControl {
     text-align: center;
@@ -68,15 +70,9 @@ export const StyledFormHeader = styled.div`
 
 export const StyledForm = styled.form`
   display: flex;
-  justify-content: space-between;
-  height: 65%;
-`;
 
-export const StyledFormControls = styled.div`
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 45%;
+  justify-content: space-around;
 `;
 
 export const StyledTextInput = styled.input`
@@ -90,7 +86,9 @@ export const StyledTextInput = styled.input`
   color: ${({ theme }) => theme.colors.gray700};
 
   &:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.brandPrimary};
+    outline: none;
+    border: 1px solid ${({ theme }) => theme.colors.brandPrimary};
+    border-radius: 1rem;
     box-shadow: 0 0 5px ${({ theme }) => theme.colors.brandPrimary};
   }
 `;
@@ -137,14 +135,4 @@ export const StyledStaticIcon = styled.div`
     height: 1.25rem;
     width: 1.25rem;
   }
-`;
-
-export const StyledDivider = styled.p`
-  display: grid;
-  place-content: center;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  font-size: 2rem;
-  color: ${({ theme }) => theme.colors.gray400};
 `;

@@ -7,9 +7,7 @@ import {
   StyledFormContainer,
   StyledFormHeader,
   StyledForm,
-  StyledFormControls,
   StyledTextInput,
-  StyledDivider,
 } from './auth.styles.js';
 import { MdArrowForward } from 'react-icons/md';
 import { BsGoogle, BsGithub } from 'react-icons/bs';
@@ -83,58 +81,43 @@ const AuthForm = () => {
             next masterpiece in a fully featured RichText editor
           </p>
         </StyledFormHeader>
+
         <StyledForm onSubmit={submitHandler}>
-          <StyledFormControls>
-            <StyledTextInput
-              type="email"
-              name="email"
-              id="email"
-              placeholder={isLogin ? 'Your Email Address' : 'Email Address'}
-              value={emailValue}
-              onChange={(e) => setEmailValue(e.target.value)}
-              required
-              whileHover="hover"
-            />
-            <StyledTextInput
-              type="Password"
-              name="Password"
-              id="Password"
-              placeholder={isLogin ? 'Your Password' : 'Password'}
-              value={passwordValue}
-              onChange={(e) => setPasswordValue(e.target.value)}
-              required
-              whileHover="hover"
-            />
-            <FormBtn
-              text={isLogin ? 'Login to Your Account' : 'Create Account'}
-              textcolor="light"
-              icon={<MdArrowForward />}
-              isLoading={isLoading}
-              isDisabled={!emailValue || !passwordValue ? true : false}
-            />
-          </StyledFormControls>
-          <StyledDivider>/</StyledDivider>
-          <StyledFormControls>
-            <FormBtn
-              text={isLogin ? 'Login with Google' : 'Sign up with Google'}
-              outline="true"
-              icon={<BsGoogle />}
-              iconType="provider"
-            />
-            <FormBtn
-              text={isLogin ? 'Login with Github' : 'Sign up with Github'}
-              outline="true"
-              icon={<BsGithub />}
-              iconType="provider"
-            />
-            <FormBtn
-              text={'Continue As Guest'}
-              outline="true"
-              icon={<VscKey />}
-              iconType="provider"
-            />
-          </StyledFormControls>
+          <StyledTextInput
+            type="email"
+            name="email"
+            id="email"
+            placeholder={isLogin ? 'Your Email Address' : 'Email Address'}
+            value={emailValue}
+            onChange={(e) => setEmailValue(e.target.value)}
+            required
+            whileHover="hover"
+          />
+          <StyledTextInput
+            type="Password"
+            name="Password"
+            id="Password"
+            placeholder={isLogin ? 'Your Password' : 'Password'}
+            value={passwordValue}
+            onChange={(e) => setPasswordValue(e.target.value)}
+            required
+            whileHover="hover"
+          />
+          <FormBtn
+            text={isLogin ? 'Login to Your Account' : 'Create Account'}
+            textcolor="light"
+            icon={<MdArrowForward />}
+            isLoading={isLoading}
+            isDisabled={!emailValue || !passwordValue ? true : false}
+          />
+          <FormBtn
+            text="Continue as a Guest"
+            outline="true"
+            icon={<VscKey />}
+            iconType="provider"
+          />
         </StyledForm>
+
         <div className="loginStateControl" onClick={switchAuthModeHandler}>
           {isLogin ? 'Not registered? ' : 'Already have an account? '}
           <span>{isLogin ? 'Sign up' : 'Login'}</span>
