@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import GoogleProvider from 'next-auth/providers/google';
 import { verifyPassword } from '../../../helpers/auth';
 import connectDB from '../../../helpers/db';
 import { User } from '../../../models/user';
