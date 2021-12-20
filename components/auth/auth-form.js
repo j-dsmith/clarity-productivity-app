@@ -43,6 +43,8 @@ const AuthForm = () => {
       console.log(result);
 
       if (!result.error) {
+        setEmailValue('');
+        setPasswordValue('');
         router.replace('/');
       }
     } else {

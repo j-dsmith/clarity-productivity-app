@@ -1,23 +1,7 @@
-import {
-  StyledFormBtn,
-  StyledStaticIcon,
-  StyledDynamicIcon,
-} from './auth.styles';
-import { SpinnerContainer } from '../ui/ui-items.styles';
+import { StyledFormBtn, StaticIcon } from './auth.styles';
 import Loader from 'react-loader-spinner';
-import { signIn } from 'next-auth/react';
 
-const FormBtn = ({
-  text,
-  icon,
-  iconType,
-  textcolor,
-  outline,
-  isLoading,
-  isDisabled,
-
-  provider,
-}) => {
+const FormBtn = ({ text, icon, textcolor, outline, isLoading, isDisabled }) => {
   //animation variants
   const btn = {
     hover: {
@@ -28,36 +12,16 @@ const FormBtn = ({
     },
   };
 
-  const iconVariant = {
-    rest: {
-      opacity: 0,
-      transition: { duration: 0 },
-      x: -10,
-    },
-    hover: {
-      opacity: 1,
-      transition: { duration: 0.1 },
-      x: 0,
-    },
-    static: { opacity: 1 },
-  };
-
   const renderIcon = () => {
     if (isLoading) {
       return (
-        <StyledStaticIcon>
+        <StaticIcon>
           <Loader type="Oval" color="#fff" height={15} width={15} />
-        </StyledStaticIcon>
+        </StaticIcon>
       );
     }
 
-    if (!isLoading && iconType !== 'provider') {
-      return (
-        <StyledDynamicIcon variants={iconVariant}>{icon}</StyledDynamicIcon>
-      );
-    }
-
-    return <StyledStaticIcon>{icon}</StyledStaticIcon>;
+    return <StaticIcon>{icon}</StaticIcon>;
   };
 
   return (
@@ -68,7 +32,6 @@ const FormBtn = ({
       textcolor={textcolor}
       outline={outline}
       disabled={isDisabled}
-      onClick={() => signIn(provider)}
     >
       {text}
       {renderIcon()}

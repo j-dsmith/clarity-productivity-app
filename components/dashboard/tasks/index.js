@@ -68,7 +68,7 @@ const Tasks = () => {
           content={task.content}
           dueDate={task.dueDate}
           deleteActive={deleteActive}
-          handler={deleteActive ? handleDeleteTask : handleCompleteTask}
+          handleDeleteTask={handleDeleteTask}
         />
       </motion.li>
     ));

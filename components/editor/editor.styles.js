@@ -145,7 +145,7 @@ export const StyledToolbar = styled.div`
   padding: 0.5em 1em;
 
   display: flex;
-  flex-wrap: wrap;
+
   align-items: center;
   justify-content: space-evenly;
 `;
@@ -173,6 +173,6 @@ export const ToolbarBtn = styled.button`
   }
 
   svg {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
   }
 `;

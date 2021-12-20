@@ -117,7 +117,7 @@ export const StyledFormBtn = styled(motion.button)`
   cursor: pointer;
 `;
 
-export const StyledDynamicIcon = styled(motion.div)`
+export const DynamicIcon = styled(motion.div)`
   display: grid;
   place-items: center;
 
@@ -127,7 +127,7 @@ export const StyledDynamicIcon = styled(motion.div)`
   }
 `;
 
-export const StyledStaticIcon = styled.div`
+export const StaticIcon = styled.div`
   display: grid;
   place-items: center;
 
