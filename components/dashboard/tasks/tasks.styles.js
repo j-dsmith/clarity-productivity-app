@@ -81,6 +81,10 @@ export const CheckboxGroup = styled.div`
     visibility: hidden;
     position: absolute;
   }
+
+  .delete-icon {
+    font-size: 1.75rem;
+  }
 `;
 
 export const CheckboxLabel = styled.label`
@@ -105,7 +109,7 @@ export const CheckboxLabel = styled.label`
     padding: 0;
     position: relative;
     z-index: 1;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: ${({ theme }) => theme.colors.brandPrimary};
     border: none;
   }

@@ -23,7 +23,7 @@ const TaskTile = ({ content, deleteActive, handleDeleteTask, id }) => {
     return (
       <StyledTaskTile deleteactive="true" onClick={() => handleDeleteTask(id)}>
         <CheckboxGroup>
-          <MdCancel />
+          <MdCancel className="delete-icon" />
         </CheckboxGroup>
 
         <p>{content}</p>

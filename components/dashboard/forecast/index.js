@@ -117,8 +117,8 @@ const Forecast = ({ weather }) => {
           <WeatherIcon>
             <Image
               src={`/weather/day/${iconUrl.icon}.png`}
-              height={50}
-              width={50}
+              height={35}
+              width={35}
             />
           </WeatherIcon>
           <p>

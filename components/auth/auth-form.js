@@ -10,14 +10,16 @@ import {
   StyledTextInput,
 } from './auth.styles.js';
 import { MdArrowForward } from 'react-icons/md';
-import { BsGoogle, BsGithub } from 'react-icons/bs';
+
 import { VscKey } from 'react-icons/vsc';
 import FormBtn from './form-btn';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isGuest, setIsGuest] = useState(false);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+
   const [isLoading, setIsLoading] = useState(false);
 
   //get router
@@ -45,6 +47,18 @@ const AuthForm = () => {
       if (!result.error) {
         setEmailValue('');
         setPasswordValue('');
+        router.replace('/');
+      }
+    } else if (isGuest) {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email: process.env.GUEST_EMAIL,
+        password: process.env.GUEST_PASSWORD,
+      });
+      if (!result.error) {
+        setEmailValue('');
+        setPasswordValue('');
+        setIsGuest(false);
         router.replace('/');
       }
     } else {
@@ -92,7 +106,6 @@ const AuthForm = () => {
             placeholder={isLogin ? 'Your Email Address' : 'Email Address'}
             value={emailValue}
             onChange={(e) => setEmailValue(e.target.value)}
-            required
             whileHover="hover"
           />
           <StyledTextInput
@@ -102,7 +115,6 @@ const AuthForm = () => {
             placeholder={isLogin ? 'Your Password' : 'Password'}
             value={passwordValue}
             onChange={(e) => setPasswordValue(e.target.value)}
-            required
             whileHover="hover"
           />
           <FormBtn

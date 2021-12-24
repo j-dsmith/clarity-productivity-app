@@ -67,10 +67,10 @@ export const FutureForecastTile = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 40%;
+  width: 50%;
 
   h4 {
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
 
   p {
