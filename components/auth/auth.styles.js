@@ -1,138 +1,104 @@
 import styled from 'styled-components';
+import { Form, Field, ErrorMessage } from 'formik';
 import { motion } from 'framer-motion';
 
-export const StyledLoginPage = styled.section`
-  display: grid;
-  place-items: center;
-  height: 100vh;
-  min-height: 100vh;
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.cultured};
-  color: ${({ theme }) => theme.colors.gray900};
-`;
-
-export const StyledFormContainer = styled.div`
-  height: 70%;
-  width: 70%;
+export const LoginPageContainer = styled.section`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: ${({ theme }) => theme.colors.cultured};
+  color: ${({ theme }) => theme.colors.gray900};
 
-  .loginStateControl {
-    text-align: center;
-    font-size: 0.85rem;
-
-    span {
-      text-decoration: underline;
-      cursor: pointer;
-      /* transition: all 100ms ease-in-out; */
-
-      &:hover {
-        color: ${({ theme }) => theme.colors.bluecrayola};
-      }
-    }
+  .login-controller {
+    color: ${({ theme }) => theme.colors.brandPrimary};
+    text-decoration: underline;
+    cursor: pointer;
   }
 `;
 
-export const StyledFormHeader = styled.div`
-  height: 35%;
-  padding: 2rem;
+export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  width: 50%;
+  padding: 1rem;
+`;
 
-  h1,
-  p {
+export const Header = styled.div`
+  h1 {
+    font-size: 3rem;
+    margin: 0.5em;
     text-align: center;
+  }
+
+  p {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  .highlight {
+    background-color: ${({ theme }) => theme.colors.brandPrimary};
+    color: ${({ theme }) => theme.colors.cultured};
+    text-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.4);
+    padding: 0 0.125rem;
+  }
+`;
+
+export const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+
+  .login-mode-controller {
+    text-align: center;
+  }
+`;
+
+export const StyledField = styled(Field)`
+  font-size: 1rem;
+  padding: 1.25em 1em;
+  margin-block: 0.5em;
+  border-radius: 0.75em;
+  border: 1px solid ${({ theme }) => theme.colors.gray700};
+`;
+
+export const StyledErrorMessage = styled.div`
+  margin-bottom: 1em;
+  margin-left: 1em;
+
+  color: ${({ theme }) => theme.colors.bittersweet};
+`;
+
+export const FormBtn = styled(motion.button)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  padding: 1.25em 1em;
+  margin-block: 0.5em;
+  border-radius: 0.75em;
+  border: ${({ theme, outline }) =>
+    outline ? `1px solid ${theme.colors.gray700}` : 'none'};
+  background-color: ${({ theme, bgcolor }) =>
+    bgcolor === 'primary' ? theme.colors.brandPrimary : 'transparent'};
+  color: ${({ theme, textdark }) =>
+    textdark ? theme.colors.gray700 : theme.colors.cultured};
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+
+  p {
     margin: 0;
     padding: 0;
   }
 
-  h1 {
-    font-size: 3rem;
-    margin: 1rem;
-  }
-
-  p {
-    width: 70%;
-    line-height: 1.5rem;
+  svg {
+    display: grid;
+    place-items: center;
     font-size: 1.25rem;
-    color: ${({ theme }) => theme.colors.gray700};
-
-    .highlight {
-      background-color: ${({ theme }) => theme.colors.brandPrimary};
-      color: ${({ theme }) => theme.colors.cultured};
-      text-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.4);
-      padding: 0 0.125rem;
-    }
   }
 `;
 
-export const StyledForm = styled.form`
-  display: flex;
-
-  flex-direction: column;
-  justify-content: space-around;
-`;
-
-export const StyledTextInput = styled.input`
-  height: 4rem;
-  margin: 0 3rem 1rem 3rem;
-  border-radius: 1rem;
-  border: 1px solid ${({ theme }) => theme.colors.gray700};
-  background-color: ${({ theme }) => theme.colors.cultured};
-  padding: 1rem;
-  font-size: 1rem;
-  color: ${({ theme }) => theme.colors.gray700};
-
-  &:focus {
-    outline: none;
-    border: 1px solid ${({ theme }) => theme.colors.brandPrimary};
-    border-radius: 1rem;
-    box-shadow: 0 0 5px ${({ theme }) => theme.colors.brandPrimary};
-  }
-`;
-
-export const StyledFormBtn = styled(motion.button)`
-  height: 4rem;
-  margin: 0 3rem 1rem 3rem;
-  padding: 0 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: none;
-  border-radius: 1rem;
-  border: ${({ outline, theme }) =>
-    outline ? `1px solid ${theme.colors.gray700}` : 'none'};
-  background-color: ${({ outline, theme }) =>
-    outline ? theme.colors.cultured : theme.colors.brandPrimary};
-
-  color: ${({ textcolor, theme }) =>
-    textcolor === 'light' ? theme.colors.cultured : theme.colors.gray700};
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: left;
-  text-shadow: ${({ textcolor }) =>
-    textcolor === 'light' ? '0.5px 0.5px 3px rgba(0, 0, 0, 0.4)' : ''};
-  cursor: pointer;
-`;
-
-export const DynamicIcon = styled(motion.div)`
-  display: grid;
-  place-items: center;
-
-  svg {
-    height: 1.25rem;
-    width: 1.25rem;
-  }
-`;
-
-export const StaticIcon = styled.div`
-  display: grid;
-  place-items: center;
-
-  svg {
-    height: 1.25rem;
-    width: 1.25rem;
-  }
-`;
+export const SpinnerContainer = styled.div``;

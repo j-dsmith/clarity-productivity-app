@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
 import axios from 'axios';
 import {
-  StyledLoginPage,
+  LoginPageContainer,
   StyledFormContainer,
   StyledFormHeader,
   StyledForm,
@@ -86,7 +86,7 @@ const AuthForm = () => {
   };
 
   return (
-    <StyledLoginPage>
+    <LoginPageContainer>
       <StyledFormContainer>
         <StyledFormHeader>
           <h1>{isLogin ? 'Login to Your Account' : 'Create Account'}</h1>
@@ -137,7 +137,7 @@ const AuthForm = () => {
           <span>{isLogin ? 'Sign up' : 'Login'}</span>
         </div>
       </StyledFormContainer>
-    </StyledLoginPage>
+    </LoginPageContainer>
   );
 };
 

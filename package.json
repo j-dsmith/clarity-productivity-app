@@ -13,6 +13,7 @@
     "@tiptap/starter-kit": "^2.0.0-beta.150",
     "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
+    "formik": "^2.2.9",
     "framer-motion": "^5.3.3",
     "mongodb": "^4.1.4",
     "mongoose": "^6.0.15",
@@ -25,7 +26,8 @@
     "react-loader-spinner": "^4.0.0",
     "react-popper": "^2.2.5",
     "styled-components": "^5.2.3",
-    "swr": "^1.1.1"
+    "swr": "^1.1.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.12.0"
