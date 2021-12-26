@@ -11,12 +11,6 @@ export const LoginPageContainer = styled.section`
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.cultured};
   color: ${({ theme }) => theme.colors.gray900};
-
-  .login-controller {
-    color: ${({ theme }) => theme.colors.brandPrimary};
-    text-decoration: underline;
-    cursor: pointer;
-  }
 `;
 
 export const ContentContainer = styled.div`
@@ -49,7 +43,7 @@ export const Header = styled.div`
 export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding-inline: 1em;
 
   .login-mode-controller {
     text-align: center;
@@ -71,7 +65,7 @@ export const StyledErrorMessage = styled.div`
   color: ${({ theme }) => theme.colors.bittersweet};
 `;
 
-export const FormBtn = styled(motion.button)`
+export const SubmitBtn = styled(motion.button)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -98,6 +92,20 @@ export const FormBtn = styled(motion.button)`
     display: grid;
     place-items: center;
     font-size: 1.25rem;
+  }
+`;
+
+export const GuestLoginBtn = styled(SubmitBtn)`
+  margin-inline: 1em;
+`;
+
+export const LoginController = styled.p`
+  text-align: center;
+
+  span {
+    color: ${({ theme }) => theme.colors.brandPrimary};
+    text-decoration: underline;
+    cursor: pointer;
   }
 `;
 

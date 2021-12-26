@@ -4,19 +4,23 @@ import { useRouter } from 'next/router';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { signIn } from 'next-auth/react';
+import axios from 'axios';
 
 // Style
 import {
   StyledForm,
   StyledField,
   StyledErrorMessage,
-  FormBtn,
+  SubmitBtn,
+  GuestLoginBtn,
+  LoginController,
 } from './auth.styles';
 import { MdArrowForward } from 'react-icons/md';
 import { VscKey } from 'react-icons/vsc';
 
 // Components
 import Loader from 'react-loader-spinner';
+import { generateGuestAccount } from '../../helpers/auth';
 
 const validationSchema = Yup.object({
   email: Yup.string().email('Invalid email address').required('Required'),
@@ -32,7 +36,8 @@ const validationSchema = Yup.object({
 
 const MyForm = ({ showLogin, setShowLogin }) => {
   // Init loading state to control loading spinner
-  const [isLoading, setIsLoading] = useState(false);
+  const [loginSubmitLoading, setLoginSubmitLoading] = useState(false);
+  const [guestSubmitLoading, setGuestSubmitLoading] = useState(false);
 
   // Framer-motion variant for form buttons
   const btn = {
@@ -47,9 +52,31 @@ const MyForm = ({ showLogin, setShowLogin }) => {
   //get router
   const router = useRouter();
 
+  const handleGuestLogin = async () => {
+    setGuestSubmitLoading(true);
+    const { email, password } = generateGuestAccount();
+
+    const response = await axios.post('/api/auth/signup', {
+      email,
+      password,
+    });
+
+    if (!response.error) {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (!result.error) {
+        router.replace('/');
+      }
+    }
+  };
+
   const submitHandler = async (values, { setSubmitting }) => {
     // event.preventDefault();
-    setIsLoading(true);
+    setLoginSubmitLoading(true);
 
     if (showLogin) {
       // Log user in
@@ -63,33 +90,21 @@ const MyForm = ({ showLogin, setShowLogin }) => {
         setSubmitting(false);
         router.replace('/');
       }
-    } else if (isGuest) {
-      const result = await signIn('credentials', {
-        redirect: false,
-        email: process.env.GUEST_EMAIL,
-        password: process.env.GUEST_PASSWORD,
-      });
-      if (!result.error) {
-        setEmailValue('');
-        setPasswordValue('');
-        setIsGuest(false);
-        router.replace('/');
-      }
     } else {
       // Create new user
       try {
         const response = await axios.post('/api/auth/signup', {
-          email: emailValue,
-          password: passwordValue,
+          email: values.email,
+          password: values.password,
         });
 
         const user = await signIn('credentials', {
           redirect: false,
-          email: emailValue,
-          password: passwordValue,
+          email: values.email,
+          password: values.password,
         });
         router.replace('/');
-        setIsLoading(false);
+        setSubmitting(false);
       } catch (error) {
         const {
           response: { data },
@@ -131,7 +146,7 @@ const MyForm = ({ showLogin, setShowLogin }) => {
               <StyledErrorMessage>{formik.errors.password}</StyledErrorMessage>
             ) : null}
 
-            <FormBtn
+            <SubmitBtn
               id="login"
               type="submit"
               bgcolor="primary"
@@ -139,33 +154,38 @@ const MyForm = ({ showLogin, setShowLogin }) => {
               whileHover="hover"
             >
               <p>{showLogin ? 'Login to Your Account' : 'Create Account'}</p>
-              {isLoading ? (
+              {loginSubmitLoading ? (
                 <Loader type="Oval" color="#fff" height={20} width={20} />
               ) : (
                 <MdArrowForward className="icon" />
               )}
-            </FormBtn>
-            <FormBtn
-              id="guest"
-              type="submit"
-              outline="true"
-              textdark="true"
-              variants={btn}
-              whileHover="hover"
-            >
-              <p>Continue as Guest</p>
-              <VscKey className="icon" />
-            </FormBtn>
-            <p className="login-mode-controller">
-              Already have an account?{' '}
-              <span
-                className="login-controller"
-                onClick={() => switchAuthModeHandler(formik)}
-              >
-                Login
-              </span>
-            </p>
+            </SubmitBtn>
           </StyledForm>
+          <GuestLoginBtn
+            id="guest"
+            type="submit"
+            outline="true"
+            textdark="true"
+            variants={btn}
+            whileHover="hover"
+            onClick={handleGuestLogin}
+          >
+            <p>Continue as Guest</p>
+            {guestSubmitLoading ? (
+              <Loader type="Oval" color="#000" height={20} width={20} />
+            ) : (
+              <VscKey className="icon" />
+            )}
+          </GuestLoginBtn>
+          <LoginController>
+            Already have an account?{' '}
+            <span
+              className="login-controller"
+              onClick={() => switchAuthModeHandler(formik)}
+            >
+              Login
+            </span>
+          </LoginController>
         </>
       )}
     </Formik>
