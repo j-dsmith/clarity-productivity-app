@@ -4,7 +4,7 @@ import { actionTypes } from './action-types';
 export const initialState = {
   sessionValue: 25,
   breakValue: 5,
-  timerValue: 10,
+  timerValue: 1500,
   timerId: null,
   timerActive: false,
   timerType: 'session',
