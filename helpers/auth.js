@@ -34,7 +34,7 @@ export const createUser = async (email, password) => {
 };
 
 export const generateGuestAccount = () => {
-  const email = `guest${Math.floor(Math.random() * 5000)}@wrkingtitle.com`;
-  const password = `password${Math.floor(Math.random() * 5000)}wt`;
+  const email = `guest${Math.floor(Math.random() * 10000)}@wrkingtitle.com`;
+  const password = `password${Math.floor(Math.random() * 10000)}wt`;
   return { email, password };
 };

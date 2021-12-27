@@ -14,6 +14,11 @@ const userSchema = new Schema({
     required: true,
     select: false,
   },
+  isGuest: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   projects: {
     type: [projectSchema],
     default: [],

@@ -59,6 +59,7 @@ const MyForm = ({ showLogin, setShowLogin }) => {
     const response = await axios.post('/api/auth/signup', {
       email,
       password,
+      isGuest: true,
     });
 
     if (!response.error) {
@@ -96,6 +97,7 @@ const MyForm = ({ showLogin, setShowLogin }) => {
         const response = await axios.post('/api/auth/signup', {
           email: values.email,
           password: values.password,
+          isGuest: false,
         });
 
         const user = await signIn('credentials', {
@@ -161,22 +163,24 @@ const MyForm = ({ showLogin, setShowLogin }) => {
               )}
             </SubmitBtn>
           </StyledForm>
-          <GuestLoginBtn
-            id="guest"
-            type="submit"
-            outline="true"
-            textdark="true"
-            variants={btn}
-            whileHover="hover"
-            onClick={handleGuestLogin}
-          >
-            <p>Continue as Guest</p>
-            {guestSubmitLoading ? (
-              <Loader type="Oval" color="#000" height={20} width={20} />
-            ) : (
-              <VscKey className="icon" />
-            )}
-          </GuestLoginBtn>
+          {!showLogin && (
+            <GuestLoginBtn
+              id="guest"
+              type="submit"
+              outline="true"
+              textdark="true"
+              variants={btn}
+              whileHover="hover"
+              onClick={handleGuestLogin}
+            >
+              <p>Continue as Guest</p>
+              {guestSubmitLoading ? (
+                <Loader type="Oval" color="#000" height={20} width={20} />
+              ) : (
+                <VscKey className="icon" />
+              )}
+            </GuestLoginBtn>
+          )}
           <LoginController>
             Already have an account?{' '}
             <span

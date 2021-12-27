@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react';
-import { getSession, useSession } from 'next-auth/react';
-import AuthForm from '../components/auth/auth-form';
-import MyForm from '../components/auth/formik-form';
+import { getSession } from 'next-auth/react';
+
 import LoginPage from '../components/auth/login-page';
 
 const AuthPage = ({ session }) => {
   return <LoginPage />;
-  // return <AuthForm />;
 };
 
 export async function getServerSideProps({ req, res }) {

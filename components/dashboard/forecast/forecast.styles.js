@@ -4,13 +4,18 @@ export const ForecastContainer = styled.section`
   grid-area: fore;
   padding: 1.5em;
   margin: 1.5em 1.5em 0.75em 0.75em;
-
   background-color: ${({ theme }) => theme.colors.gray800};
   color: ${({ theme }) => theme.colors.cultured};
   border-radius: 1.5rem;
   box-shadow: ${({ theme }) => theme.shadow.lg};
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+
+  h2 {
+    margin: 0;
+    margin-bottom: 1rem;
+  }
 `;
 
 export const DetailsContainer = styled.div`
@@ -24,13 +29,17 @@ export const DetailsContainer = styled.div`
 
 export const LocationTile = styled.div`
   width: 40%;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1em;
 
   h2 {
     margin: 0;
     padding: 0;
     font-size: 5rem;
+    line-height: 5rem;
     font-weight: 400;
   }
 
@@ -51,6 +60,7 @@ export const LocationTile = styled.div`
 
 export const InfoTile = styled.div`
   width: 40%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -59,6 +69,7 @@ export const InfoTile = styled.div`
   p {
     font-size: 0.875rem;
     padding: 0;
+    margin: 0;
   }
 `;
 
@@ -66,15 +77,17 @@ export const FutureForecastTile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 50%;
 
   h4 {
-    font-size: 1rem;
+    font-size: 1.25rem;
+    margin: 1rem;
   }
 
   p {
     text-align: center;
+    margin: 1rem;
   }
 `;
 

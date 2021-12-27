@@ -58,8 +58,8 @@ const Forecast = ({ weather }) => {
           return (
             <Image
               src={`/weather/day/${condition.icon}.png`}
-              width={75}
-              height={75}
+              width={50}
+              height={50}
               key={condition.code}
             />
           );
@@ -67,8 +67,8 @@ const Forecast = ({ weather }) => {
         return (
           <Image
             src={`/weather/night/${condition.icon}.png`}
-            width={75}
-            height={75}
+            width={50}
+            height={50}
             key={condition.code}
           />
         );
@@ -131,6 +131,7 @@ const Forecast = ({ weather }) => {
 
   return (
     <ForecastContainer>
+      <h2>Forecast</h2>
       <DetailsContainer bg>
         <LocationTile>
           <p>

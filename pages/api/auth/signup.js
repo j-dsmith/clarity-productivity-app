@@ -17,15 +17,10 @@ const handler = async (req, res) => {
   // }
 
   // Destructure request body
-  const { email, password } = req.body;
+  const { email, password, isGuest } = req.body;
 
   // Validate email and password
-  if (
-    !email ||
-    !email.includes('@') ||
-    !password
-    // password.trim().length < 7
-  ) {
+  if (!email || !email.includes('@') || !password || !isGuest) {
     res.status(422).json({
       message:
         'Invalid input - password should also be at least 7 characters long',
@@ -54,6 +49,7 @@ const handler = async (req, res) => {
   const user = await new User({
     email,
     password: hashedPassword,
+    isGuest,
   }).save();
   db.disconnect();
 
