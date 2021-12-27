@@ -22,22 +22,15 @@ const SidebarItem = ({ title, icon, color, href }) => {
     toggleTrayOpen(false);
   };
 
-  if (title === 'home' || title === 'projects')
-    return (
-      <Link href={href}>
-        <StyledIcon
-          color={color}
-          onClick={() => handleTrayState(router.pathname)}
-        >
-          {icon}
-        </StyledIcon>
-      </Link>
-    );
-
   return (
-    <StyledIcon color={color} onClick={() => alert('Feature in development')}>
-      {icon}
-    </StyledIcon>
+    <Link href={href}>
+      <StyledIcon
+        color={color}
+        onClick={() => handleTrayState(router.pathname)}
+      >
+        {icon}
+      </StyledIcon>
+    </Link>
   );
 };
 

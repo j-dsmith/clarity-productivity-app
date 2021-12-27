@@ -6,6 +6,7 @@ import Sidebar from './sidebar.js';
 
 const LayoutContainer = styled.section`
   min-height: 100vh;
+  height: 100vh;
   width: max(92vw, calc(100vw - 8rem));
   position: relative;
   top: 0;

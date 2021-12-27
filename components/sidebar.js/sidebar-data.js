@@ -31,7 +31,7 @@ export const data = [
   },
   {
     title: 'timer',
-    href: '/study/timer',
+    href: '/timer',
     icon: <MdAlarm />,
     color: colors.bluecrayola,
   },

@@ -36,10 +36,10 @@ export const LocationTile = styled.div`
   padding: 1em;
 
   h2 {
-    margin: 0;
+    margin: 0.5rem;
     padding: 0;
-    font-size: 5rem;
-    line-height: 5rem;
+    font-size: 4rem;
+    line-height: 4rem;
     font-weight: 400;
   }
 
