@@ -25,9 +25,9 @@ export const TimerContainer = styled.div`
     '.';
   place-items: center;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.brandPrimary};
   color: ${({ theme }) => theme.colors.cultured};
-  box-shadow: ${({ theme }) => theme.shadow.lg};
+  background: linear-gradient(145deg, #4a535f, #3e4650);
+  box-shadow: 20px 20px 65px #30363d, -20px -20px 65px #5a6675;
 `;
 
 export const CurrentTimer = styled.h2`

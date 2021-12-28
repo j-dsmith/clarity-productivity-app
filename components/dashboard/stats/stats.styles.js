@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export const StatsContainer = styled.section`
   grid-area: stat;
-  padding: 1.5em;
+  padding: 1.5em 1.5em 2em 1.5em;
   margin: 0.75em 1.5em 1.5em 0.75em;
   background-color: ${({ theme }) => theme.colors.gray800};
   color: ${({ theme }) => theme.colors.cultured};
@@ -15,10 +15,10 @@ export const StatsContainer = styled.section`
 
 export const TileContainer = styled.div`
   width: 100%;
-  flex-basis: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
+  margin-block: 1em;
 `;
 
 export const StyledStatTile = styled(motion.div)`
@@ -44,6 +44,5 @@ export const StyledStatTile = styled(motion.div)`
 export const StatsHeader = styled.div`
   h2 {
     margin: 0;
-    margin-bottom: 1em;
   }
 `;

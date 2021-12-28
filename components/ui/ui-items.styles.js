@@ -91,11 +91,12 @@ export const TextInput = styled.input`
 `;
 
 export const SpinnerContainer = styled.div`
-  width: 100%;
-  min-height: 100%;
+  flex-basis: 100%;
+
   margin-block: auto;
   display: grid;
   place-items: center;
+  border: 1px solid red;
 `;
 
 export const SpinnerPage = styled.div`

@@ -39,16 +39,15 @@ const Tasks = () => {
         <TaskHeader>
           <h2>Tasks</h2>
         </TaskHeader>
-        <TaskList>
-          <SpinnerContainer>
-            <Loader
-              type="Oval"
-              color="hsl(212, 13%, 48%)"
-              height={75}
-              width={75}
-            />
-          </SpinnerContainer>
-        </TaskList>
+
+        <SpinnerContainer>
+          <Loader
+            type="Oval"
+            color="hsl(212, 13%, 48%)"
+            height={75}
+            width={75}
+          />
+        </SpinnerContainer>
       </TasksContainer>
     );
   }
