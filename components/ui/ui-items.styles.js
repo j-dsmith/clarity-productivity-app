@@ -96,7 +96,6 @@ export const SpinnerContainer = styled.div`
   margin-block: auto;
   display: grid;
   place-items: center;
-  border: 1px solid red;
 `;
 
 export const SpinnerPage = styled.div`

@@ -104,7 +104,9 @@ const ProjectsList = ({}) => {
           outline={deleteActive ? false : true}
         />
       </InputGroup>
-      <ContentList>{renderProjects()}</ContentList>
+      <ContentList>
+        <ul>{renderProjects()}</ul>
+      </ContentList>
     </>
   );
 };

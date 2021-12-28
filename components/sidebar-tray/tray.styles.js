@@ -6,6 +6,7 @@ export const TrayContainer = styled(motion.div)`
   background-color: ${({ theme }) => theme.colors.gray700};
   width: 22%;
   min-height: 100vh;
+  height: 100vh;
   position: absolute;
   z-index: 1;
   box-shadow: ${({ theme }) => theme.shadow.lg};
@@ -39,10 +40,15 @@ export const ProjectsLink = styled.div`
   border-radius: 0.5em;
 `;
 
-export const ContentList = styled.ul`
-  list-style: none;
-  margin: 2rem -1rem;
-  padding: 0;
-  margin-top: 2rem;
-  position: relative;
+export const ContentList = styled.div`
+  margin-inline: -1rem;
+  overflow-y: scroll;
+
+  height: 100%;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 `;

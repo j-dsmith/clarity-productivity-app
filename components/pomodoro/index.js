@@ -16,104 +16,59 @@ import {
   RoundCount,
   Round,
   Controls,
+  ControlBtn,
 } from './pomodoro.styles';
 
 // Helpers
-import { actionTypes } from './action-types';
+import {
+  startTimer,
+  pauseTimer,
+  resetTimer,
+  convertTimeValueToClock,
+  cycleToBreak,
+  cycleToSession,
+  skipCycle,
+} from './helpers';
 import { reducer } from './reducer';
 import { initialState } from './reducer';
 
+// Components
+import Confetti from 'react-confetti';
+import { incrementPomodoroCycles } from '../../helpers/pomodoro';
+
 const Pomodoro = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [confettiDimensions, setConfettiDimensions] = useState({
+    height: 0,
+    width: 0,
+  });
+  const [showConfetti, setShowConfetti] = useState(false);
 
-  const startTimer = () => {
-    // Set timer active state
-    dispatch({
-      ...state,
-      type: actionTypes.SET_TIMER_ACTIVE,
-      timerActive: true,
-    });
-
-    // Start timer interval
-    let timerInterval = setInterval(() => {
-      // Dispatch action to update timer value
-      dispatch({
-        ...state,
-        type: actionTypes.UPDATE_TIMER,
-      });
-    }, 1000);
-
-    // Assign interval id
-    dispatch({
-      ...state,
-      type: actionTypes.SET_TIMER_ID,
-      timerId: timerInterval,
-    });
+  const controlBtn = {
+    rest: {
+      color: 'hsl(20, 33%, 98%)',
+    },
+    hover: {
+      scale: 1.2,
+      transition: { duration: 0.1, ease: 'easeInOut' },
+      color: 'hsl(222, 100%, 61%)',
+    },
   };
 
-  const pauseTimer = () => {
-    // Clear interval to pause timer
-    clearInterval(state.timerId);
-    dispatch({
-      ...state,
-      type: actionTypes.SET_TIMER_ACTIVE,
-      timerActive: false,
+  useEffect(() => {
+    setConfettiDimensions({
+      height: window.innerHeight,
+      width: window.innerWidth,
     });
-  };
+  }, []);
 
-  const resetTimer = () => {
-    if (state.timerId) {
-      clearInterval(state.timerId);
+  useEffect(() => {
+    if (state.roundsComplete === 4) {
+      setShowConfetti(true);
+      pauseTimer(state, dispatch);
+      incrementPomodoroCycles();
     }
-    dispatch({
-      type: actionTypes.RESET_TIMER,
-    });
-  };
-
-  const convertTimeValueToClock = (timerValue) => {
-    let minutes = Math.floor(timerValue / 60);
-    let seconds = timerValue - minutes * 60;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
-
-    return `${minutes}:${seconds}`;
-  };
-
-  const cycleToBreak = () => {
-    dispatch({
-      ...state,
-      type: actionTypes.INCREMENT_SESSIONS_COMPLETE,
-    });
-
-    dispatch({
-      ...state,
-      type: actionTypes.SET_TIMER_TYPE,
-      timerType: 'break',
-    });
-    dispatch({
-      ...state,
-      type: actionTypes.SET_TIMER_VALUE,
-      timerValue: state.breakValue * 60,
-    });
-  };
-
-  const cycleToSession = () => {
-    dispatch({
-      ...state,
-      type: actionTypes.INCREMENT_BREAKS_COMPLETE,
-    });
-    // If break, toggle timer to session
-    dispatch({
-      ...state,
-      type: actionTypes.SET_TIMER_TYPE,
-      timerType: 'session',
-    });
-    dispatch({
-      ...state,
-      type: actionTypes.SET_TIMER_VALUE,
-      timerValue: state.sessionValue * 60,
-    });
-  };
+  }, [state.roundsComplete]);
 
   useEffect(() => {
     if (state.timerValue === 0) {
@@ -123,18 +78,30 @@ const Pomodoro = () => {
 
       if (state.timerType === 'session') {
         // If session, toggle timer to break
-        cycleToBreak();
+        cycleToBreak(state, dispatch);
         // Start new timer
-        startTimer();
+        startTimer(state, dispatch);
       } else {
-        cycleToSession();
-        startTimer();
+        cycleToSession(state, dispatch);
+        startTimer(state, dispatch);
       }
     }
   }, [state.timerValue]);
 
   return (
     <PomodoroPage>
+      {showConfetti && (
+        <Confetti
+          width={confettiDimensions.width}
+          height={confettiDimensions.height}
+          colors={[
+            'hsl(222, 100%, 61%)',
+            'hsl(20, 33%, 98%)',
+            'hsl(240, 14%, 1%)',
+          ]}
+        />
+      )}
+
       <TimerContainer>
         <Header>{state.timerType}</Header>
         <CurrentTimer>{convertTimeValueToClock(state.timerValue)}</CurrentTimer>
@@ -146,17 +113,51 @@ const Pomodoro = () => {
           <Round complete={state.roundsComplete >= 4 ? true : false} />
         </RoundCount>
         <Controls>
-          <MdRestartAlt className="control" onClick={resetTimer} />
-          {state.timerActive ? (
-            <MdPause id="play-pause" className="control" onClick={pauseTimer} />
-          ) : (
-            <MdPlayArrow
-              id="play-pause"
+          <ControlBtn
+            variants={controlBtn}
+            initial="rest"
+            whileHover="hover"
+            whileTap={{ scale: 1 }}
+          >
+            <MdRestartAlt
               className="control"
-              onClick={startTimer}
+              onClick={() => resetTimer(state, dispatch, setShowConfetti)}
             />
-          )}
-          <MdOutlineSkipNext className="control" />
+          </ControlBtn>
+
+          <ControlBtn
+            variants={state.roundsComplete === 4 ? '' : controlBtn}
+            initial="rest"
+            whileHover="hover"
+            whileTap={{ scale: 1.1 }}
+            disabled={state.roundsComplete === 4 ? true : false}
+          >
+            {state.timerActive ? (
+              <MdPause
+                id="play-pause"
+                className="control"
+                onClick={() => pauseTimer(state, dispatch)}
+              />
+            ) : (
+              <MdPlayArrow
+                id="play-pause"
+                className="control"
+                onClick={() => startTimer(state, dispatch)}
+              />
+            )}
+          </ControlBtn>
+          <ControlBtn
+            variants={state.roundsComplete === 4 ? '' : controlBtn}
+            initial="rest"
+            whileHover="hover"
+            whileTap={{ scale: 1.1 }}
+            disabled={state.roundsComplete === 4 ? true : false}
+          >
+            <MdOutlineSkipNext
+              className="control"
+              onClick={() => skipCycle(state, dispatch)}
+            />
+          </ControlBtn>
         </Controls>
       </TimerContainer>
     </PomodoroPage>

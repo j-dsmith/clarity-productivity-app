@@ -26,6 +26,7 @@ const SidebarItem = ({ title, icon, color, href }) => {
     <Link href={href}>
       <StyledIcon
         color={color}
+        active={href === router.pathname ? true : false}
         onClick={() => handleTrayState(router.pathname)}
       >
         {icon}

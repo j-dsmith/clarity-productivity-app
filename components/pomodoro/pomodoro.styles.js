@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export const PomodoroPage = styled.section`
   min-height: 100vh;
@@ -24,10 +25,13 @@ export const TimerContainer = styled.div`
     'controls'
     '.';
   place-items: center;
-  border-radius: 50%;
+  border-radius: 30%;
+  /* background-color: ${({ theme }) => theme.colors.gray800}; */
+  /* border: 1px solid ${({ theme }) => theme.colors.gray500}; */
   color: ${({ theme }) => theme.colors.cultured};
+  /* box-shadow: ${({ theme }) => theme.shadow.lg}; */
   background: linear-gradient(145deg, #4a535f, #3e4650);
-  box-shadow: 20px 20px 65px #30363d, -20px -20px 65px #5a6675;
+  box-shadow: 21px 21px 41px #282d34, -21px -21px 41px #626f7e;
 `;
 
 export const CurrentTimer = styled.h2`
@@ -54,12 +58,12 @@ export const RoundCount = styled.div`
 `;
 
 export const Round = styled.div`
-  height: 1rem;
-  width: 1rem;
+  height: 1.25rem;
+  width: 1.25rem;
   border-radius: 50%;
-  border: 1px solid ${({ theme }) => theme.colors.cultured};
+  border: 2px solid ${({ theme }) => theme.colors.brandPrimary};
   background-color: ${({ complete, theme }) =>
-    complete ? theme.colors.cultured : 'transparent'};
+    complete ? theme.colors.brandPrimary : 'transparent'};
 `;
 
 export const Controls = styled.div`
@@ -68,15 +72,20 @@ export const Controls = styled.div`
   justify-content: space-around;
   grid-area: controls;
   width: 30%;
+`;
 
-  .control {
-    font-size: 2rem;
-    cursor: pointer;
-  }
+export const ControlBtn = styled(motion.button)`
+  font-size: 2rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  border: none;
+  background-color: transparent;
 
   #play-pause {
-    font-size: 4rem;
-    border: 1px solid white;
+    font-size: ${({ disabled }) => (disabled ? '2rem' : '3.5rem')};
+    border: 1px solid;
+    border-color: transparent;
     border-radius: 50%;
   }
 `;

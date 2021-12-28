@@ -28,12 +28,15 @@ export const SidebarItemList = styled.ul`
 export const StyledIcon = styled.div`
   margin: 0.5rem;
   padding: 0.75em;
-  border-radius: 50%;
+  border-radius: ${({ active }) => (active ? '1.5rem' : '50%')};
   display: grid;
   place-items: center;
-  color: ${({ theme }) => theme.colors.cultured};
+  color: ${({ theme, active }) =>
+    active ? theme.colors.brandPrimary : theme.colors.cultured};
   background-color: ${({ theme }) => theme.colors.gray700};
-  border: 1px solid ${({ theme }) => theme.colors.gray700};
+  border: 1px solid
+    ${({ theme, active }) =>
+      active ? theme.colors.gray600 : theme.colors.gray700};
 
   box-shadow: ${({ theme }) => theme.shadow.lg};
   cursor: pointer;

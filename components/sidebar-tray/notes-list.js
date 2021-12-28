@@ -134,7 +134,9 @@ const NotesList = ({ currentProjectId }) => {
           outline={deleteActive ? false : true}
         />
       </InputGroup>
-      <ContentList>{renderNotes()}</ContentList>
+      <ContentList>
+        <ul>{renderNotes()}</ul>
+      </ContentList>
     </>
   );
 };
