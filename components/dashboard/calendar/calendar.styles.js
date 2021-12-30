@@ -8,6 +8,8 @@ export const CalendarContainer = styled.section`
   color: ${({ theme }) => theme.colors.cultured};
   border-radius: 1.5rem;
   box-shadow: ${({ theme }) => theme.shadow.xl};
+  display: flex;
+  flex-direction: column;
 `;
 
 export const CalendarHeader = styled.div`
@@ -25,6 +27,7 @@ export const CalendarHeader = styled.div`
 `;
 
 export const CalendarGrid = styled.div`
+  flex: 2;
   display: grid;
   place-items: center;
   grid-template-columns: repeat(7, 1fr);

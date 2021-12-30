@@ -25,6 +25,7 @@ export const DetailsContainer = styled.div`
   border-radius: 1em;
   background-color: ${({ bg, theme }) => (bg ? theme.colors.gray700 : '')};
   box-shadow: ${({ bg, theme }) => (bg ? theme.shadow.xl : '')};
+  flex: 2;
 `;
 
 export const LocationTile = styled.div`
@@ -38,7 +39,7 @@ export const LocationTile = styled.div`
   h2 {
     margin: 0.5rem;
     padding: 0;
-    font-size: 4rem;
+    font-size: clamp(4rem, 5vw, 5rem);
     line-height: 4rem;
     font-weight: 400;
   }

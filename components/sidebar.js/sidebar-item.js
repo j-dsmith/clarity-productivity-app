@@ -22,6 +22,18 @@ const SidebarItem = ({ title, icon, color, href }) => {
     toggleTrayOpen(false);
   };
 
+  if (title === 'trash' || title === 'decks') {
+    return (
+      <StyledIcon
+        color={color}
+        active={href === router.pathname ? true : false}
+        onClick={() => alert('Feature in Development')}
+      >
+        {icon}
+      </StyledIcon>
+    );
+  }
+
   return (
     <Link href={href}>
       <StyledIcon

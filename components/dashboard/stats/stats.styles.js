@@ -19,6 +19,7 @@ export const TileContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   margin-block: 1em;
+  flex: 2;
 `;
 
 export const StyledStatTile = styled(motion.div)`
