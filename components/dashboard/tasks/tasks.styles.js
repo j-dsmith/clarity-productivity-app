@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const TasksContainer = styled.section`
-  grid-area: task;
-  margin: 0.75em 0.75em 1.5em 1.5em;
+  grid-area: tasks;
+
   padding-bottom: 2em;
-  background-color: ${({ theme }) => theme.colors.gray800};
+  background-color: var(--component-bg-dark);
   color: ${({ theme }) => theme.colors.cultured};
   border-radius: 1.5rem;
   box-shadow: ${({ theme }) => theme.shadow.xl};

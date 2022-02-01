@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const ForecastContainer = styled.section`
-  grid-area: fore;
+  grid-area: forecast;
   padding: 1.5em;
-  margin: 1.5em 1.5em 0.75em 0.75em;
+
   background-color: ${({ theme }) => theme.colors.gray800};
   color: ${({ theme }) => theme.colors.cultured};
   border-radius: 1.5rem;

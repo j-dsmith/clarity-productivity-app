@@ -31,6 +31,32 @@ export const theme = {
 
 const GlobalStyle = createGlobalStyle`
 
+:root {
+  // Colors
+  --page-bg-light: hsl(0, 0%, 100%);
+  --component-bg-dark: hsl(212, 14%, 19%);
+  --component-bg-light: hsl(0, 0%, 95%);
+  --text-light: hsl(20, 33%, 98%);
+  --color-red: hsl(0,100%, 71%);
+  --color-blue: hsl(222, 100%, 61%);
+  --shadow-color: hsl(0, 0%, 0%);
+
+  // Shadows
+  --shadow-sm: 0.5px 1px 1px hsl(var(--shadow-color) / 0.7);
+  --shadow-md: 
+      1px 2px 2px hsl(var(--shadow-color) / 0.333),
+      2px 4px 4px hsl(var(--shadow-color) / 0.333),
+      3px 6px 6px hsl(var(--shadow-color) / 0.333)
+      ;
+  --shadow-lg:
+      1px 2px 2px hsl(var(--shadow-color) / 0.2),
+      2px 4px 4px hsl(var(--shadow-color) / 0.2),
+      4px 8px 8px hsl(var(--shadow-color) / 0.2)
+      8px 16px 16px hsl(var(--shadow-color) / 0.2)
+      16px 32px 32px hsl(var(--shadow-color) / 0.2)
+      ;
+}
+
 *, *{
   box-sizing: border-box
 }

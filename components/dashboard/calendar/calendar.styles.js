@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const CalendarContainer = styled.section`
-  grid-area: cal;
+  grid-area: calendar;
   padding: 1.5em;
-  margin: 1.5em 0.75em 0.75em 1.5em;
-  background-color: ${({ theme }) => theme.colors.gray800};
+
+  background-color: var(--component-bg-dark);
   color: ${({ theme }) => theme.colors.cultured};
   border-radius: 1.5rem;
   box-shadow: ${({ theme }) => theme.shadow.xl};

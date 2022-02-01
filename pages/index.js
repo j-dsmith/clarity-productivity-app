@@ -7,10 +7,10 @@ import { useContext, useEffect } from 'react';
 import UserContext from '../store/user-ctx.js';
 
 export default function Home({}) {
-  const weatherURL = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=auto&days=2&aqi=no&alerts=no`;
+  const weatherURL = `api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt=7&appid=${process.env.OPENWEATHER_API_KEY}`;
 
   const userCtx = useContext(UserContext);
-  const { user, setUser } = userCtx;
+  const { setUser } = userCtx;
 
   const { data: fetchedUser, error: userError } = useSWR(
     '/api/user',
