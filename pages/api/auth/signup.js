@@ -18,12 +18,11 @@ const handler = async (req, res) => {
 
   // Destructure request body
   const { email, password, isGuest } = req.body;
-
+  console.log(req.body);
   // Validate email and password
-  if (!email || !email.includes('@') || !password || !isGuest) {
+  if (!email || !email.includes('@') || !password) {
     res.status(422).json({
-      message:
-        'Invalid input - password should also be at least 7 characters long',
+      message: 'Invalid input - please try again',
     });
     return;
   }

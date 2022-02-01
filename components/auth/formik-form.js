@@ -42,10 +42,10 @@ const MyForm = ({ showLogin, setShowLogin }) => {
   // Framer-motion variant for form buttons
   const btn = {
     hover: {
-      transition: { duration: 0.5, type: 'spring' },
+      transition: { duration: 0.15, type: 'ease' },
       scale: 1.03,
       boxShadow:
-        'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px',
+        '0 1px 1px hsl(0 0% 0% / 0.075), 0 2px 2px hsl(0 0% 0% / 0.075), 0 4px 4px hsl(0 0% 0% / 0.075), 0 8px 8px hsl(0 0% 0% / 0.075)',
     },
   };
 
@@ -108,6 +108,7 @@ const MyForm = ({ showLogin, setShowLogin }) => {
         router.replace('/');
         setSubmitting(false);
       } catch (error) {
+        setLoginSubmitLoading(false);
         const {
           response: { data },
         } = error;

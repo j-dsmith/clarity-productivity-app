@@ -20,7 +20,6 @@ export default function Home({}) {
   useEffect(() => {
     if (fetchedUser) {
       setUser(fetchedUser.data);
-      console.log(fetchedUser);
     }
   }, [fetchedUser]);
 
