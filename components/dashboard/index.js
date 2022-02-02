@@ -4,7 +4,7 @@ import { DashContainer } from './dashboard.styles';
 // Components
 import Calendar from './calendar';
 import Tasks from './tasks';
-import Forecast from './forecast';
+import Forecast from './openweather';
 import Stats from './stats';
 
 const Dashboard = ({ weather }) => {
@@ -29,7 +29,7 @@ const Dashboard = ({ weather }) => {
         variants={variants}
       >
         <Calendar />
-        <Forecast weather={weather} />
+        <Forecast />
         <Tasks />
         <Stats />
       </DashContainer>

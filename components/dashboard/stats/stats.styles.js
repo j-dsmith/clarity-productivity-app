@@ -3,14 +3,15 @@ import { motion } from 'framer-motion';
 
 export const StatsContainer = styled.section`
   grid-area: stats;
-  padding: 1.5em 1.5em 2em 1.5em;
+  padding: 1.5em;
 
-  background-color: var(--component-bg-dark);
-  color: ${({ theme }) => theme.colors.cultured};
+  background-color: var(--component-bg-light);
+  color: var(--text-dark);
   border-radius: 1.5rem;
-  box-shadow: ${({ theme }) => theme.shadow.xl};
+  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
+  gap: 1em;
 `;
 
 export const TileContainer = styled.div`
@@ -18,16 +19,16 @@ export const TileContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  margin-block: 1em;
+  gap: 2em;
   flex: 2;
 `;
 
 export const StyledStatTile = styled(motion.div)`
   display: grid;
-  margin: 10%;
   place-items: center;
-  margin-bottom: 1.5em;
-  border-left: 2px solid ${({ theme }) => theme.colors.brandPrimary};
+  border-left: 2px solid var(--color-blue);
+
+  height: 80%;
 
   p {
     margin: 0;

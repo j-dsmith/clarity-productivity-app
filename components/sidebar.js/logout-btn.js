@@ -29,7 +29,7 @@ const LogoutBtn = () => {
   return (
     <StyledIcon
       whileHover="hover"
-      color="#fcfaf9"
+      style={{ '--color': 'hsl(0,100%, 71%)' }}
       btntype="logout"
       onClick={handleLogout}
     >

@@ -9,7 +9,7 @@ import {
   CalendarBtn,
   WeekdayHeader,
 } from './calendar.styles';
-import { MdArrowForwardIos } from 'react-icons/md';
+import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 
 // Helpers
 import CalendarMonth, {
@@ -20,25 +20,25 @@ import CalendarMonth, {
 
 const Calendar = () => {
   //get current month and year
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [yearDisplayed, setYearDisplayed] = useState(new Date().getFullYear());
+  const [monthDisplayed, setMonthDisplayed] = useState(new Date().getMonth());
 
-  const calendarMonth = new CalendarMonth(currentYear, currentMonth);
+  const calendarMonth = new CalendarMonth(yearDisplayed, monthDisplayed);
 
   const handleClick = (btnType) => {
     if (btnType === 'increment') {
-      if (currentMonth === 11) {
-        setCurrentMonth(0);
-        setCurrentYear(currentYear + 1);
+      if (monthDisplayed === 11) {
+        setMonthDisplayed(0);
+        setYearDisplayed(yearDisplayed + 1);
       } else {
-        setCurrentMonth(currentMonth + 1);
+        setMonthDisplayed(monthDisplayed + 1);
       }
-      // setCurrentMonth(currentMonth + 1);
+      // setMonthDisplayed(monthDisplayed + 1);
     } else {
-      setCurrentMonth(currentMonth - 1);
-      if (currentMonth === 0) {
-        setCurrentMonth(11);
-        setCurrentYear(currentYear - 1);
+      setMonthDisplayed(monthDisplayed - 1);
+      if (monthDisplayed === 0) {
+        setMonthDisplayed(11);
+        setYearDisplayed(yearDisplayed - 1);
       }
     }
   };
@@ -47,11 +47,11 @@ const Calendar = () => {
     <CalendarContainer>
       <CalendarHeader>
         <CalendarBtn colStart="1" onClick={() => handleClick()} rotate="true">
-          <MdArrowForwardIos />
+          <MdArrowBack />
         </CalendarBtn>
-        <h3>{`${calendarMonth.name} ${currentYear}`}</h3>
+        <h2>{`${calendarMonth.name} ${yearDisplayed}`}</h2>
         <CalendarBtn colStart="7" onClick={() => handleClick('increment')}>
-          <MdArrowForwardIos />
+          <MdArrowForward />
         </CalendarBtn>
       </CalendarHeader>
       <CalendarGrid>
@@ -62,8 +62,8 @@ const Calendar = () => {
         <WeekdayHeader>Fr</WeekdayHeader>
         <WeekdayHeader>Sa</WeekdayHeader>
         <WeekdayHeader>Su</WeekdayHeader>
-        {renderPrevMonthDays(calendarMonth, currentYear, currentMonth)}
-        {renderCurrentMonthDays(calendarMonth)}
+        {renderPrevMonthDays(calendarMonth, yearDisplayed, monthDisplayed)}
+        {renderCurrentMonthDays(calendarMonth, yearDisplayed)}
         {renderNextMonthDays(calendarMonth)}
       </CalendarGrid>
     </CalendarContainer>

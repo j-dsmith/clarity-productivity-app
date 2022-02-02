@@ -1,22 +1,22 @@
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 export const TasksContainer = styled.section`
   grid-area: tasks;
-
   padding-bottom: 2em;
-  background-color: var(--component-bg-dark);
-  color: ${({ theme }) => theme.colors.cultured};
+  background-color: var(--component-bg-light);
+  color: var(--text-dark);
   border-radius: 1.5rem;
-  box-shadow: ${({ theme }) => theme.shadow.xl};
+  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
+  gap: 1rem;
   justify-content: flex-start;
 `;
 
 export const TaskHeader = styled.div`
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   padding: 1.5em;
   padding-bottom: 0;
 
@@ -26,46 +26,41 @@ export const TaskHeader = styled.div`
 `;
 
 export const TaskList = styled.div`
-  height: 100%;
-  width: 100%;
+  flex-grow: 2;
   margin-bottom: 1em;
+  padding: 0.5em 0;
+  border-top: 1px solid var(--color-gray-400);
+  border-bottom: 1px solid var(--color-gray-400);
   overflow-y: scroll;
 
   ul {
     list-style: none;
-    padding: 0;
+    padding: 0 1.5em;
     margin: 0;
-
-    border-block: 1px solid ${({ theme }) => theme.colors.gray700};
-
-    & * + * {
-      border-top: 1px solid ${({ theme }) => theme.colors.gray700};
-    }
+    border-top: 1px solid var(--component-bg-light);
+    position: relative;
   }
 `;
 
 export const StyledTaskTile = styled.div`
-  height: 3rem;
-  padding: 2rem;
   cursor: pointer;
   transition: all 100ms ease-in-out;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-left: 2px solid ${({ theme }) => theme.colors.gray800};
+  background-color: var(--color-gray-400);
+  border-radius: 1rem;
+  margin-bottom: 0.5em;
+  transition: all 150ms linear;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.gray700};
-    border-left: 2px solid
-      ${({ theme, deleteactive }) =>
-        deleteactive === 'true'
-          ? theme.colors.bittersweet
-          : theme.colors.brandPrimary};
+    box-shadow: var(--shadow-sm);
+    transform: scale(1.02) translateY(-2px);
   }
   p {
     // Remove border applied by adjacent selector in ul
     border: none;
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 `;
 
@@ -73,7 +68,7 @@ export const CheckboxGroup = styled.div`
   position: relative;
   display: grid;
   place-items: center;
-  padding: 1em;
+  padding: 0.5em;
   margin-right: 1em;
 
   // Custom Checkbox
@@ -84,6 +79,7 @@ export const CheckboxGroup = styled.div`
 
   .delete-icon {
     font-size: 1.75rem;
+    color: var(--color-red);
   }
 `;
 
@@ -102,7 +98,7 @@ export const CheckboxLabel = styled.label`
     height: 70%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background-color: ${({ theme, ischecked }) => theme.colors.cultured};
+    background-color: var(--text-light);
   }
 
   svg {
@@ -110,7 +106,7 @@ export const CheckboxLabel = styled.label`
     position: relative;
     z-index: 1;
     font-size: 1.75rem;
-    color: ${({ theme }) => theme.colors.brandPrimary};
+    color: var(--color-blue);
     border: none;
   }
 `;

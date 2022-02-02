@@ -2,27 +2,27 @@ import styled from 'styled-components';
 
 export const CalendarContainer = styled.section`
   grid-area: calendar;
-  padding: 1.5em;
-
-  background-color: var(--component-bg-dark);
-  color: ${({ theme }) => theme.colors.cultured};
+  background-color: var(--component-bg-light);
+  color: var(--color-text-dark);
   border-radius: 1.5rem;
-  box-shadow: ${({ theme }) => theme.shadow.xl};
+  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+  padding: 1em;
 `;
 
 export const CalendarHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 1em;
-  font-size: 1.5rem;
 
-  h3 {
+  h2 {
     padding: 0;
     margin: 0;
     text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
   }
 `;
 
@@ -35,36 +35,42 @@ export const CalendarGrid = styled.div`
   grid-template-areas: 'mon tue wed thu fri sat sun';
 `;
 
-export const WeekdayHeader = styled.h5`
+export const WeekdayHeader = styled.h3`
   text-align: center;
   display: grid;
   place-items: center;
   grid-column: 'mon';
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin: 0;
   padding: 0.5em;
+  font-weight: 500;
   /* margin-block: 1em; */
 `;
 
 export const CalendarBtn = styled.button`
   border: none;
-  background: transparent;
-  padding: 0.5em;
+  background: var(--color-gray-400);
+  height: 2.25rem;
+  width: 2.25rem;
   grid-column: ${({ colStart }) => colStart + '/ span 1'};
   display: grid;
   place-items: center;
-  color: ${({ theme }) => theme.colors.cultured};
-  border-radius: 30%;
+  color: var(--color-gray-800);
+  border-radius: 50%;
+  border: 1px solid var(--color-gray-600);
   cursor: pointer;
-  transform: ${({ rotate }) => (rotate === 'true' ? 'scaleX(-1)' : '')};
+  transition: all 150ms linear;
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadow.xl};
-    background-color: ${({ theme }) => theme.colors.gray500};
+    box-shadow: var(--shadow-sm);
+    transform: scale(1.06) translateY(-2px);
+    color: var(--text-dark);
+    border: 1px solid var(--color-gray-400);
   }
 
   svg {
     font-size: 1rem;
+    filter: drop-shadow(var(--shadow-sm));
   }
 `;
 
@@ -77,15 +83,16 @@ export const CalendarDay = styled.p`
   margin: 0;
   height: 2em;
   width: 2em;
+  font-size: 0.85rem;
 
   &.today {
-    border: 1px solid ${({ theme }) => theme.colors.brandPrimary};
-    border-radius: 30%;
-    background-color: ${({ theme }) => theme.colors.brandPrimary};
-    box-shadow: ${({ theme }) => theme.shadow.lg};
+    border-radius: 1rem;
+    background-color: var(--color-blue);
+    color: var(--text-light);
+    box-shadow: var(--shadow-sm);
   }
 `;
 
 export const ExtraDay = styled(CalendarDay)`
-  color: ${({ theme }) => theme.colors.gray200};
+  color: var(--color-gray-800);
 `;

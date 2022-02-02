@@ -1,13 +1,13 @@
 // Style
 import { StyledUIBtn } from './ui-items.styles';
 
-const UIBtn = ({ handler, color, icon, outline, btnLg, disabled }) => {
+const UIBtn = ({ handler, color, icon, outline, disabled, className }) => {
   return (
     <StyledUIBtn
+      className={`${className}`}
+      style={{ '--color': color }}
       onClick={() => handler()}
-      color={color}
       outline={outline}
-      btnLg={btnLg}
       disabled={disabled}
     >
       {icon}

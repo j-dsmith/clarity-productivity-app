@@ -7,7 +7,7 @@ import { useContext, useEffect } from 'react';
 import UserContext from '../store/user-ctx.js';
 
 export default function Home({}) {
-  const weatherURL = `api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt=7&appid=${process.env.OPENWEATHER_API_KEY}`;
+  // const weatherURL = `api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt=7&appid=${process.env.OPENWEATHER_API_KEY}`;
 
   const userCtx = useContext(UserContext);
   const { setUser } = userCtx;
@@ -23,16 +23,16 @@ export default function Home({}) {
     }
   }, [fetchedUser]);
 
-  const { data: fetchedForecast, error: forecastError } = useSWR(
-    weatherURL,
-    fetchData
-  );
+  // const { data: fetchedForecast, error: forecastError } = useSWR(
+  //   weatherURL,
+  //   fetchData
+  // );
 
-  const weather = fetchedForecast ? fetchedForecast : null;
+  // const weather = fetchedForecast ? fetchedForecast : null;
 
   return (
     <Layout>
-      <Dashboard weather={weather} />
+      <Dashboard />
     </Layout>
   );
 }

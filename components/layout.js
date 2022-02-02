@@ -12,7 +12,7 @@ const LayoutContainer = styled.section`
   top: 0;
   left: min(8vw, 8rem);
   z-index: 0;
-  background-color: ${({ theme }) => theme.colors.gray600};
+  background-color: var(--page-bg-light);
   display: flex;
 
   main {

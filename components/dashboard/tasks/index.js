@@ -9,7 +9,7 @@ import { fetchContext } from '../../../helpers/client';
 
 // Style
 import { theme } from '../../../pages/_app';
-import { MdAdd, MdDelete } from 'react-icons/md';
+import { MdAdd, MdOutlineCancel } from 'react-icons/md';
 import { TasksContainer, TaskList, TaskHeader } from './tasks.styles';
 import {
   InputGroup,
@@ -21,6 +21,7 @@ import {
 import UIBtn from '../../ui/ui-btn';
 import TaskTile from './task-tile';
 import Loader from 'react-loader-spinner';
+import DeleteBtn from '../../ui/delete-btn';
 
 const Tasks = () => {
   // State Initialization for new task input and active delete state
@@ -104,16 +105,14 @@ const Tasks = () => {
             disabled={deleteActive}
           />
           <UIBtn
-            icon={<MdAdd />}
+            icon={!taskTitle || deleteActive ? <MdOutlineCancel /> : <MdAdd />}
             color={theme.colors.brandPrimary}
             handler={tasks && handleAddTask}
             disabled={!taskTitle || deleteActive ? true : false}
           />
-          <UIBtn
-            icon={<MdDelete />}
-            color={theme.colors.bittersweet}
+          <DeleteBtn
+            deleteActive={deleteActive}
             handler={tasks && toggleDeleteActive}
-            outline={deleteActive ? false : true}
           />
         </InputGroup>
       </TaskHeader>

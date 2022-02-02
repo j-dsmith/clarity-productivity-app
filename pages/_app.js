@@ -34,14 +34,23 @@ const GlobalStyle = createGlobalStyle`
 :root {
   // Colors
   --page-bg-light: hsl(0, 0%, 100%);
+
   --component-bg-dark: hsl(212, 14%, 19%);
   --component-bg-light: hsl(0, 0%, 95%);
-  --text-light: hsl(20, 33%, 98%);
+
+  --text-light: hsl(0, 0%, 100%);
+  --text-dark: hsl(0, 0%, 7%);
+
   --color-red: hsl(0,100%, 71%);
   --color-blue: hsl(222, 100%, 61%);
-  --shadow-color: hsl(0, 0%, 0%);
+  --color-gray-200: hsl(0, 0%, 90%);
+  --color-gray-400: hsl(0, 0%, 85%);
+  --color-gray-600: hsl(0, 0%, 80%);
+  --color-gray-800: hsl(0, 0%, 60%);
 
   // Shadows
+  --shadow-color: 0deg 0% 50%;
+
   --shadow-sm: 0.5px 1px 1px hsl(var(--shadow-color) / 0.7);
   --shadow-md: 
       1px 2px 2px hsl(var(--shadow-color) / 0.333),
@@ -51,11 +60,13 @@ const GlobalStyle = createGlobalStyle`
   --shadow-lg:
       1px 2px 2px hsl(var(--shadow-color) / 0.2),
       2px 4px 4px hsl(var(--shadow-color) / 0.2),
-      4px 8px 8px hsl(var(--shadow-color) / 0.2)
-      8px 16px 16px hsl(var(--shadow-color) / 0.2)
+      4px 8px 8px hsl(var(--shadow-color) / 0.2),
+      8px 16px 16px hsl(var(--shadow-color) / 0.2),
       16px 32px 32px hsl(var(--shadow-color) / 0.2)
       ;
-}
+      
+    // Font
+    --font-poppins:  'Poppins';
 
 *, *{
   box-sizing: border-box
@@ -66,7 +77,7 @@ body {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
   background-color: hsl(20, 33%, 98%);
 }
 
@@ -107,7 +118,7 @@ export default function App({
                 crossOrigin="true"
               />
               <link
-                href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+                href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap"
                 rel="stylesheet"
               />
             </Head>

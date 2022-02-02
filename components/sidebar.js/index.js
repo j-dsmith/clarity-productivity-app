@@ -15,7 +15,7 @@ const Sidebar = () => {
         key={item.title}
         title={item.title}
         icon={item.icon}
-        color={item.color}
+        color="hsl(222, 100%, 61%)"
         href={item.href}
       />
     ));

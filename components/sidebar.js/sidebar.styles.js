@@ -5,8 +5,8 @@ export const StyledSidebar = styled.nav`
   height: 100vh;
   min-height: 100vh;
   width: min(8vw, 8rem);
-  background-color: ${({ theme }) => theme.colors.gray800};
-  box-shadow: ${({ theme }) => theme.shadow.lg};
+  background-color: var(--page-bg-light);
+  border-right: 1px solid var(--color-gray-200);
   position: fixed;
   top: 0;
   left: 0;
@@ -28,24 +28,24 @@ export const SidebarItemList = styled.ul`
 export const StyledIcon = styled.div`
   margin: 0.5rem;
   padding: 0.75em;
-  border-radius: ${({ active }) => (active ? '1.5rem' : '50%')};
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  color: ${({ theme, active }) =>
-    active ? theme.colors.brandPrimary : theme.colors.cultured};
-  background-color: ${({ theme }) => theme.colors.gray700};
-  border: 1px solid
-    ${({ theme, active }) =>
-      active ? theme.colors.gray600 : theme.colors.gray700};
-
-  box-shadow: ${({ theme }) => theme.shadow.lg};
+  color: ${({ active }) =>
+    active ? 'var(--color-blue)' : 'var(--color-gray-800)'};
+  background-color: var(--component-bg-light);
+  border: ${({ active }) =>
+    active ? 'none' : '1px solid var(--color-gray-400)'};
+  box-shadow: ${({ active }) => (active ? 'var(--shadow-md)' : '')};
+  transform: ${({ active }) => (active ? 'scale(1.06)' : '')};
   cursor: pointer;
   transition: all 150ms linear;
 
   &:hover {
-    color: ${({ color }) => color};
-    border-radius: 1.5rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray600};
+    color: var(--color);
+    transform: scale(1.06);
+    box-shadow: var(--shadow-md);
+    border: none;
 
     /* background-color: ${({ btntype, theme }) =>
       btntype === 'logout' ? theme.colors.gray900 : theme.colors.gray700}; */
@@ -53,5 +53,6 @@ export const StyledIcon = styled.div`
 
   svg {
     font-size: calc(2.5rem + 0.5vw);
+    filter: drop-shadow(var(--shadow-sm));
   }
 `;

@@ -25,7 +25,7 @@ const SidebarItem = ({ title, icon, color, href }) => {
   if (title === 'trash' || title === 'decks') {
     return (
       <StyledIcon
-        color={color}
+        style={{ '--color': color }}
         active={href === router.pathname ? true : false}
         onClick={() => alert('Feature in Development')}
       >
@@ -37,7 +37,7 @@ const SidebarItem = ({ title, icon, color, href }) => {
   return (
     <Link href={href}>
       <StyledIcon
-        color={color}
+        style={{ '--color': color }}
         active={href === router.pathname ? true : false}
         onClick={() => handleTrayState(router.pathname)}
       >

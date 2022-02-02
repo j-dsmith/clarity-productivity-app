@@ -25,10 +25,11 @@ export const renderPrevMonthDays = (
   ));
 };
 
-export const renderCurrentMonthDays = (calendarMonth) => {
+export const renderCurrentMonthDays = (calendarMonth, yearDisplayed) => {
   const currentMonthDays = [];
   const today = new Date().getDate();
   const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
 
   const { numDays, monthIdx, firstOfMonth } = calendarMonth;
 
@@ -39,26 +40,22 @@ export const renderCurrentMonthDays = (calendarMonth) => {
 
   // Using dates(days) in array - render dates
   return currentMonthDays.map((day) => {
-    //TODO: Fix so that todays date gets highlighted
-    // if (day === new Date()) {
-    //   return <StyledCurrentDay key={'current-' + day}>{day}</StyledCurrentDay>;
-    // }
+    const isToday =
+      today === day &&
+      monthIdx === currentMonth &&
+      currentYear === yearDisplayed
+        ? 'today'
+        : '';
+
     if (day === 1) {
       return (
-        <CalendarDay
-          key={day}
-          firstDay={firstOfMonth}
-          className={today === day && monthIdx === currentMonth ? 'today' : ''}
-        >
+        <CalendarDay key={day} firstDay={firstOfMonth} className={isToday}>
           {day}
         </CalendarDay>
       );
     }
     return (
-      <CalendarDay
-        key={'current-' + day}
-        className={today === day && monthIdx === currentMonth ? 'today' : ''}
-      >
+      <CalendarDay key={'current-' + day} className={isToday}>
         {day}
       </CalendarDay>
     );
@@ -120,6 +117,7 @@ export default class CalendarMonth {
     );
 
     this.monthIdx = new Date(year, month).getMonth();
+    this.currentYear = new Date().getFullYear();
 
     // Calculate number of days for current month
     this.numDays = new Date(year, month + 1, 0).getDate();

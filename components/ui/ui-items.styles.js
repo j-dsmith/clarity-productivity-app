@@ -5,32 +5,43 @@ export const StyledUIBtn = styled.button`
   display: grid;
   place-items: center;
   font-size: ${({ btnLg }) => (btnLg ? '1.5rem' : '1.25rem')};
-  padding: 0.25em;
-  margin: 0 0.25em;
-  border-radius: 30%;
-  background-color: ${({ color, outline }) =>
-    outline ? 'transparent' : color};
-  border: 1px solid ${({ color }) => color};
-  color: ${({ theme }) => theme.colors.cultured};
-  transition: all 100ms linear;
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 50%;
+  background-color: var(--color-gray-400);
+  border: 1px solid var(--color-gray-600);
+  color: var(--color-gray-800);
+  transition: all 150ms linear;
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ color }) => color};
+    color: var(--color);
+    box-shadow: var(--shadow-sm);
+    transform: scale(1.06) translateY(-2px);
+    border: 1px solid var(--color-gray-400);
+  }
+
+  &.delete-active {
+    transform: scale(1.06) translateY(-2px);
+    color: var(--color-red);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-gray-400);
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.gray400};
-    border: 1px solid ${({ theme }) => theme.colors.gray400};
+    background-color: var(--color-gray-600);
+    color: var(--color-gray-800);
+    border: 1px solid var(--color-gray-600);
   }
 
-  &:disabled&:hover {
-    background-color: ${({ theme }) => theme.colors.gray400};
+  &:disabled:hover {
+    transform: scale(1);
+    box-shadow: none;
   }
-`;
 
-export const UIBtnOutline = styled(StyledUIBtn)`
-  background-color: transparent;
+  svg {
+    filter: drop-shadow(var(--shadow-sm));
+  }
 `;
 
 export const StyledSaveBtn = styled.button`
@@ -56,37 +67,54 @@ export const StyledSaveBtn = styled.button`
 `;
 
 export const StyledDeleteBtn = styled.button`
-  background-color: ${({ theme }) => theme.colors.bittersweet};
-  color: ${({ theme }) => theme.colors.cultured};
-  font-size: 0.875rem;
-  padding: 0.5em 1em;
-  border: none;
-  border-radius: 0.75em;
+  display: grid;
+  place-items: center;
+  background-color: var(--color-gray-400);
+  color: var(--color);
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-gray-600);
+  font-size: 1.25rem;
+  transition: all 150ms linear;
   cursor: pointer;
+
+  &:hover {
+    color: var(--color-red);
+    box-shadow: var(--shadow-sm);
+    transform: scale(1.06) translateY(-2px);
+    border: 1px solid var(--color-gray-400);
+  }
+
+  &.active {
+    transform: scale(1.06) translateY(-2px);
+    color: var(--color-red);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-gray-400);
+  }
 `;
 
 export const InputGroup = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 1em 0;
+  gap: 0.5rem;
   width: ${({ width }) => width};
 `;
 
 export const TextInput = styled.input`
   width: 100%;
-  border-radius: 0.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
   border: none;
-  padding: 0.5em;
-  margin-right: 0.5em;
+  padding: 1em;
   font-size: 0.875rem;
-  background-color: ${({ theme }) => theme.colors.gray500};
-  border: 1px solid ${({ theme }) => theme.colors.gray400};
-  color: ${({ theme }) => theme.colors.cultured};
-  box-shadow: ${({ theme }) => theme.shadow.lg};
+  background-color: var(--color-gray-400);
+  color: var(--text-dark);
+  box-shadow: var(--shadow-sm);
 
   &:focus {
-    outline: none;
+    border: 2px solid var(--color-blue);
+    outline: hsla(222 100% 61% / 1);
   }
 `;
 

@@ -7,4 +7,7 @@ module.exports = {
     GUEST_EMAIL: 'guest@wrkingtitle.com',
     GUEST_PASSWORD: 'guest',
   },
+  images: {
+    domains: ['openweathermap.org'],
+  },
 };
