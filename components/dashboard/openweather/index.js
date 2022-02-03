@@ -1,8 +1,11 @@
 // Dependencies
-import { useState, useReducer } from 'react';
+import { useState, useReducer, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import Geocode from 'react-geocode';
+import locationDetailsReducer, {
+  actionTypes,
+  initialState,
+} from './location-details-reducer';
 
 // Style
 import { ForecastContainer, LocationSearchContainer } from './forecast.styles';
@@ -19,11 +22,11 @@ import HourlyWeather from './hourly-weather';
 
 function Forecast() {
   const [searchLocation, setSearchLocation] = useState('');
-  const [locationDetails, setLocationDetails] = useState({
-    name: '',
-    current: {},
-    daily: {},
-  });
+  const [locationDetails, dispatchLocationDetails] = useReducer(
+    locationDetailsReducer,
+    initialState
+  );
+  const [geolocation, setGeolocation] = useState({});
 
   async function getForecastByName() {
     // Split location from input into separate segments for search
@@ -45,15 +48,39 @@ function Forecast() {
 
     if (Object.entries(forecast).length > 0) {
       // Update state with fetched info
-      setLocationDetails({
-        name: { city, state, country },
-        current: forecast.data.current,
-        daily: forecast.data.daily,
-        hourly: forecast.data.hourly,
+      dispatchLocationDetails({
+        type: actionTypes.UPDATE_FORECAST,
+        payload: {
+          name: { city, state, country },
+          current: forecast.data.current,
+          hourly: forecast.data.hourly,
+        },
       });
     }
   }
 
+  // Get user coordinates using navigator.geolocation
+  async function getUserCoordinates() {
+    const permission = await navigator.permissions.query({
+      name: 'geolocation',
+    });
+    if (permission.state === 'granted') {
+      navigator.geolocation.getCurrentPosition((pos) =>
+        setGeolocation(pos.coords)
+      );
+    } else if (permisson.state === 'prompt') {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setGeolocation(pos.coords),
+        (error) => alert(error)
+      );
+    } else if (permission.state === 'denied') {
+      alert(
+        'You have not authorized location tracking for this application, please change these permissions or search using location name instead.'
+      );
+    }
+  }
+
+  // Fetch forecast from openweathermap api using latitude, longitude
   async function fetchWeather(lat, lon) {
     // Create url to fetch forecast using location
     const weatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,daily,alerts&units=imperial&appid=${process.env.OPENWEATHER_API_KEY}`;
@@ -79,11 +106,11 @@ function Forecast() {
             disabled={!searchLocation ? true : false}
             handler={getForecastByName}
           />
-          {/* <UIBtn
+          <UIBtn
             icon={<MdOutlineLocationOn />}
             color="var(--text-dark)"
-            handler={getLocationByCoords}
-          /> */}
+            handler={getUserCoordinates}
+          />
         </InputGroup>
         <p className="search-format">
           For US Locations, format as (City, State, Country)
@@ -106,6 +133,37 @@ function Forecast() {
       </div>
     );
   }
+
+  const { latitude, longitude } = geolocation;
+  useEffect(() => {
+    (async () => {
+      if ((latitude, longitude)) {
+        // Get forecast
+        const forecast = await fetchWeather(latitude, longitude);
+
+        // Get location name from reverse geocode lookup
+        const locationReverseGeocodeUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${process.env.OPENWEATHER_API_KEY}`;
+        const reverseGeocodeResult = await axios.get(locationReverseGeocodeUrl);
+        const { name: city, state, country } = reverseGeocodeResult.data[0];
+
+        if (
+          Object.entries(forecast).length > 0 &&
+          Object.entries(reverseGeocodeResult.data[0]).length > 0
+        ) {
+          dispatchLocationDetails({
+            type: actionTypes.UPDATE_FORECAST,
+            payload: {
+              name: { city, state, country },
+              current: forecast.data.current,
+              hourly: forecast.data.hourly,
+            },
+          });
+        }
+      }
+    })();
+  }, [latitude, longitude]);
+
+  console.log(Object.entries(geolocation).length);
 
   return (
     <ForecastContainer>
