@@ -15,9 +15,8 @@ export const ForecastContainer = styled.div`
   }
 
   .image {
-    width: 100px;
-    border: 1px solid red;
-    background-color: var(--color-gray-800);
+    width: 60px;
+    filter: drop-shadow(var(--shadow-sm));
   }
 `;
 
@@ -40,39 +39,68 @@ export const LocationSearchContainer = styled.div`
       margin-right: 0.5em;
     }
   }
+
+  .search-format {
+    font-size: 0.875rem;
+    border-left: 2px solid var(--color-blue);
+    padding-left: 1rem;
+  }
 `;
 
-export const DailyForecast = styled.div`
-  border: 1px solid red;
+export const HourlyForecast = styled.div`
   flex: 2;
   display: flex;
   flex-direction: column;
+  gap: 1em;
 
-  h3 {
+  h3,
+  p {
     margin: 0;
+    line-height: 1;
   }
 
   #forecast-header {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    border: 1px solid limegreen;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
   }
 
   #weather-description {
     text-transform: capitalize;
-    grid-column-start: 1;
-    grid-row-start: 1;
   }
 
   #location-name {
     font-weight: 500;
-    grid-column-start: 1;
-    grid-row-start: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    svg {
+      color: var(--color-gray-800);
+      cursor: pointer;
+      transition: all 150ms linear;
+
+      &:hover {
+        color: var(--color-blue);
+        transform: scale(1.06);
+        filter: drop-shadow(var(--shadow-sm));
+      }
+    }
   }
 
   #hourly-weather-detail {
     display: flex;
+    gap: 0.5em;
+    flex: 2;
+  }
+
+  #wind-humidity-detail {
+    display: flex;
+    gap: 1em;
+
+    span {
+      font-weight: 500;
+    }
   }
 `;
 
@@ -80,5 +108,38 @@ export const WeatherDetailTile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
+  justify-content: space-between;
+  gap: 0.5em;
+  background-color: var(--color-gray-400);
+  padding: 1em;
+  border-radius: 0.75em;
+  transition: all 150ms ease;
+
+  p.hour {
+    font-size: 0.875rem;
+    margin-bottom: -1rem;
+  }
+
+  p.temp {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow: var(--shadow-sm);
+    margin-top: -1rem;
+  }
+
+  p.precipitation {
+    display: flex;
+    align-items: center;
+    color: var(--color-blue);
+
+    svg {
+      font-size: 1.5rem;
+      margin-right: -0.25rem;
+    }
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: scale(1.06);
+  }
 `;

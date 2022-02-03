@@ -1,7 +1,8 @@
 // Dependencies
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import Geocode from 'react-geocode';
 
 // Style
 import { ForecastContainer, LocationSearchContainer } from './forecast.styles';
@@ -14,14 +15,7 @@ import { MdAdd, MdOutlineCancel, MdOutlineLocationOn } from 'react-icons/md';
 // Components
 import { InputGroup, TextInput } from '../../ui/ui-items.styles';
 import UIBtn from '../../ui/ui-btn';
-import DailyWeather from './daily-weather';
-
-function useGeolocation() {
-  const [geolocation, setGeolocation] = useState({});
-  navigator.geolocation.getCurrentPosition((pos) => setGeolocation(pos.coords));
-
-  return geolocation;
-}
+import HourlyWeather from './hourly-weather';
 
 function Forecast() {
   const [searchLocation, setSearchLocation] = useState('');
@@ -31,7 +25,7 @@ function Forecast() {
     daily: {},
   });
 
-  async function fetchWeather() {
+  async function getForecastByName() {
     // Split location from input into separate segments for search
     const locationSegments = searchLocation.split(',');
 
@@ -45,35 +39,32 @@ function Forecast() {
 
     // Get location, destructure name, lat, and lon properties
     const location = geocodeResult.data[0];
-    const { name, lat, lon } = location;
+    const { name: city, state, country, lat, lon } = location;
 
-    // Create url to fetch forecast using location
-    const weatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=imperial&appid=${process.env.OPENWEATHER_API_KEY}`;
-    const forecast = await axios.get(weatherURL);
-    setLocationDetails({
-      name: name,
-      current: forecast.data.current,
-      daily: forecast.data.daily,
-      hourly: forecast.data.hourly,
-    });
+    const forecast = await fetchWeather(lat, lon);
+
+    if (Object.entries(forecast).length > 0) {
+      // Update state with fetched info
+      setLocationDetails({
+        name: { city, state, country },
+        current: forecast.data.current,
+        daily: forecast.data.daily,
+        hourly: forecast.data.hourly,
+      });
+    }
   }
 
-  function renderForecastDetails() {
-    let icon = '';
-    if (locationDetails.current.weather) {
-      icon = locationDetails.current.weather[0].icon;
+  async function fetchWeather(lat, lon) {
+    // Create url to fetch forecast using location
+    const weatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,daily,alerts&units=imperial&appid=${process.env.OPENWEATHER_API_KEY}`;
+    const forecast = await axios.get(weatherURL);
 
-      return fetchWeatherIcon(icon);
-    }
+    return forecast;
   }
 
   function renderLocationSearchbar() {
     return (
       <LocationSearchContainer>
-        <label htmlFor="location">
-          Search location using (City, State, Country)
-        </label>
-
         <InputGroup width="100%">
           <TextInput
             id="location"
@@ -86,10 +77,20 @@ function Forecast() {
             icon={!searchLocation ? <MdOutlineCancel /> : <MdAdd />}
             color="hsl(222, 100%, 61%)"
             disabled={!searchLocation ? true : false}
-            handler={fetchWeather}
+            handler={getForecastByName}
           />
-          <UIBtn icon={<MdOutlineLocationOn />} color="var(--text-dark)" />
+          {/* <UIBtn
+            icon={<MdOutlineLocationOn />}
+            color="var(--text-dark)"
+            handler={getLocationByCoords}
+          /> */}
         </InputGroup>
+        <p className="search-format">
+          For US Locations, format as (City, State, Country)
+        </p>
+        <p className="search-format">
+          For International locations, format as (City, Country)
+        </p>
       </LocationSearchContainer>
     );
   }
@@ -109,13 +110,14 @@ function Forecast() {
   return (
     <ForecastContainer>
       <h2>Forecast</h2>
-
       {Object.entries(locationDetails.current).length === 0 ? (
         renderLocationSearchbar()
       ) : (
-        <DailyWeather location={locationDetails} />
+        <HourlyWeather
+          location={locationDetails}
+          fetchWeatherIcon={fetchWeatherIcon}
+        />
       )}
-      {locationDetails.current ? renderForecastDetails() : null}
     </ForecastContainer>
   );
 }

@@ -9,8 +9,8 @@ export const LoginPageContainer = styled.section`
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.cultured};
-  color: ${({ theme }) => theme.colors.gray900};
+  background-color: var(--page-bg-light);
+  color: var(--text-dark);
 `;
 
 export const ContentContainer = styled.div`
@@ -33,9 +33,9 @@ export const Header = styled.div`
   }
 
   .highlight {
-    background-color: ${({ theme }) => theme.colors.brandPrimary};
-    color: ${({ theme }) => theme.colors.cultured};
-    text-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.4);
+    background-color: var(--color-blue);
+    color: var(--text-light);
+    text-shadow: var(--shadow-sm);
     padding: 0 0.125rem;
   }
 `;
@@ -55,14 +55,13 @@ export const StyledField = styled(Field)`
   padding: 1.25em 1em;
   margin-block: 0.5em;
   border-radius: 0.75em;
-  border: 1px solid ${({ theme }) => theme.colors.gray700};
+  border: 1px solid var(--color-gray-400);
 `;
 
 export const StyledErrorMessage = styled.div`
   margin-bottom: 1em;
   margin-left: 1em;
-
-  color: ${({ theme }) => theme.colors.bittersweet};
+  color: var(--color-red);
 `;
 
 export const SubmitBtn = styled(motion.button)`
@@ -73,12 +72,12 @@ export const SubmitBtn = styled(motion.button)`
   padding: 1.25em 1em;
   margin-block: 0.5em;
   border-radius: 0.75em;
-  border: ${({ theme, outline }) =>
-    outline ? `1px solid ${theme.colors.gray700}` : 'none'};
-  background-color: ${({ theme, bgcolor }) =>
-    bgcolor === 'primary' ? theme.colors.brandPrimary : 'transparent'};
-  color: ${({ theme, textdark }) =>
-    textdark ? theme.colors.gray700 : theme.colors.cultured};
+  border: ${({ outline }) =>
+    outline ? `1px solid var(--color-gray-400)` : 'none'};
+  background-color: ${({ bgcolor }) =>
+    bgcolor === 'primary' ? '1px solid var(--color-blue)' : 'transparent'};
+  color: ${({ textdark }) =>
+    textdark ? 'var(--text-dark)' : 'var(--text-light)'};
   font-weight: 600;
   text-align: left;
   cursor: pointer;
