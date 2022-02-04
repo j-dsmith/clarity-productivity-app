@@ -3,26 +3,26 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 export const TrayContainer = styled(motion.div)`
-  background-color: ${({ theme }) => theme.colors.gray700};
+  background-color: var(--component-bg-light);
   width: 22%;
   min-height: 100vh;
   height: 100vh;
   position: absolute;
   z-index: 1;
-  box-shadow: ${({ theme }) => theme.shadow.lg};
+  box-shadow: var(--shadow-sm);
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  gap: 1em;
 `;
 
 export const TrayHeader = styled.div`
-  color: ${({ theme }) => theme.colors.cultured};
+  color: var(--text-dark);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: flex-start;
   padding: 0.5rem 0;
-  background-color: ${({ theme }) => theme.colors.gray700};
 
   h2 {
     padding: 0;
@@ -31,7 +31,7 @@ export const TrayHeader = styled.div`
 `;
 
 export const ProjectsLink = styled.div`
-  color: ${({ theme }) => theme.colors.brandPrimary};
+  color: var(--color-blue);
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 700;
@@ -48,7 +48,7 @@ export const ContentList = styled.div`
 
   ul {
     list-style: none;
-    padding: 0;
+    padding: 1em;
     margin: 0;
   }
 `;

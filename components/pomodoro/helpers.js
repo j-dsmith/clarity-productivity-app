@@ -45,6 +45,38 @@ export const resetTimer = (state, dispatch, setShowConfetti) => {
   setShowConfetti(false);
 };
 
+export const incrementValue = (state, dispatch, timerType) => {
+  if (timerType === 'break') {
+    dispatch({
+      ...state,
+      type: actionTypes.INCREMENT_BREAK_VALUE,
+    });
+  }
+  if (timerType === 'session') {
+    dispatch({
+      ...state,
+      type: actionTypes.INCREMENT_SESSION_VALUE,
+    });
+  }
+};
+export const decrementValue = (state, dispatch, timerType) => {
+  if (timerType === 'break') {
+    console.log('in decrement for break timer');
+    dispatch({
+      ...state,
+      type: actionTypes.DECREMENT_BREAK_VALUE,
+    });
+  }
+  if (timerType === 'session') {
+    console.log('in decrement for session timer');
+
+    dispatch({
+      ...state,
+      type: actionTypes.DECREMENT_SESSION_VALUE,
+    });
+  }
+};
+
 export const convertTimeValueToClock = (timerValue) => {
   let minutes = Math.floor(timerValue / 60);
   let seconds = timerValue - minutes * 60;

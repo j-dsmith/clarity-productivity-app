@@ -2,20 +2,17 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const ProjectTileContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.gray600};
-  color: ${({ theme }) => theme.colors.cultured};
+  background-color: var(--color-gray-400);
+  color: var(--text-dark);
   padding: 1em;
-  border-left: 2px solid ${({ theme }) => theme.colors.gray600};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray800};
   cursor: pointer;
+  transition: all 150ms linear;
+  border-radius: 1rem;
+  margin-bottom: 0.5em;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.gray800};
-    border-left: 2px solid
-      ${({ theme, deleteactive }) =>
-        deleteactive === 'true'
-          ? theme.colors.bittersweet
-          : theme.colors.brandPrimary};
+    box-shadow: var(--shadow-sm);
+    transform: scale(1.02) translateY(-2px);
   }
 `;
 
@@ -26,12 +23,13 @@ export const TileHeader = styled.div`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  margin-block: 0.25em;
+
   /* padding: 0.75em; */
 
   h3 {
     margin: 0 0.5em 0 0;
     padding: 0;
+    text-shadow: var(--shadow-sm);
   }
 `;
 
@@ -67,22 +65,22 @@ export const Date = styled.div`
   font-size: 0.85rem;
   span {
     font-style: italic;
-    color: ${({ theme }) => theme.colors.gray200};
+    color: var(--color-gray-800);
   }
 `;
 
 export const InfoBox = styled.div`
   display: flex;
   align-items: center;
-  padding: 0.5em 0;
-  color: ${({ theme, deleteactive }) =>
-    deleteactive === 'true' ? theme.colors.bittersweet : theme.colors.cultured};
+  padding: 0;
+  color: var(--color);
 
   span {
     margin-right: 0.25rem;
   }
 
   svg {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    filter: drop-shadow(var(--shadow-sm));
   }
 `;

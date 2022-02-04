@@ -16,7 +16,8 @@ export const EditorContainer = styled(motion.div)`
 export const EditorHeader = styled.div`
   flex-basis: 10%;
   padding-right: 1em;
-  background-color: ${({ theme }) => theme.colors.gray500};
+  background-color: var(--component-bg-light);
+  color: var(--text-dark);
   display: flex;
   align-items: center;
 `;
@@ -29,7 +30,7 @@ export const NoteTitleInput = styled.input`
   border: none;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-dark);
   background-color: transparent;
 
   &:focus {
@@ -42,7 +43,7 @@ export const NoteTitle = styled.h2`
   font-size: 2.5rem;
   line-height: 2.5rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-dark);
   width: 35ch;
 `;
 
@@ -51,7 +52,7 @@ export const StyledEditorContent = styled(EditorContent)`
   flex-basis: 85%;
   position: relative;
   overflow-y: scroll;
-  color: ${({ theme }) => theme.colors.cultured};
+  color: var(--text-dark);
 
   //* Auto-assigned class for content editable div holding editor content
   .ProseMirror {
@@ -141,38 +142,40 @@ export const StyledEditorContent = styled(EditorContent)`
 export const StyledToolbar = styled.div`
   flex-basis: 5%;
   position: relative;
-  border-block: 1px solid ${({ theme }) => theme.colors.gray800};
+  border-block: 1px solid var(--color-gray-400);
   padding: 0.5em 1em;
-
   display: flex;
-
   align-items: center;
   justify-content: space-evenly;
 `;
 
 export const ToolbarBtn = styled.button`
-  background-color: transparent;
-  border: none;
-  color: ${({ theme }) => theme.colors.cultured};
+  background-color: var(--component-bg-light);
+  border: 1px solid var(--color-gray-200);
+  color: var(--text-dark);
   cursor: pointer;
-  border-radius: 20%;
-  transition: all 100ms ease-in-out;
-  border: 1px solid transparent;
+  border-radius: 50%;
+  transition: all 150ms linear;
   padding: 0.5em;
+  display: grid;
+  place-items: center;
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadow.xl};
-    background-color: ${({ theme }) => theme.colors.gray800};
-    border: 1px solid ${({ theme }) => theme.colors.gray600};
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--component-bg-light);
+    transform: scale(1.06);
+    color: var(--color-blue);
   }
 
   &.is-active {
-    box-shadow: ${({ theme }) => theme.shadow.xl};
-    background-color: ${({ theme }) => theme.colors.gray800};
-    border: 1px solid ${({ theme }) => theme.colors.gray600};
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--component-bg-light);
+    transform: scale(1.06);
+    color: var(--color-blue);
   }
 
   svg {
     font-size: 1.125rem;
+    filter: drop-shadow(var(--shadow-sm));
   }
 `;

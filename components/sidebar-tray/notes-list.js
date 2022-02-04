@@ -8,7 +8,7 @@ import { useSWRConfig } from 'swr';
 // Style
 import { InputGroup, TextInput, SpinnerContainer } from '../ui/ui-items.styles';
 import { TrayHeader, ContentList, ProjectsLink } from './tray.styles';
-import { MdAdd, MdDelete } from 'react-icons/md';
+import { MdAdd, MdDelete, MdOutlineCancel } from 'react-icons/md';
 import { theme } from '../../pages/_app';
 
 // Helpers
@@ -36,7 +36,7 @@ const NotesList = ({ currentProjectId }) => {
   if (Object.keys(user).length === 0) {
     return (
       <SpinnerContainer>
-        <Loader type="Oval" color="hsl(212, 13%, 48%)" height={75} width={75} />
+        <Loader type="Oval" color="hsl(0, 0%, 60%)" height={75} width={75} />
       </SpinnerContainer>
     );
   }
@@ -122,8 +122,8 @@ const NotesList = ({ currentProjectId }) => {
         />
 
         <UIBtn
-          icon={<MdAdd />}
-          color={theme.colors.brandPrimary}
+          icon={!newNoteTitle || deleteActive ? <MdOutlineCancel /> : <MdAdd />}
+          color="var(--color-blue)"
           handler={handleAddNote}
           disabled={!newNoteTitle || deleteActive ? true : false}
         />

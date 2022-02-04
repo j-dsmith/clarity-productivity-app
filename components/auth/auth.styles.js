@@ -36,7 +36,9 @@ export const Header = styled.div`
     background-color: var(--color-blue);
     color: var(--text-light);
     text-shadow: var(--shadow-sm);
-    padding: 0 0.125rem;
+    padding: 0.25rem 0.125rem;
+    border-radius: 0.5rem;
+    box-shadow: 0.5px 1px 1px hsl(220deg 60% 50% / 0.7);
   }
 `;
 
@@ -56,6 +58,10 @@ export const StyledField = styled(Field)`
   margin-block: 0.5em;
   border-radius: 0.75em;
   border: 1px solid var(--color-gray-400);
+
+  &:focus {
+    box-shadow: var(--shadow-sm);
+  }
 `;
 
 export const StyledErrorMessage = styled.div`
@@ -64,7 +70,7 @@ export const StyledErrorMessage = styled.div`
   color: var(--color-red);
 `;
 
-export const SubmitBtn = styled(motion.button)`
+export const SubmitBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -72,15 +78,18 @@ export const SubmitBtn = styled(motion.button)`
   padding: 1.25em 1em;
   margin-block: 0.5em;
   border-radius: 0.75em;
-  border: ${({ outline }) =>
-    outline ? `1px solid var(--color-gray-400)` : 'none'};
-  background-color: ${({ bgcolor }) =>
-    bgcolor === 'primary' ? '1px solid var(--color-blue)' : 'transparent'};
-  color: ${({ textdark }) =>
-    textdark ? 'var(--text-dark)' : 'var(--text-light)'};
+  border: var(--border);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-weight: 600;
   text-align: left;
   cursor: pointer;
+  transition: all 150ms linear;
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: var(--box-shadow);
+  }
 
   p {
     margin: 0;
@@ -91,6 +100,7 @@ export const SubmitBtn = styled(motion.button)`
     display: grid;
     place-items: center;
     font-size: 1.25rem;
+    filter: drop-shadow(var(--icon-shadow));
   }
 `;
 

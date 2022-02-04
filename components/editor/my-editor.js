@@ -22,12 +22,7 @@ const MyEditor = ({ currentNoteId, currentProjectId }) => {
   if (Object.keys(user).length === 0) {
     return (
       <SpinnerPage>
-        <Loader
-          type="Oval"
-          color="hsl(212, 13%, 48%)"
-          height={100}
-          width={100}
-        />
+        <Loader type="Oval" color="hsl(0, 0%, 60%)" height={100} width={100} />
       </SpinnerPage>
     );
   }

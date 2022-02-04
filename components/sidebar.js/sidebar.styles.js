@@ -7,6 +7,7 @@ export const StyledSidebar = styled.nav`
   width: min(8vw, 8rem);
   background-color: var(--page-bg-light);
   border-right: 1px solid var(--color-gray-200);
+  box-shadow: var(--shadow-lg);
   position: fixed;
   top: 0;
   left: 0;

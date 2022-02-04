@@ -1,12 +1,16 @@
+// Dependencies
+import { actionTypes } from './location-details-reducer';
+
 // Style
 import { HourlyForecast, WeatherDetailTile } from './forecast.styles';
 import { WiRaindrop } from 'react-icons/wi';
 import { MdOutlineModeEdit } from 'react-icons/md';
 
-// Components
-import UIBtn from '../../ui/ui-btn';
-
-function HourlyWeather({ location, fetchWeatherIcon }) {
+function HourlyWeather({
+  location,
+  fetchWeatherIcon,
+  dispatchForecastDetails,
+}) {
   const { name, hourly, current } = location;
   const { city, state, country } = name;
 
@@ -159,9 +163,19 @@ function HourlyWeather({ location, fetchWeatherIcon }) {
           {country === 'US'
             ? getStateAbbreviation(state).toUpperCase()
             : country}
-          <div id="edit-location">
+          <button
+            id="edit-location"
+            type="button"
+            onClick={() => {
+              console.log('dispatch from hourly forecast');
+              dispatchForecastDetails({
+                type: actionTypes.UPDATE_FORECAST,
+                payload: { name: {}, current: {}, hourly: {} },
+              });
+            }}
+          >
             <MdOutlineModeEdit />
-          </div>
+          </button>
         </h3>
       </div>
       <div id="hourly-weather-detail">{renderHourlyForecast()}</div>

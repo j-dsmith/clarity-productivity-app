@@ -6,7 +6,7 @@ import { useSWRConfig } from 'swr';
 // Style
 import { SpinnerContainer, InputGroup, TextInput } from '../ui/ui-items.styles';
 import { ContentList, TrayHeader } from './tray.styles';
-import { MdAdd, MdDelete } from 'react-icons/md';
+import { MdAdd, MdDelete, MdOutlineCancel } from 'react-icons/md';
 import { theme } from '../../pages/_app';
 
 // Helpers
@@ -30,7 +30,7 @@ const ProjectsList = ({}) => {
   if (Object.keys(user).length === 0) {
     return (
       <SpinnerContainer>
-        <Loader type="Oval" color="hsl(212, 13%, 48%)" height={75} width={75} />
+        <Loader type="Oval" color="hsl(0, 0%, 60%)" height={75} width={75} />
       </SpinnerContainer>
     );
   }
@@ -92,8 +92,10 @@ const ProjectsList = ({}) => {
         />
 
         <UIBtn
-          icon={<MdAdd />}
-          color={theme.colors.brandPrimary}
+          icon={
+            !newProjectTitle || deleteActive ? <MdOutlineCancel /> : <MdAdd />
+          }
+          color="var(--color-blue)"
           handler={handleAddProject}
           disabled={!newProjectTitle || deleteActive ? true : false}
         />

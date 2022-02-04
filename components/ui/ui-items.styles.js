@@ -21,13 +21,6 @@ export const StyledUIBtn = styled.button`
     border: 1px solid var(--color-gray-400);
   }
 
-  &.delete-active {
-    transform: scale(1.06) translateY(-2px);
-    color: var(--color-red);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--color-gray-400);
-  }
-
   &:disabled {
     background-color: var(--color-gray-600);
     color: var(--color-gray-800);
@@ -45,24 +38,32 @@ export const StyledUIBtn = styled.button`
 `;
 
 export const StyledSaveBtn = styled.button`
-  padding: 0.5em 0;
-  width: 3.5rem;
-  margin-left: 0.5em;
-  font-size: 1rem;
-  color: ${({ theme }) => theme.colors.cultured};
-  background-color: ${({ theme, saving }) =>
-    saving ? theme.colors.gray800 : theme.colors.brandPrimary};
-  border: 1px solid
-    ${({ theme, saving }) => (saving ? theme.colors.gray600 : 'transparent')};
-  box-shadow: ${({ theme, saving }) => (saving ? theme.shadow.xl : 'none')};
-  border-radius: 0.5rem;
+  height: 2rem;
+  width: 2rem;
+  font-size: 1.25rem;
+  color: var(--text-light);
+  background-color: ${({ saving }) =>
+    saving ? 'var(--color-gray-800)' : 'var(--color-blue)'};
+  border: none;
+  box-shadow: ${({ saving }) =>
+    saving
+      ? '0px 1px 1px hsl(220deg 60% 50% / 0.333), 0px 2px 2px hsl(220deg 60% 50% / 0.333), 0px 4px 4px hsl(220deg 60% 50% / 0.333)'
+      : '0.5px 1px 1px hsl(220deg 60% 50% / 0.7)'};
+  border-radius: 50%;
   cursor: pointer;
-  transition: all 100ms ease-in-out;
+  transition: all 150ms linear;
+  display: grid;
+  place-items: center;
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadow.xl};
-    background-color: ${({ theme }) => theme.colors.gray800};
-    border: 1px solid ${({ theme }) => theme.colors.gray600};
+    box-shadow: 0px 1px 1px hsl(220deg 60% 50% / 0.333),
+      0px 2px 2px hsl(220deg 60% 50% / 0.333),
+      0px 4px 4px hsl(220deg 60% 50% / 0.333);
+    transform: scale(1.06);
+  }
+
+  svg {
+    filter: drop-shadow(0.5px 1px 1px hsl(220deg 60% 50% / 0.7));
   }
 `;
 
@@ -137,27 +138,32 @@ export const SpinnerPage = styled.div`
 `;
 export const BannerContainer = styled(motion.div)`
   position: absolute;
+  background-color: var(--component-bg-light);
+  width: 20rem;
+  border-radius: 1.5rem;
+  padding: 0.5em;
+
   left: 25%;
   top: 22.5%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  color: ${({ theme }) => theme.colors.cultured};
+  color: var(--text-dark);
   font-size: 2rem;
+  box-shadow: var(--shadow-md);
+  text-shadow: var(--shadow-sm);
 
   p {
     padding: 0;
     margin: 0;
     margin-left: 0.5em;
-    height: 3rem;
   }
 
   span {
-    color: ${({ theme }) => theme.colors.brandPrimary};
+    color: var(--color-blue);
   }
 
   svg {
     font-size: 3rem;
   }
 `;
-
-export const ArrowContainer = styled(motion.div)``;

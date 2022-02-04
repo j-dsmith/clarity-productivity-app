@@ -9,7 +9,7 @@ import { fetchContext } from '../../../helpers/client';
 
 // Style
 import { theme } from '../../../pages/_app';
-import { MdAdd, MdOutlineCancel } from 'react-icons/md';
+import { MdAdd, MdOutlineCancel, MdDelete } from 'react-icons/md';
 import { TasksContainer, TaskList, TaskHeader } from './tasks.styles';
 import {
   InputGroup,
@@ -42,12 +42,7 @@ const Tasks = () => {
         </TaskHeader>
 
         <SpinnerContainer>
-          <Loader
-            type="Oval"
-            color="hsl(212, 13%, 48%)"
-            height={75}
-            width={75}
-          />
+          <Loader type="Oval" color="hsl(0, 0%, 60%)" height={75} width={75} />
         </SpinnerContainer>
       </TasksContainer>
     );
@@ -106,7 +101,7 @@ const Tasks = () => {
           />
           <UIBtn
             icon={!taskTitle || deleteActive ? <MdOutlineCancel /> : <MdAdd />}
-            color={theme.colors.brandPrimary}
+            color="var(--color-blue)"
             handler={tasks && handleAddTask}
             disabled={!taskTitle || deleteActive ? true : false}
           />

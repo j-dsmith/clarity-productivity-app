@@ -21,10 +21,7 @@ const ProjectTile = ({
 }) => {
   if (deleteActive) {
     return (
-      <ProjectTileContainer
-        deleteactive="true"
-        onClick={() => handleDeleteProject(id)}
-      >
+      <ProjectTileContainer onClick={() => handleDeleteProject(id)}>
         <TileHeader>
           <h3>{title}</h3>
           {/* <Tag variants={tag} whileHover="hover" color="red" /> */}
@@ -33,7 +30,13 @@ const ProjectTile = ({
           <Date>
             Created: <span>{createdAt}</span>
           </Date>
-          <InfoBox deleteactive="true">
+          <InfoBox
+            style={{
+              '--color': deleteActive
+                ? 'hsl(0,100%, 71%)'
+                : 'hsl(222, 100%, 61%)',
+            }}
+          >
             <MdCancel />
           </InfoBox>
         </TileFooter>
@@ -51,7 +54,7 @@ const ProjectTile = ({
           <Date>
             Created: <span>{createdAt}</span>
           </Date>
-          <InfoBox>
+          <InfoBox style={{ '--color': 'hsl(222, 100%, 61%)' }}>
             <span>{numNotes}</span>
             <MdDescription />
           </InfoBox>

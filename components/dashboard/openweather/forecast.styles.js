@@ -65,15 +65,12 @@ export const HourlyForecast = styled.div`
     gap: 0.5em;
   }
 
-  #weather-description {
-    text-transform: capitalize;
-  }
-
-  #location-name {
-    font-weight: 500;
+  #edit-location {
+    border: none;
+    background-color: transparent;
     display: flex;
     align-items: center;
-    gap: 0.5em;
+    font-size: 1rem;
 
     svg {
       color: var(--color-gray-800);
@@ -86,6 +83,15 @@ export const HourlyForecast = styled.div`
         filter: drop-shadow(var(--shadow-sm));
       }
     }
+  }
+
+  #weather-description {
+    text-transform: capitalize;
+  }
+
+  #location-name {
+    font-weight: 500;
+    display: flex;
   }
 
   #hourly-weather-detail {

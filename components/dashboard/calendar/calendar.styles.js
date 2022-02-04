@@ -48,7 +48,6 @@ export const WeekdayHeader = styled.h3`
 `;
 
 export const CalendarBtn = styled.button`
-  border: none;
   background: var(--color-gray-400);
   height: 2.25rem;
   width: 2.25rem;

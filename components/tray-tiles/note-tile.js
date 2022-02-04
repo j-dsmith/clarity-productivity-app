@@ -23,7 +23,6 @@ const NoteTile = ({
     return (
       <NoteTileContainer
         onClick={() => handleDeleteNote(currentProjectId, noteId)}
-        deleteactive="true"
       >
         <TileHeader>
           <h3>{title}</h3>
@@ -32,7 +31,13 @@ const NoteTile = ({
           <Date>
             Created: <span>{createdAt}</span>
           </Date>
-          <InfoBox deleteactive="true">
+          <InfoBox
+            style={{
+              '--color': deleteActive
+                ? 'hsl(0,100%, 71%)'
+                : 'hsl(222, 100%, 61%)',
+            }}
+          >
             <MdCancel />
           </InfoBox>
         </TileFooter>
@@ -50,7 +55,7 @@ const NoteTile = ({
           <Date>
             Created: <span>{createdAt}</span>
           </Date>
-          <InfoBox>
+          <InfoBox style={{ '--color': 'hsl(222, 100%, 61%)' }}>
             <MdEdit />
           </InfoBox>
         </TileFooter>

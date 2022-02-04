@@ -22,7 +22,7 @@ import HourlyWeather from './hourly-weather';
 
 function Forecast() {
   const [searchLocation, setSearchLocation] = useState('');
-  const [locationDetails, dispatchLocationDetails] = useReducer(
+  const [locationDetails, dispatchForecastDetails] = useReducer(
     locationDetailsReducer,
     initialState
   );
@@ -48,7 +48,7 @@ function Forecast() {
 
     if (Object.entries(forecast).length > 0) {
       // Update state with fetched info
-      dispatchLocationDetails({
+      dispatchForecastDetails({
         type: actionTypes.UPDATE_FORECAST,
         payload: {
           name: { city, state, country },
@@ -150,7 +150,7 @@ function Forecast() {
           Object.entries(forecast).length > 0 &&
           Object.entries(reverseGeocodeResult.data[0]).length > 0
         ) {
-          dispatchLocationDetails({
+          dispatchForecastDetails({
             type: actionTypes.UPDATE_FORECAST,
             payload: {
               name: { city, state, country },
@@ -174,6 +174,7 @@ function Forecast() {
         <HourlyWeather
           location={locationDetails}
           fetchWeatherIcon={fetchWeatherIcon}
+          dispatchForecastDetails={dispatchForecastDetails}
         />
       )}
     </ForecastContainer>

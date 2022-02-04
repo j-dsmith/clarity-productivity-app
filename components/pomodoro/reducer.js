@@ -13,6 +13,52 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.INCREMENT_BREAK_VALUE:
+      return {
+        ...state,
+        breakValue: state.breakValue + 1,
+        timerValue:
+          state.timerType === 'break'
+            ? state.breakValue * 60 + 60
+            : state.timerValue,
+      };
+
+    case actionTypes.DECREMENT_BREAK_VALUE:
+      if (state.breakValue <= 1) {
+        return { ...state, breakValue: 1 };
+      }
+      return {
+        ...state,
+        breakValue: state.breakValue - 1,
+        timerValue:
+          state.timerType === 'break'
+            ? state.breakValue * 60 - 60
+            : state.timerValue,
+      };
+
+    case actionTypes.INCREMENT_SESSION_VALUE:
+      return {
+        ...state,
+        sessionValue: state.sessionValue + 1,
+        timerValue:
+          state.timerType === 'session'
+            ? state.sessionValue * 60 + 60
+            : state.timerValue,
+      };
+
+    case actionTypes.DECREMENT_SESSION_VALUE:
+      if (state.sessionValue <= 1) {
+        return { ...state, sessionValue: 1 };
+      }
+      return {
+        ...state,
+        sessionValue: state.sessionValue - 1,
+        timerValue:
+          state.timerType === 'session'
+            ? state.sessionValue * 60 - 60
+            : state.timerValue,
+      };
+
     case actionTypes.SET_TIMER_ACTIVE:
       return { ...state, timerActive: action.timerActive };
 

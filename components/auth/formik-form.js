@@ -39,16 +39,6 @@ const MyForm = ({ showLogin, setShowLogin }) => {
   const [loginSubmitLoading, setLoginSubmitLoading] = useState(false);
   const [guestSubmitLoading, setGuestSubmitLoading] = useState(false);
 
-  // Framer-motion variant for form buttons
-  const btn = {
-    hover: {
-      transition: { duration: 0.15, type: 'ease' },
-      scale: 1.03,
-      boxShadow:
-        '0 1px 1px hsl(0 0% 0% / 0.075), 0 2px 2px hsl(0 0% 0% / 0.075), 0 4px 4px hsl(0 0% 0% / 0.075), 0 8px 8px hsl(0 0% 0% / 0.075)',
-    },
-  };
-
   //get router
   const router = useRouter();
 
@@ -150,10 +140,15 @@ const MyForm = ({ showLogin, setShowLogin }) => {
             ) : null}
 
             <SubmitBtn
+              style={{
+                '--box-shadow':
+                  '0px 1px 1px hsl(220deg 60% 50% / 0.333), 0px 2px 2px hsl(220deg 60% 50% / 0.333), 0px 4px 4px hsl(220deg 60% 50% / 0.333)',
+                '--bg-color': 'var(--color-blue)',
+                '--text-color': 'var(--text-light)',
+                '--icon-shadow': '0.5px 1px 1px hsl(220deg 60% 50% / 0.7);',
+              }}
               id="login"
               type="submit"
-              bgcolor="primary"
-              variants={btn}
               whileHover="hover"
             >
               <p>{showLogin ? 'Login to Your Account' : 'Create Account'}</p>
@@ -166,11 +161,15 @@ const MyForm = ({ showLogin, setShowLogin }) => {
           </StyledForm>
           {!showLogin && (
             <GuestLoginBtn
+              style={{
+                '--box-shadow': 'var(--shadow-md)',
+                '--bg-color': 'var(--page-bg-light)',
+                '--text-color': 'var(--text-dark)',
+                '--border': '1px solid var(--color-gray-400)',
+                '--icon-shadow': 'var(--shadow-sm)',
+              }}
               id="guest"
               type="submit"
-              outline="true"
-              textdark="true"
-              variants={btn}
               whileHover="hover"
               onClick={handleGuestLogin}
             >

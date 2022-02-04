@@ -9,13 +9,13 @@ export const TasksContainer = styled.section`
   box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   justify-content: flex-start;
 `;
 
 export const TaskHeader = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
   flex-grow: 1;
   padding: 1.5em;
   padding-bottom: 0;
@@ -29,7 +29,6 @@ export const TaskList = styled.div`
   flex-grow: 2;
   margin-bottom: 1em;
   padding: 0.5em 0;
-  border-top: 1px solid var(--color-gray-400);
   border-bottom: 1px solid var(--color-gray-400);
   overflow-y: scroll;
 
