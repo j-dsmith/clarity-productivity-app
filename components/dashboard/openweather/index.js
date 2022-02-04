@@ -106,11 +106,12 @@ function Forecast() {
             disabled={!searchLocation ? true : false}
             handler={getForecastByName}
           />
-          <UIBtn
+          {/* Issue with user coordinates when pushed to vercel */}
+          {/* <UIBtn
             icon={<MdOutlineLocationOn />}
             color="var(--text-dark)"
             handler={getUserCoordinates}
-          />
+          /> */}
         </InputGroup>
         <p className="search-format">
           For US Locations, format as (City, State, Country)
