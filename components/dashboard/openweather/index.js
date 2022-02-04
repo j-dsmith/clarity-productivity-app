@@ -64,25 +64,26 @@ function Forecast() {
     const permission = await navigator.permissions.query({
       name: 'geolocation',
     });
-    console.log(permission.state);
-    try {
-      if (permission.state === 'granted') {
-        navigator.geolocation.getCurrentPosition((pos) =>
-          setGeolocation(pos.coords)
-        );
-      } else if (permisson.state === 'prompt') {
-        console.log(permission.state);
-        navigator.geolocation.getCurrentPosition(
-          (pos) => setGeolocation(pos.coords),
-          (error) => alert(error)
-        );
-      } else if (permission.state === 'denied') {
-        alert(
-          'You have not authorized location tracking for this application, please change these permissions or search using location name instead.'
-        );
+    if (permission.state) {
+      try {
+        if (permission.state === 'granted') {
+          navigator.geolocation.getCurrentPosition((pos) =>
+            setGeolocation(pos.coords)
+          );
+        } else if (permisson.state === 'prompt') {
+          console.log(permission.state);
+          navigator.geolocation.getCurrentPosition(
+            (pos) => setGeolocation(pos.coords),
+            (error) => alert(error)
+          );
+        } else if (permission.state === 'denied') {
+          alert(
+            'You have not authorized location tracking for this application, please change these permissions or search using location name instead.'
+          );
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 
