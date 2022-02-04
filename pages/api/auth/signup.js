@@ -18,7 +18,6 @@ const handler = async (req, res) => {
 
   // Destructure request body
   const { email, password, isGuest } = req.body;
-  console.log(req.body);
   // Validate email and password
   if (!email || !email.includes('@') || !password) {
     res.status(422).json({

@@ -65,19 +65,22 @@ function Forecast() {
       name: 'geolocation',
     });
     console.log(permission.state);
-    if (permission.state === 'granted') {
-      await navigator.geolocation.getCurrentPosition((pos) =>
-        setGeolocation(pos.coords)
-      );
-    } else if (permisson.state === 'prompt') {
-      await navigator.geolocation.getCurrentPosition(
-        (pos) => setGeolocation(pos.coords),
-        (error) => alert(error)
-      );
-    } else if (permission.state === 'denied') {
-      alert(
-        'You have not authorized location tracking for this application, please change these permissions or search using location name instead.'
-      );
+    if (permission.state) {
+      if (permission.state === 'granted') {
+        navigator.geolocation.getCurrentPosition((pos) =>
+          setGeolocation(pos.coords)
+        );
+      } else if (permisson.state === 'prompt') {
+        console.log(permission.state);
+        navigator.geolocation.getCurrentPosition(
+          (pos) => setGeolocation(pos.coords),
+          (error) => alert(error)
+        );
+      } else if (permission.state === 'denied') {
+        alert(
+          'You have not authorized location tracking for this application, please change these permissions or search using location name instead.'
+        );
+      }
     }
   }
 
@@ -164,8 +167,6 @@ function Forecast() {
       }
     })();
   }, [latitude, longitude]);
-
-  console.log(Object.entries(geolocation).length);
 
   return (
     <ForecastContainer>

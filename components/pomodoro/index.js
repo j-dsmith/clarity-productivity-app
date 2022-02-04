@@ -84,8 +84,6 @@ const Pomodoro = () => {
     }
   }, [state.timerValue]);
 
-  console.log(state.timerValue);
-
   return (
     <PomodoroPage>
       {showConfetti && (

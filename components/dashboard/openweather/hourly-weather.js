@@ -167,7 +167,6 @@ function HourlyWeather({
             id="edit-location"
             type="button"
             onClick={() => {
-              console.log('dispatch from hourly forecast');
               dispatchForecastDetails({
                 type: actionTypes.UPDATE_FORECAST,
                 payload: { name: {}, current: {}, hourly: {} },

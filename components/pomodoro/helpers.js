@@ -61,15 +61,12 @@ export const incrementValue = (state, dispatch, timerType) => {
 };
 export const decrementValue = (state, dispatch, timerType) => {
   if (timerType === 'break') {
-    console.log('in decrement for break timer');
     dispatch({
       ...state,
       type: actionTypes.DECREMENT_BREAK_VALUE,
     });
   }
   if (timerType === 'session') {
-    console.log('in decrement for session timer');
-
     dispatch({
       ...state,
       type: actionTypes.DECREMENT_SESSION_VALUE,
