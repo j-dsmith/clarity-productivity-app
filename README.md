@@ -1,84 +1,20 @@
-# Example app with styled-components
+# Clarity
 
-This example features how you use a different styling solution than [styled-jsx](https://github.com/vercel/styled-jsx) that also supports universal styles. That means we can serve the required styles for the first render within the HTML and then load the rest in the client. In this case we are using [styled-components](https://github.com/styled-components/styled-components).
+Clarity is a fullstack productivity app built with [Next.js]('https://nextjs.org/) and [MongoDB](https://www.mongodb.com/). It features user persistence and authentication using [NextAuth]('https://next-auth.js.org/'), and a headless RichText WYSIWYG editor to allow the user to create and persist projects and notes. Several other custom components round out the productivity features of the application
 
-For this purpose we are extending the `<Document />` and injecting the server side rendered styles into the `<head>`, and also adding the `babel-plugin-styled-components` (which is required for server side rendering). Additionally we set up a global [theme](https://www.styled-components.com/docs/advanced#theming) for styled-components using NextJS custom [`<App>`](https://nextjs.org/docs/advanced-features/custom-app) component.
+## Components
 
-## Preview
+All components are accessible from the Sidebar, which is visible immediately after a user signs in.
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+The core of Clarity is the RichText editor, which was built using [tiptap](https://tiptap.dev/api/editor/), a headless RichTextEditor. The functionality was modeled after the Notes application in IOS and MacOS, allowing users to create folders for managing ideas or projects. Notes are created from within each project and can be saved to the users profile.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-styled-components)
+The Dashboard is composed of 4 separate widgets: a Calendar, Forecast, Task List, and Stats for the users projects, completed tasks, and pomodoro cycles. The weather forecast uses data fetched from [OpenWeatherMap](https://tiptap.dev/api/editor/).
 
-## Deploy your own
+A Pomodoro Timer allows the user to focus using the "Pomodoro Technique", a method of study that cycles from a period of study to a short break. This method helps optimize studying by targeting a study session that does not exceed the human attention span, followed by a short break to allow the mind time to recover. A Pomodoro cycle is typically four cycles of study and break, followed by a longer rest period. 
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+This component allows the user to set their own time limits for sessions and breaks, and will track the rounds completed for the current cycle. If 4 cycles are completed, a celebration animation occurs and the number of completed Pomodoro cycles is tracked in the users profile, displaying in the Stats component of the Dashboard. Currently the timer does not remain active if the user navigates away to a different part of the application but that feature will be added in a future update.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-styled-components&project-name=with-styled-components&repository-name=with-styled-components)
+A section for Flashcards is currently in development, and will allow the user to create study decks of flashcards that can be studied using space repetition. The study status of each deck will be tracked in the user's profile.
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-styled-components with-styled-components-app
-# or
-yarn create next-app --example with-styled-components with-styled-components-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-### Try it on CodeSandbox
-
-[Open this example on CodeSandbox](https://codesandbox.io/s/github/vercel/next.js/tree/canary/examples/with-styled-components)
-
-### Notes
-
-When wrapping a [Link](https://nextjs.org/docs/api-reference/next/link) from `next/link` within a styled-component, the [as](https://styled-components.com/docs/api#as-polymorphic-prop) prop provided by `styled` will collide with the Link's `as` prop and cause styled-components to throw an `Invalid tag` error. To avoid this, you can either use the recommended [forwardedAs](https://styled-components.com/docs/api#forwardedas-prop) prop from styled-components or use a different named prop to pass to a `styled` Link.
-
-<details>
-<summary>Click to expand workaround example</summary>
-<br />
-
-**components/StyledLink.js**
-
-```javascript
-import Link from 'next/link'
-import styled from 'styled-components'
-
-const StyledLink = ({ as, children, className, href }) => (
-  <Link href={href} as={as} passHref>
-    <a className={className}>{children}</a>
-  </Link>
-)
-
-export default styled(StyledLink)`
-  color: #0075e0;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    color: #40a9ff;
-  }
-
-  &:focus {
-    color: #40a9ff;
-    outline: none;
-    border: 0;
-  }
-`
-```
-
-**pages/index.js**
-
-```javascript
-import StyledLink from '../components/StyledLink'
-
-export default () => (
-  <StyledLink href="/post/[pid]" forwardedAs="/post/abc">
-    First post
-  </StyledLink>
-)
-```
-
-</details>
+A trash or deleted section is the final feature in development, which will allow the user to recover deleted projects and notes, or clear the trash to remove them permenantly.
+ 
