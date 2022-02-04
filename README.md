@@ -1,6 +1,6 @@
 # Clarity
 
-Clarity is a fullstack productivity app built with [Next.js]('https://nextjs.org/) and [MongoDB](https://www.mongodb.com/). It features user persistence and authentication using [NextAuth]('https://next-auth.js.org/'), and a headless RichText WYSIWYG editor to allow the user to create and persist projects and notes. Several other custom components round out the productivity features of the application
+Clarity is a fullstack productivity app built with [Next.js](https://nextjs.org/) and [MongoDB](https://www.mongodb.com/). It features user persistence and authentication using [NextAuth](https://next-auth.js.org/), and a headless RichText WYSIWYG editor to allow the user to create and persist projects and notes. Several other custom components round out the productivity features of the application
 
 ## Navigating the App
 The app features authentication to get past the landing page, but a guest account can be used that will sign the user in and allow them to explore the app with full functionality without their data persisting when they log out.
