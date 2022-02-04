@@ -112,11 +112,12 @@ function Forecast() {
             handler={getForecastByName}
           />
           {/* Issue with user coordinates when pushed to vercel */}
-          <UIBtn
+
+          {/* <UIBtn
             icon={<MdOutlineLocationOn />}
             color="var(--text-dark)"
             handler={getUserCoordinates}
-          />
+          /> */}
         </InputGroup>
         <p className="search-format">
           For US Locations, format as (City, State, Country)
