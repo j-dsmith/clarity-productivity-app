@@ -64,13 +64,13 @@ function Forecast() {
     const permission = await navigator.permissions.query({
       name: 'geolocation',
     });
-    console.log(permission);
+    console.log(permission.state);
     if (permission.state === 'granted') {
-      navigator.geolocation.getCurrentPosition((pos) =>
+      await navigator.geolocation.getCurrentPosition((pos) =>
         setGeolocation(pos.coords)
       );
     } else if (permisson.state === 'prompt') {
-      navigator.geolocation.getCurrentPosition(
+      await navigator.geolocation.getCurrentPosition(
         (pos) => setGeolocation(pos.coords),
         (error) => alert(error)
       );
