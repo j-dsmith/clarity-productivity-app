@@ -65,7 +65,7 @@ function Forecast() {
       name: 'geolocation',
     });
     console.log(permission.state);
-    if (permission.state) {
+    try {
       if (permission.state === 'granted') {
         navigator.geolocation.getCurrentPosition((pos) =>
           setGeolocation(pos.coords)
@@ -81,6 +81,8 @@ function Forecast() {
           'You have not authorized location tracking for this application, please change these permissions or search using location name instead.'
         );
       }
+    } catch (error) {
+      console.log(error);
     }
   }
 
