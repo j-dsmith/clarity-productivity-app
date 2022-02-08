@@ -29,4 +29,4 @@ Finally, I have experimented with Draft.js and React Quill for RichText Editors 
 - Persisting the Pomodoro timer state to allow the user to navigate throughout the site while keeping an active timer cycle would be a feature to implement given more time. 
 - This project is a continued iteration of several previous verions and has changed design methodologies and techniques several times. In the future, or given enough time to expand this app to React Native, I would start the design process from wireframe and take a more structured approach to development rather than the experimental approach I took this time.
 
-#### This project can be viewed live on Vercel: [Clarity](clarity-productivity-app.vercel.app)
+#### This project can be viewed live on Vercel: [Clarity](http://clarity-productivity-app.vercel.app)
