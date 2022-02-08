@@ -134,7 +134,7 @@ function Forecast() {
     return (
       <div className="image">
         <Image
-          src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
+          src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
           height={100}
           width={100}
         />
