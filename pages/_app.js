@@ -1,31 +1,31 @@
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { SessionProvider } from 'next-auth/react';
-import { AnimatePresence } from 'framer-motion';
-import { AnimationContextProvider } from '../store/animation-ctx';
-import Head from 'next/head';
-import Layout from '../components/layout';
-import { UserContextProvider } from '../store/user-ctx';
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { SessionProvider } from "next-auth/react";
+import { AnimatePresence } from "framer-motion";
+import { AnimationContextProvider } from "../store/animation-ctx";
+import Head from "next/head";
+import Layout from "../components/layout";
+import { UserContextProvider } from "../store/user-ctx";
 
 export const theme = {
   colors: {
-    gray100: 'hsl(214, 14%, 77%)',
-    gray200: 'hsl(211, 13%, 59%)',
-    gray300: 'hsl(212, 13%, 48%)',
-    gray400: 'hsl(210, 13%, 42%)',
-    gray500: 'hsl(213, 13%, 36%)',
-    gray600: 'hsl(213, 13%, 31%)',
-    gray700: 'hsl(210, 13%, 25%)',
-    gray800: 'hsl(212, 14%, 19%)',
-    gray900: 'hsl(240, 14%, 1%)',
-    cultured: 'hsl(20, 33%, 98%)',
-    bittersweet: 'hsl(0, 100%, 71%)',
-    brandPrimary: 'hsl(222, 100%, 61%)',
+    gray100: "hsl(214, 14%, 77%)",
+    gray200: "hsl(211, 13%, 59%)",
+    gray300: "hsl(212, 13%, 48%)",
+    gray400: "hsl(210, 13%, 42%)",
+    gray500: "hsl(213, 13%, 36%)",
+    gray600: "hsl(213, 13%, 31%)",
+    gray700: "hsl(210, 13%, 25%)",
+    gray800: "hsl(212, 14%, 19%)",
+    gray900: "hsl(240, 14%, 1%)",
+    cultured: "hsl(20, 33%, 98%)",
+    bittersweet: "hsl(0, 100%, 71%)",
+    brandPrimary: "hsl(222, 100%, 61%)",
   },
   shadow: {
-    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-    xl: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px',
-    dbXl: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+    md: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    lg: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+    xl: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+    dbXl: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
   },
 };
 
@@ -91,7 +91,7 @@ body {
 * {
   box-sizing: border-box;
 }
-
+}
 `;
 
 export default function App({
