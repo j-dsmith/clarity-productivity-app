@@ -130,7 +130,11 @@ const MyForm = ({ showLogin, setShowLogin }) => {
 
             {/* Password */}
 
-            <StyledField name="password" type="password" />
+            <StyledField
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
             {formik.touched.password && formik.errors.password ? (
               <StyledErrorMessage>{formik.errors.password}</StyledErrorMessage>
             ) : null}
