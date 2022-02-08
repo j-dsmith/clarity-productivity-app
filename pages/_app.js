@@ -106,7 +106,7 @@ export default function App({
           <GlobalStyle />
           <ThemeProvider theme={theme}>
             <Head>
-              <title>_wrkingTitle</title>
+              <title>Clarity</title>
               <meta
                 name="viewport"
                 content="initial-scale=1.0, width=device-width"
