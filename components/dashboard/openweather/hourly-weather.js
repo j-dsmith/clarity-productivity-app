@@ -73,11 +73,11 @@ function HourlyWeather({
   function renderHourlyForecast() {
     const sixHourForecast = hourly.slice(1, 7);
     return sixHourForecast.map(({ dt, weather, temp, pop }) => {
-      console.log(weather);
+      const icon = weather[0].icon;
       return (
         <WeatherDetailTile key={dt}>
           <p className="hour">{convertTimestampToHour(dt)}</p>
-          {fetchWeatherIcon(weather[0].icon)}
+          {fetchWeatherIcon(icon)}
           <p className="temp">{Math.floor(temp)}˚</p>
           <p className="precipitation">
             <WiRaindrop />

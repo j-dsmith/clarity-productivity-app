@@ -130,6 +130,7 @@ function Forecast() {
   }
 
   function fetchWeatherIcon(icon) {
+    console.log(icon);
     return (
       <div className="image">
         <Image
