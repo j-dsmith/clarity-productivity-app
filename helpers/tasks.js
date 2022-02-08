@@ -1,7 +1,6 @@
 // Dependencies
 import axios from "axios";
 
-// Add new task
 export const addTask = async (text) => {
   const response = await axios.post("/api/tasks", {
     text,

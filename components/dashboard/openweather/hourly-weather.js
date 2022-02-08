@@ -1,10 +1,10 @@
 // Dependencies
-import { actionTypes } from './location-details-reducer';
+import { actionTypes } from "./location-details-reducer";
 
 // Style
-import { HourlyForecast, WeatherDetailTile } from './forecast.styles';
-import { WiRaindrop } from 'react-icons/wi';
-import { MdOutlineModeEdit } from 'react-icons/md';
+import { HourlyForecast, WeatherDetailTile } from "./forecast.styles";
+import { WiRaindrop } from "react-icons/wi";
+import { MdOutlineModeEdit } from "react-icons/md";
 
 function HourlyWeather({
   location,
@@ -30,42 +30,42 @@ function HourlyWeather({
   }
 
   function convertWindDegreeToCompass(degree) {
-    let direction = '';
+    let direction = "";
 
     if (degree >= 349) {
-      direction = 'N';
+      direction = "N";
       return direction;
     }
     if (degree > 304) {
-      direction = 'NW';
+      direction = "NW";
       return direction;
     }
     if (degree > 259) {
-      direction = 'W';
+      direction = "W";
       return direction;
     }
     if (degree > 214) {
-      direction = 'SW';
+      direction = "SW";
       return direction;
     }
     if (degree > 169) {
-      direction = 'S';
+      direction = "S";
       return direction;
     }
     if (degree > 124) {
-      direction = 'SE';
+      direction = "SE";
       return direction;
     }
     if (degree > 79) {
-      direction = 'E';
+      direction = "E";
       return direction;
     }
     if (degree > 34) {
-      direction = 'NE';
+      direction = "NE";
       return direction;
     }
     if (degree >= 0) {
-      direction = 'N';
+      direction = "N";
       return direction;
     }
   }
@@ -73,6 +73,7 @@ function HourlyWeather({
   function renderHourlyForecast() {
     const sixHourForecast = hourly.slice(1, 7);
     return sixHourForecast.map(({ dt, weather, temp, pop }) => {
+      console.log(weather);
       return (
         <WeatherDetailTile key={dt}>
           <p className="hour">{convertTimestampToHour(dt)}</p>
@@ -89,63 +90,63 @@ function HourlyWeather({
 
   function getStateAbbreviation(state) {
     const lowercaseState = state.toLowerCase();
-    let abbreviatedState = '';
+    let abbreviatedState = "";
 
     const states = {
-      alabama: 'AL',
-      alaska: 'AK',
-      arizona: 'AZ',
-      arkansas: 'AR',
-      california: 'CA',
-      colorado: 'CO',
-      connecticut: 'CT',
-      delaware: 'DE',
-      florida: 'FL',
-      georgia: 'GA',
-      hawaii: 'HI',
-      idaho: 'ID',
-      illinois: 'IL',
-      indiana: 'IN',
-      iowa: 'IA',
-      kansas: 'KS',
-      kentucky: 'KY',
-      louisiana: 'LA',
-      maine: 'ME',
-      maryland: 'MD',
-      massachusetts: 'MA',
-      michigan: 'MI',
-      minnesota: 'MN',
-      mississippi: 'MS',
-      missouri: 'MO',
-      montana: 'MT',
-      nebraska: 'NE',
-      nevada: 'NV',
-      newhampshire: 'NH',
-      newjersey: 'NJ',
-      newmexico: 'NM',
-      newyork: 'NY',
-      northcarolina: 'NC',
-      northdakota: 'ND',
-      ohio: 'OH',
-      oklahoma: 'OK',
-      oregon: 'OR',
-      pennsylvania: 'PA',
-      rhodeisland: 'RI',
-      southcarolina: 'SC',
-      southdakota: 'SD',
-      tennessee: 'TN',
-      texas: 'TX',
-      utah: 'UT',
-      vermont: 'VT',
-      virginia: 'VA',
-      washington: 'WA',
-      westvirginia: 'WV',
-      wisconsin: 'WI',
-      wyoming: 'WY',
+      alabama: "AL",
+      alaska: "AK",
+      arizona: "AZ",
+      arkansas: "AR",
+      california: "CA",
+      colorado: "CO",
+      connecticut: "CT",
+      delaware: "DE",
+      florida: "FL",
+      georgia: "GA",
+      hawaii: "HI",
+      idaho: "ID",
+      illinois: "IL",
+      indiana: "IN",
+      iowa: "IA",
+      kansas: "KS",
+      kentucky: "KY",
+      louisiana: "LA",
+      maine: "ME",
+      maryland: "MD",
+      massachusetts: "MA",
+      michigan: "MI",
+      minnesota: "MN",
+      mississippi: "MS",
+      missouri: "MO",
+      montana: "MT",
+      nebraska: "NE",
+      nevada: "NV",
+      newhampshire: "NH",
+      newjersey: "NJ",
+      newmexico: "NM",
+      newyork: "NY",
+      northcarolina: "NC",
+      northdakota: "ND",
+      ohio: "OH",
+      oklahoma: "OK",
+      oregon: "OR",
+      pennsylvania: "PA",
+      rhodeisland: "RI",
+      southcarolina: "SC",
+      southdakota: "SD",
+      tennessee: "TN",
+      texas: "TX",
+      utah: "UT",
+      vermont: "VT",
+      virginia: "VA",
+      washington: "WA",
+      westvirginia: "WV",
+      wisconsin: "WI",
+      wyoming: "WY",
     };
 
-    if (state.includes(' ')) {
-      const formattedStateForSearch = lowercaseState.split(' ').join('');
+    if (state.includes(" ")) {
+      const formattedStateForSearch = lowercaseState.split(" ").join("");
       abbreviatedState = states[formattedStateForSearch];
     } else {
       abbreviatedState = states[lowercaseState];
@@ -159,8 +160,8 @@ function HourlyWeather({
       <div id="forecast-header">
         <p id="weather-description">{current.weather[0].description}</p>
         <h3 id="location-name">
-          {city},{' '}
-          {country === 'US'
+          {city},{" "}
+          {country === "US"
             ? getStateAbbreviation(state).toUpperCase()
             : country}
           <button
@@ -183,9 +184,9 @@ function HourlyWeather({
           Humidity: <span>{current.humidity}%</span>
         </p>
         <p>
-          Wind:{' '}
+          Wind:{" "}
           <span>
-            {Math.floor(current.wind_speed)} MPH{' '}
+            {Math.floor(current.wind_speed)} MPH{" "}
             {convertWindDegreeToCompass(current.wind_deg)}
           </span>
         </p>

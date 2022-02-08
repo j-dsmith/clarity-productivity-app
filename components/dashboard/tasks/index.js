@@ -1,37 +1,37 @@
 // Dependencies
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useSWRConfig } from 'swr';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { useSWRConfig } from "swr";
 
 // Helpers
-import { addTask, deleteTask } from '../../../helpers/tasks';
-import { fetchContext } from '../../../helpers/client';
+import { addTask, deleteTask } from "../../../helpers/tasks";
+import { fetchContext } from "../../../helpers/client";
 
 // Style
-import { theme } from '../../../pages/_app';
-import { MdAdd, MdOutlineCancel, MdDelete } from 'react-icons/md';
-import { TasksContainer, TaskList, TaskHeader } from './tasks.styles';
+import { theme } from "../../../pages/_app";
+import { MdAdd, MdOutlineCancel, MdDelete } from "react-icons/md";
+import { TasksContainer, TaskList, TaskHeader } from "./tasks.styles";
 import {
   InputGroup,
   SpinnerContainer,
   TextInput,
-} from '../../ui/ui-items.styles';
+} from "../../ui/ui-items.styles";
 
 // Components
-import UIBtn from '../../ui/ui-btn';
-import TaskTile from './task-tile';
-import Loader from 'react-loader-spinner';
-import DeleteBtn from '../../ui/delete-btn';
+import UIBtn from "../../ui/ui-btn";
+import TaskTile from "./task-tile";
+import Loader from "react-loader-spinner";
+import DeleteBtn from "../../ui/delete-btn";
 
 const Tasks = () => {
   // State Initialization for new task input and active delete state
-  const [taskTitle, setTaskTitle] = useState('');
+  const [taskTitle, setTaskTitle] = useState("");
   const [deleteActive, setDeleteActive] = useState(false);
 
   const { mutate } = useSWRConfig();
 
   // Get user from context
-  const { user } = fetchContext('user');
+  const { user } = fetchContext("user");
 
   // Check if user is empty object or if loaded successfully
   if (Object.keys(user).length === 0) {
@@ -71,16 +71,16 @@ const Tasks = () => {
 
   const handleAddTask = async () => {
     // Reset input
-    setTaskTitle('');
+    setTaskTitle("");
     // Run add task helper to send POST request to /api/tasks
     const response = await addTask(taskTitle);
-    mutate('/api/user');
+    mutate("/api/user");
   };
 
   const handleDeleteTask = async (id) => {
     // Run delete task helper to send DELETE request to /api/tasks/[taskId]
     const response = await deleteTask(id);
-    mutate('/api/user');
+    mutate("/api/user");
   };
 
   const toggleDeleteActive = () => {
@@ -94,7 +94,7 @@ const Tasks = () => {
         <InputGroup width="80%">
           <TextInput
             type="text"
-            placeholder={deleteActive ? '' : 'Task Title'}
+            placeholder={deleteActive ? "" : "Task Title"}
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
             disabled={deleteActive}
