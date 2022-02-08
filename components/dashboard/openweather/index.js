@@ -1,27 +1,27 @@
 // Dependencies
-import { useState, useReducer, useEffect } from 'react';
-import axios from 'axios';
-import Image from 'next/image';
+import { useState, useReducer, useEffect } from "react";
+import axios from "axios";
+import Image from "next/image";
 import locationDetailsReducer, {
   actionTypes,
   initialState,
-} from './location-details-reducer';
+} from "./location-details-reducer";
 
 // Style
-import { ForecastContainer, LocationSearchContainer } from './forecast.styles';
+import { ForecastContainer, LocationSearchContainer } from "./forecast.styles";
 
 // Components
 
 // Style
-import { MdAdd, MdOutlineCancel, MdOutlineLocationOn } from 'react-icons/md';
+import { MdAdd, MdOutlineCancel, MdOutlineLocationOn } from "react-icons/md";
 
 // Components
-import { InputGroup, TextInput } from '../../ui/ui-items.styles';
-import UIBtn from '../../ui/ui-btn';
-import HourlyWeather from './hourly-weather';
+import { InputGroup, TextInput } from "../../ui/ui-items.styles";
+import UIBtn from "../../ui/ui-btn";
+import HourlyWeather from "./hourly-weather";
 
 function Forecast() {
-  const [searchLocation, setSearchLocation] = useState('');
+  const [searchLocation, setSearchLocation] = useState("");
   const [locationDetails, dispatchForecastDetails] = useReducer(
     locationDetailsReducer,
     initialState
@@ -30,12 +30,12 @@ function Forecast() {
 
   async function getForecastByName() {
     // Split location from input into separate segments for search
-    const locationSegments = searchLocation.split(',');
+    const locationSegments = searchLocation.split(",");
 
     // Create url to search openweather api for location geocode information
     const locationGeocodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${locationSegments.map(
       (segment) => segment.trim()
-    )}&limit=1&appid=${process.env.OPENWEATHER_API_KEY}`;
+    )}&limit=1&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`;
 
     // Fetch geocode information from openweather api
     const geocodeResult = await axios.get(locationGeocodeUrl);
@@ -63,23 +63,23 @@ function Forecast() {
   async function getUserCoordinates() {
     navigator.permissions
       .query({
-        name: 'geolocation',
+        name: "geolocation",
       })
       .then((permission) => {
         console.log(permission);
-        if (permission.state === 'prompt') {
+        if (permission.state === "prompt") {
           console.log(permission.state);
           navigator.geolocation.getCurrentPosition(
             (pos) => setGeolocation(pos.coords),
             (error) => alert(error)
           );
-        } else if (permission.state === 'granted') {
+        } else if (permission.state === "granted") {
           navigator.geolocation.getCurrentPosition((pos) =>
             setGeolocation(pos.coords)
           );
-        } else if (permission.state === 'denied') {
+        } else if (permission.state === "denied") {
           alert(
-            'You have not authorized location tracking for this application, please change these permissions or search using location name instead.'
+            "You have not authorized location tracking for this application, please change these permissions or search using location name instead."
           );
         }
       });
@@ -88,7 +88,7 @@ function Forecast() {
   // Fetch forecast from openweathermap api using latitude, longitude
   async function fetchWeather(lat, lon) {
     // Create url to fetch forecast using location
-    const weatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,daily,alerts&units=imperial&appid=${process.env.OPENWEATHER_API_KEY}`;
+    const weatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,daily,alerts&units=imperial&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`;
     const forecast = await axios.get(weatherURL);
 
     return forecast;
@@ -149,7 +149,7 @@ function Forecast() {
         const forecast = await fetchWeather(latitude, longitude);
 
         // Get location name from reverse geocode lookup
-        const locationReverseGeocodeUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${process.env.OPENWEATHER_API_KEY}`;
+        const locationReverseGeocodeUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`;
         const reverseGeocodeResult = await axios.get(locationReverseGeocodeUrl);
         const { name: city, state, country } = reverseGeocodeResult.data[0];
 
