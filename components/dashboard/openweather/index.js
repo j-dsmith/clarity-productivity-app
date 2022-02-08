@@ -137,6 +137,7 @@ function Forecast() {
           src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
           height={100}
           width={100}
+          priority
         />
       </div>
     );
