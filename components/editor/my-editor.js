@@ -4,19 +4,19 @@ import {
   EditorHeader,
   NoteTitleInput,
   NoteTitle,
-} from './editor.styles';
-import { SpinnerPage } from '../ui/ui-items.styles';
+} from "./editor.styles";
+import { SpinnerPage } from "../ui/ui-items.styles";
 
 // Helpers
-import { fetchContext } from '../../helpers/client';
+import { fetchContext } from "../../helpers/client";
 
 // Components
-import Loader from 'react-loader-spinner';
-import TiptapEditor from './tiptap-editor';
+import Loader from "react-loader-spinner";
+import TiptapEditor from "./tiptap-editor";
 
 const MyEditor = ({ currentNoteId, currentProjectId }) => {
   // Get user stored in context
-  const { user } = fetchContext('user');
+  const { user } = fetchContext("user");
 
   // Return Loader if user hasn't been loaded and is an empty object
   if (Object.keys(user).length === 0) {
@@ -37,7 +37,12 @@ const MyEditor = ({ currentNoteId, currentProjectId }) => {
   );
 
   // Get properties from note
-  const { title, content } = currentNote;
+  let title = "";
+  let content = "";
+  if (currentNote) {
+    title = currentNote.title;
+    content = currentNote.content;
+  }
 
   // Framer-motion variants
   const editor = {

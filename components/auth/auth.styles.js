@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Form, Field, ErrorMessage } from 'formik';
-import { motion } from 'framer-motion';
+import styled from "styled-components";
+import { Form, Field, ErrorMessage } from "formik";
+import { motion } from "framer-motion";
 
 export const LoginPageContainer = styled.section`
   display: flex;
@@ -45,17 +45,22 @@ export const Header = styled.div`
 export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
   padding-inline: 1em;
 
   .login-mode-controller {
     text-align: center;
+  }
+
+  label {
+    padding: 0 0.5em;
   }
 `;
 
 export const StyledField = styled(Field)`
   font-size: 1rem;
   padding: 1.25em 1em;
-  margin-block: 0.5em;
+  /* margin-block: 0.5em; */
   border-radius: 0.75em;
   border: 1px solid var(--color-gray-400);
 

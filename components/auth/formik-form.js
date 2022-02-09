@@ -122,19 +122,15 @@ const MyForm = ({ showLogin, setShowLogin }) => {
         <>
           <StyledForm>
             {/* TODO: Add styled components for these form fields and labels */}
-
-            <StyledField name="email" type="text" placeholder="Email" />
+            <label htmlFor="email">Email</label>
+            <StyledField name="email" type="text" id="email" />
             {formik.touched.email && formik.errors.email ? (
               <StyledErrorMessage>{formik.errors.email}</StyledErrorMessage>
             ) : null}
 
             {/* Password */}
-
-            <StyledField
-              name="password"
-              type="password"
-              placeholder="Password"
-            />
+            <label htmlFor="password">Password</label>
+            <StyledField name="password" type="password" id="password" />
             {formik.touched.password && formik.errors.password ? (
               <StyledErrorMessage>{formik.errors.password}</StyledErrorMessage>
             ) : null}
@@ -182,12 +178,12 @@ const MyForm = ({ showLogin, setShowLogin }) => {
             </GuestLoginBtn>
           )}
           <LoginController>
-            Already have an account?{" "}
+            {showLogin ? "Need an account" : "Already have an account"}?{" "}
             <span
               className="login-controller"
               onClick={() => switchAuthModeHandler(formik)}
             >
-              Login
+              {showLogin ? "Create Account" : "Login"}
             </span>
           </LoginController>
         </>
